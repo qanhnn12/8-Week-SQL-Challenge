@@ -224,7 +224,7 @@ WITH CustomerPoints AS (
     s.customer_id,
     CASE 
       WHEN s.customer_id IN (SELECT customer_id FROM members) AND mn.product_name = 'sushi' THEN mn.price*20
-      WHEN s.customer_id IN (SELECT customer_id FROM members) AND mn.product_name != 'sushi' THEN price*10 
+      WHEN s.customer_id IN (SELECT customer_id FROM members) AND mn.product_name != 'sushi' THEN mn.price*10 
     ELSE 0 END AS points
   FROM menu mn 
   JOIN sales s
