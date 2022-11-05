@@ -7,7 +7,7 @@
 * [Bussiness task](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/solution.md#%EF%B8%8F-bussiness-task)
 * [Entity relationship diagram](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/solution.md#-entity-relationship-diagram)
 * [Case study questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/solution.md#-case-study-questions)
-* [Bonus questions](  
+* [Bonus questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/solution.md#pushpin-bonus-questions)  
 * [My solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/solution.md#-my-solution)
   
 ## 🛠️ Bussiness task
@@ -31,8 +31,8 @@ Danny wants to use the data to answer a few simple questions about his customers
   not just sushi - how many points do customer A and B have at the end of January?
 
 ## :pushpin: Bonus Questions
-* Join All The Things: Create a table that has these columns: customer_id, order_date, product_name, price, member (Y/N).
-* Rank All The Things: Based on the table above, add one column: ranking.  
+* Join All The Things - Create a table that has these columns: customer_id, order_date, product_name, price, member (Y/N).
+* Rank All The Things - Based on the table above, add one column: ranking.  
   
 ## 🚀 My solution
 View the complete syntax [here](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/query.sql).
