@@ -102,7 +102,7 @@ Danny, the CEO of this trendy fashion company has asked you to assist the team�
 ***View the case study [here](https://8weeksqlchallenge.com/case-study-7/) and my solution here.***
 
 ---
-## 🍊: Case Study #8 - Fresh Segments
+## 🍊 Case Study #8 - Fresh Segments
 <p align="center">
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/8.png" align="center" width="400" height="400" >
 
