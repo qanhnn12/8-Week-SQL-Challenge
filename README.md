@@ -9,6 +9,6 @@ Thanks @DataWithDanny for the interesting SQL case studies! :wave:🏻
 
 ---
 ## 🍜 Case Study #1 - Danny's Diner
-![case study 1] (https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/1.png)
+![case study 1](https://raw.githubusercontent.com/qanhnn12/8-Week-SQL-Challenge/main/IMG/1.png?token=GHSAT0AAAAAAB2OJZADGRE3ZMOR3NH4OL5KY3GFSHQ)
 
 
