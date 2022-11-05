@@ -79,7 +79,7 @@ SELECT
   SUM(m.price) AS total_pay
 FROM sales s
 JOIN menu m
-	ON s.product_id = m.product_id
+  ON s.product_id = m.product_id
 GROUP BY s.customer_id
 ORDER BY s.customer_id;
 
@@ -175,6 +175,7 @@ SELECT
 FROM orderAfterMember
 WHERE rnk = 1;
 
+
 -- 7. Which item was purchased just before the customer became a member?
 
 WITH orderBeforeMember AS (
@@ -217,7 +218,7 @@ GROUP BY s.customer_id;
 
 
 -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
--- Note: Only members receive points when purchasing items
+-- Note: Only customers who are members receive points when purchasing items
 
 WITH CustomerPoints AS (
   SELECT 
@@ -236,3 +237,75 @@ SELECT
   SUM(points) AS total_points
 FROM CustomerPoints
 GROUP BY customer_id;
+
+
+-- 10. In the first week after a customer joins the program (including their join date), they earn 2x points
+-- on all items, not just sushi - how many points do customer A and B have at the end of January?
+
+WITH programDates AS (
+  SELECT 
+    customer_id, 
+    join_date,
+    DATEADD(DAY, 6, join_date) AS valid_date, 
+    EOMONTH('2021-01-31') AS last_date
+  FROM members
+)
+
+SELECT 
+  p.customer_id,
+  SUM(CASE 
+      	WHEN s.order_date BETWEEN p.join_date AND p.valid_date THEN m.price*20
+      	WHEN m.product_name = 'sushi' THEN m.price*20
+      ELSE m.price*10 END) AS total_points
+FROM sales s
+JOIN programDates p 
+  ON s.customer_id = p.customer_id
+JOIN menu m 
+  ON s.product_id = m.product_id
+WHERE s.order_date <= last_date
+GROUP BY p.customer_id;
+
+
+------------------------
+--   BONUS QUESTIONS  --
+------------------------
+
+-- Join All The Things
+
+SELECT 
+  s.customer_id,
+  s.order_date,
+  mn.product_name,
+  mn.price,
+  CASE WHEN s.order_date >= m.join_date THEN 'Y'
+    ELSE 'N' END AS member
+FROM sales s
+JOIN menu mn 
+  ON s.product_id = mn.product_id
+LEFT JOIN members m 
+  ON s.customer_id = m.customer_id;
+
+
+-- Rank All The Things
+-- Note: Create a CTE using the result in the previous question
+
+WITH customerStatus AS(
+SELECT 
+  s.customer_id,
+  s.order_date,
+  mn.product_name,
+  mn.price,
+  CASE WHEN s.order_date >= m.join_date THEN 'Y'
+    ELSE 'N' END AS member
+FROM sales s
+JOIN menu mn 
+  ON s.product_id = mn.product_id
+LEFT JOIN members m 
+  ON s.customer_id = m.customer_id
+)
+
+SELECT *,
+  CASE WHEN member = 'Y' 
+  	THEN DENSE_RANK() OVER(PARTITION BY customer_id, member ORDER BY order_date)
+  ELSE null END AS ranking
+FROM customerStatus;
