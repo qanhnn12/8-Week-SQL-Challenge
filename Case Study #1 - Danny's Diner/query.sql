@@ -72,3 +72,44 @@ FROM dbo.sales;
 --CASE STUDY QUESTIONS--
 ------------------------
 
+-- 1. What is the total amount each customer spent at the restaurant?
+
+SELECT 
+  s.customer_id,
+  SUM(m.price) AS total_pay
+FROM sales s
+JOIN menu m
+	ON s.product_id = m.product_id
+GROUP BY s.customer_id
+ORDER BY s.customer_id;
+
+-- 2. How many days has each customer visited the restaurant?
+
+SELECT 
+	customer_id,
+	COUNT(DISTINCT order_date) AS visit_count
+FROM sales 
+GROUP BY customer_id;
+
+-- 3. What was the first item from the menu purchased by each customer?
+
+WITH orderRank AS (
+	SELECT 
+		customer_id,
+		product_id,
+		order_date,
+		DENSE_RANK() OVER(PARTITION BY customer_id ORDER BY order_date) AS rnk
+	FROM sales
+)
+
+SELECT 
+	o.customer_id,
+	o.order_date,
+	m.product_name
+FROM orderRank o
+JOIN menu m 
+	ON o.product_id = m.product_id
+WHERE o.rnk = 1
+GROUP BY o.customer_id, o.order_date, m.product_name
+
+
