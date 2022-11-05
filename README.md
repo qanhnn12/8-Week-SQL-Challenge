@@ -69,7 +69,7 @@ This case study is all about calculating metrics, growth and helping the busines
 ***View the case study [here](https://8weeksqlchallenge.com/case-study-4/) and my solution here.***
   
 ---
-## 🛒: Case Study #5 - Data Mart
+## 🛒 Case Study #5 - Data Mart
 <p align="center">
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/5.png" align="center" width="400" height="400" >
 
