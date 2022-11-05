@@ -294,7 +294,7 @@ GROUP BY p.customer_id;
 | B           | 820          |          
                               
 ---
-## :pushpin: BONUS QUESTIONS
+## :pushpin: Bonus Questions
 ### Join All The Things 
 **Create a table that has these columns: customer_id, order_date, product_name, price, member (Y/N).**
 ```SQL
@@ -329,8 +329,9 @@ LEFT JOIN members m
 | C           | 2021-01-01 | ramen        | 12    | N      |
 | C           | 2021-01-07 | ramen        | 12    | N      |
 
+---
 ### Rank All The Things
-**Based on the table above, add one more column.**
+**Based on the table above, add one column: ranking.**
 
 ```SQL
 WITH customerStatus AS(
