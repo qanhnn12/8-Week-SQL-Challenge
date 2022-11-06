@@ -1,6 +1,7 @@
 ------------------------
 --CASE STUDY QUESTIONS--
 ------------------------
+
 --Author: Anh Nguyen
 --Date: 05/11/2022
 --Tool used: MySQL
