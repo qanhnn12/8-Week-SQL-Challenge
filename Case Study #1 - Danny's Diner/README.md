@@ -106,14 +106,15 @@ GROUP BY o.customer_id, o.order_date, m.product_name;
 ### Q4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 ```SQL
 SELECT
-  TOP 1 s.product_id,
+  s.product_id,
   m.product_name,
   COUNT(*) AS most_purch
 FROM sales s
 JOIN menu m 
   ON s.product_id = m.product_id
 GROUP BY s.product_id, m.product_name
-ORDER BY most_purch DESC;
+ORDER BY most_purch DESC
+LIMIT 1;
 
 ```
 | product_id | product_name | most_purch |
@@ -141,8 +142,8 @@ SELECT
 FROM freqRank f
 JOIN menu m 
   ON f.product_id = m.product_id
-WHERE f.rnk = 1;
-
+WHERE f.rnk = 1
+ORDER BY f.customer_id;
 ```
 | customer_id | product_name | purch_freq |
 |-------------|--------------|------------|
@@ -214,8 +215,9 @@ WHERE rnk = 1;
 ```  
 | customer_id | product_name | order_date | join_date  |
 |-------------|--------------|------------|------------|
-| A           | curry        | 2021-01-07 | 2021-01-07 |
-| B           | sushi        | 2021-01-11 | 2021-01-09 |
+| A           | sushi        | 2021-01-01 | 2021-01-07 |
+| A           | curry        | 2021-01-01 | 2021-01-07 |
+| B           | sushi        | 2021-01-04 | 2021-01-09 |
 
                                   
 ---
@@ -274,8 +276,8 @@ WITH programDates AS (
   SELECT 
     customer_id, 
     join_date,
-    DATEADD(DAY, 6, join_date) AS valid_date, 
-    EOMONTH('2021-01-31') AS last_date
+    ADDDATE(join_date, 6) AS valid_date, 
+    LAST_DAY('2021-01-01') AS last_date
   FROM members
 )
 
