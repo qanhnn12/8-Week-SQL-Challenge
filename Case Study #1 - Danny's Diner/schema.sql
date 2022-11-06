@@ -1,7 +1,6 @@
 --------------------------------
 --CASE STUDY #1: DANNY'S DINER--
 --------------------------------
-
 --Author: Anh Nguyen
 --Date: 05/11/2022
 --Tool used: MySQL
