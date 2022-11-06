@@ -1,10 +1,20 @@
+-------------------------------
+--CASE STUDY #2: PIZZA RUNNER--
+-------------------------------
+--Author: Anh Nguyen
+--Date: 06/11/2022
+--Tool used: MySQL
+
+
 CREATE SCHEMA pizza_runner;
 SET search_path = pizza_runner;
+
 
 DROP TABLE IF EXISTS runners;
 CREATE TABLE runners (
   runner_id INTEGER,
   registration_date DATE
+  
 );
 INSERT INTO runners
   (runner_id, registration_date)
@@ -74,6 +84,7 @@ CREATE TABLE pizza_names (
   pizza_id INTEGER,
   pizza_name TEXT
 );
+
 INSERT INTO pizza_names
   (pizza_id, pizza_name)
 VALUES
@@ -86,6 +97,7 @@ CREATE TABLE pizza_recipes (
   pizza_id INTEGER,
   toppings TEXT
 );
+
 INSERT INTO pizza_recipes
   (pizza_id, toppings)
 VALUES
@@ -98,6 +110,7 @@ CREATE TABLE pizza_toppings (
   topping_id INTEGER,
   topping_name TEXT
 );
+
 INSERT INTO pizza_toppings
   (topping_id, topping_name)
 VALUES
