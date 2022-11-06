@@ -5,6 +5,7 @@
 --Date: 05/11/2022
 --Tool used: MySQL
 
+
 -- 1. What is the total amount each customer spent at the restaurant?
 
 SELECT 
@@ -51,14 +52,15 @@ GROUP BY o.customer_id, o.order_date, m.product_name;
 -- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
 SELECT
-  TOP 1 s.product_id,
+  s.product_id,
   m.product_name,
   COUNT(*) AS most_purch
 FROM sales s
 JOIN menu m 
   ON s.product_id = m.product_id
 GROUP BY s.product_id, m.product_name
-ORDER BY most_purch DESC;
+ORDER BY most_purch DESC
+LIMIT 1;
 
 
 -- 5. Which item was the most popular for each customer?
@@ -80,7 +82,8 @@ SELECT
 FROM freqRank f
 JOIN menu m 
   ON f.product_id = m.product_id
-WHERE f.rnk = 1;
+WHERE f.rnk = 1
+ORDER BY f.customer_id;
 
 
 -- 6. Which item was purchased first by the customer after they became a member?
@@ -179,8 +182,8 @@ WITH programDates AS (
   SELECT 
     customer_id, 
     join_date,
-    DATEADD(DAY, 6, join_date) AS valid_date, 
-    EOMONTH('2021-01-31') AS last_date
+    ADDDATE(join_date, 6) AS valid_date, 
+    LAST_DAY('2021-01-01') AS last_date
   FROM members
 )
 
