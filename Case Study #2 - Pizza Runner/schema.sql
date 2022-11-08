@@ -6,9 +6,14 @@
 --Tool used: SQL Server
 
 
---Note: 
---In table [customer_order], change the datatype from TIMESTAMP to DATETIME, otherwise, you can't insert new values to it.
---In table [pizza_names], [pizza_recipes], and [pizza_toppings], change datatype from TEXT to VARCHAR.
+/*  
+Note: 
+1. In table [customer_order], change the datatype of column [order_time] from TIMESTAMP to DATETIME.
+Otherwise, you can't insert new values to table [customer_order].
+
+2. In table [pizza_names], [pizza_recipes], and [pizza_toppings], change datatype from TEXT to VARCHAR. 
+Otherwise you will face the error in Q4.
+*/ 
 
 
 CREATE SCHEMA pizza_runner;
