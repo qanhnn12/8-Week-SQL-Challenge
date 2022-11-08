@@ -3,7 +3,7 @@
 --------------------------------
 --Author: Anh Nguyen
 --Date: 05/11/2022
---Tool used: MS SQL Server
+--Tool used: SQL Server
 
 
 CREATE SCHEMA dannys_diner;
