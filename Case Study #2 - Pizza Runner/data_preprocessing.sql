@@ -2,7 +2,6 @@
 --DATA PREPROCESSING--
 ----------------------
 
-
 -- Create a new temporary table: #customer_orders_temp
 
 SELECT 
