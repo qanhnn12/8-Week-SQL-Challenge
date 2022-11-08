@@ -4,7 +4,7 @@
 
 --Author: Anh Nguyen
 --Date: 05/11/2022
---Tool used: MySQL
+--Tool used: SQL Server
 
 
 -- 1. What is the total amount each customer spent at the restaurant?
@@ -53,15 +53,13 @@ GROUP BY o.customer_id, o.order_date, m.product_name;
 -- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
 SELECT
-  s.product_id,
+  TOP 1 s.product_id,
   m.product_name,
   COUNT(*) AS most_purch
 FROM sales s
 JOIN menu m 
   ON s.product_id = m.product_id
-GROUP BY s.product_id, m.product_name
-ORDER BY most_purch DESC
-LIMIT 1;
+GROUP BY s.product_id, m.product_name;
 
 
 -- 5. Which item was the most popular for each customer?
@@ -183,8 +181,8 @@ WITH programDates AS (
   SELECT 
     customer_id, 
     join_date,
-    ADDDATE(join_date, 6) AS valid_date, 
-    LAST_DAY('2021-01-01') AS last_date
+    DATEADD(d, 6, join_date) AS valid_date, 
+    EOMONTH('2021-01-01') AS last_date
   FROM members
 )
 
