@@ -6,7 +6,9 @@
 --Tool used: SQL Server
 
 
--- Note: In table [customer_order], change the datatype from TIMESTAMP to DATETIME, otherwise, you can't insert new values to it.
+--Note: 
+--In table [customer_order], change the datatype from TIMESTAMP to DATETIME, otherwise, you can't insert new values to it.
+--In table [pizza_names], [pizza_recipes], and [pizza_toppings], change datatype from TEXT to VARCHAR.
 
 
 CREATE SCHEMA pizza_runner;
@@ -82,7 +84,7 @@ VALUES
 DROP TABLE IF EXISTS pizza_names;
 CREATE TABLE pizza_names (
   "pizza_id" INTEGER,
-  "pizza_name" TEXT
+  "pizza_name" VARCHAR(10)
 );
 INSERT INTO pizza_names
   ("pizza_id", "pizza_name")
@@ -94,7 +96,7 @@ VALUES
 DROP TABLE IF EXISTS pizza_recipes;
 CREATE TABLE pizza_recipes (
   "pizza_id" INTEGER,
-  "toppings" TEXT
+  "toppings" VARCHAR(30)
 );
 INSERT INTO pizza_recipes
   ("pizza_id", "toppings")
@@ -106,7 +108,7 @@ VALUES
 DROP TABLE IF EXISTS pizza_toppings;
 CREATE TABLE pizza_toppings (
   "topping_id" INTEGER,
-  "topping_name" TEXT
+  "topping_name" VARCHAR(20)
 );
 INSERT INTO pizza_toppings
   ("topping_id", "topping_name")
