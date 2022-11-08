@@ -3,10 +3,9 @@
 ----------------------
 
 
--- Create a new table: customer_orders_temp
+-- Create a new temporary table: #customer_orders_temp
 
-CREATE TABLE customer_orders_temp AS 
-  SELECT 
+SELECT 
     order_id,
     customer_id,
     pizza_id,
@@ -19,13 +18,13 @@ CREATE TABLE customer_orders_temp AS
       	ELSE extras 
       	END AS extras,
     order_time
-  FROM customer_orders;
+INTO #customer_orders_temp
+FROM customer_orders;
 
 
--- Create a new table: runner_orders_temp
+-- Create a new temporary table: #runner_orders_temp
 
-CREATE TABLE runner_orders_temp AS
-  SELECT 
+SELECT 
     order_id,
     runner_id,
     CAST(
@@ -49,4 +48,5 @@ CREATE TABLE runner_orders_temp AS
         WHEN cancellation IN ('null', 'NaN', '') THEN NULL 
         ELSE cancellation
         END AS cancellation
+INTO #runner_orders_temp
 FROM runner_orders;
