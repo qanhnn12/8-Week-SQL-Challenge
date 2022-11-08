@@ -43,7 +43,7 @@ SELECT
 	    WHEN duration LIKE '%minute' THEN TRIM('minute' FROM duration)
 	    WHEN duration LIKE '%minutes' THEN TRIM('minutes' FROM duration)
 	    ELSE duration END
-        AS FLOAT) AS duration,
+        AS INT) AS duration,
     CASE
         WHEN cancellation IN ('null', 'NaN', '') THEN NULL 
         ELSE cancellation
