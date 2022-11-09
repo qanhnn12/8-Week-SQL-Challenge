@@ -241,10 +241,52 @@ WITH toppingBreak AS(
 
 SELECT 
   pn.pizza_name, 
-  STRING_AGG(pt.topping_name, ', ') WITHIN GROUP (ORDER BY pt.topping_id) AS ingredients
+  STRING_AGG(pt.topping_name, ', ') AS ingredients
 FROM toppingBreak t
 JOIN pizza_toppings pt 
   ON t.topping = pt.topping_id
 JOIN pizza_names pn 
   ON t.pizza_id = pn.pizza_id
 GROUP BY pn.pizza_name;
+
+
+--2. What was the most commonly added extra?
+
+WITH extrasBreak AS (
+	SELECT 
+		TRIM(value) AS extra,
+		COUNT(TRIM(value)) AS extra_count
+	FROM #customer_orders_temp c
+	CROSS APPLY STRING_SPLIT(extras, ',')
+	WHERE extras != ''
+	GROUP BY TRIM(value)
+)
+
+SELECT 
+	TOP 1 p.topping_name,
+	e.extra_count
+FROM extrasBreak e
+JOIN pizza_toppings p 
+ON e.extra = p.topping_id
+ORDER BY e.extra_count DESC;
+
+
+--3. What was the most common exclusion?
+
+WITH exclusionsBreak AS (
+	SELECT 
+		TRIM(value) AS exclusion,
+		COUNT(TRIM(value)) AS exclusion_count
+	FROM #customer_orders_temp c
+	CROSS APPLY STRING_SPLIT(exclusions, ',')
+	WHERE exclusions != ''
+	GROUP BY TRIM(value)
+)
+
+SELECT 
+	TOP 1 p.topping_name,
+	e.exclusion_count
+FROM exclusionsBreak e
+JOIN pizza_toppings p 
+ON e.exclusion = p.topping_id
+ORDER BY e.exclusion_count DESC;
