@@ -219,6 +219,6 @@ SELECT
   runner_id,
   COUNT(distance) AS delivered,
   COUNT(order_id) AS total,
-  100 * COUNT(distance) / COUNT(order_id) AS success_rate
+  100 * COUNT(distance) / COUNT(order_id) AS successful_pct
 FROM #runner_orders_temp
 GROUP BY runner_id;
