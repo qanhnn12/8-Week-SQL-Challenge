@@ -39,7 +39,7 @@ Danny wants to use the data to answer a few simple questions about his customers
   
 ---
 ### Q1. What is the total amount each customer spent at the restaurant?
-```SQL
+```TSQL
 SELECT 
   s.customer_id,
   SUM(m.price) AS total_pay
@@ -58,7 +58,7 @@ ORDER BY s.customer_id;
   
 ---
 ### Q2. How many days has each customer visited the restaurant?
-```SQL
+```TSQL
 SELECT 
   customer_id,
   COUNT(DISTINCT order_date) AS visit_count
@@ -74,7 +74,7 @@ GROUP BY customer_id;
   
 ---
 ### Q3. What was the first item from the menu purchased by each customer?
-```SQL
+```TSQL
 WITH orderRank AS (
   SELECT 
     customer_id,
@@ -122,7 +122,7 @@ GROUP BY s.product_id, m.product_name;
   
 ---
 ### Q5. Which item was the most popular for each customer?
-```SQL
+```TSQL
 WITH freqRank AS (
   SELECT
     customer_id,
@@ -154,7 +154,7 @@ ORDER BY f.customer_id;
   
 ---
 ### Q6. Which item was purchased first by the customer after they became a member?
-```SQL
+```TSQL
 WITH orderAfterMember AS (
   SELECT 
     s.customer_id,
@@ -187,7 +187,7 @@ WHERE rnk = 1;
 
 ---
 ### Q7. Which item was purchased just before the customer became a member?
-```SQL
+```TSQL
 WITH orderBeforeMember AS (
   SELECT 
     s.customer_id,
@@ -220,7 +220,7 @@ WHERE rnk = 1;
                                   
 ---
 ### Q8. What is the total items and amount spent for each member before they became a member?
-```SQL
+```TSQL
 SELECT 
   s.customer_id,
   COUNT(s.product_id) AS total_items,
@@ -242,7 +242,7 @@ GROUP BY s.customer_id;
 ---
 ### Q9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 Note: Only customers who are members receive points when purchasing items
-```SQL
+```TSQL
 WITH CustomerPoints AS (
   SELECT 
     s.customer_id,
@@ -269,7 +269,7 @@ GROUP BY customer_id;
   
 --- 
 ### Q10. In the first week after a customer joins the program (including their join date), they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
-```SQL
+```TSQL
 WITH programDates AS (
   SELECT 
     customer_id, 
@@ -300,7 +300,7 @@ GROUP BY p.customer_id;
                               
 ---
 ### Join All The Things 
-```SQL
+```TSQL
 SELECT 
   s.customer_id,
   s.order_date,
@@ -335,7 +335,7 @@ LEFT JOIN members m
 ---
 ### Rank All The Things
 
-```SQL
+```TSQL
 WITH customerStatus AS(
 SELECT 
   s.customer_id,
