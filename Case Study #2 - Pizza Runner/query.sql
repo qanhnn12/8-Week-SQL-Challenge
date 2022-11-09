@@ -231,18 +231,20 @@ GROUP BY runner_id;
 -- 1. What are the standard ingredients for each pizza?
 
 WITH toppingBreak AS(
-	SELECT 
-		pizza_id,
-		toppings,
-		TRIM(value) AS topping
-	FROM pizza_recipes
-	CROSS APPLY STRING_SPLIT(toppings, ',')
+  SELECT 
+    pizza_id,
+    toppings,
+    TRIM(value) AS topping
+  FROM pizza_recipes
+  CROSS APPLY STRING_SPLIT(toppings, ',')
 )
 
 SELECT 
-	pn.pizza_name, 
-	STRING_AGG(pt.topping_name, ', ') WITHIN GROUP (ORDER BY pt.topping_id) AS ingredients
+  pn.pizza_name, 
+  STRING_AGG(pt.topping_name, ', ') WITHIN GROUP (ORDER BY pt.topping_id) AS ingredients
 FROM toppingBreak t
-JOIN pizza_toppings pt ON t.topping = pt.topping_id
-JOIN pizza_names pn ON t.pizza_id = pn.pizza_id
+JOIN pizza_toppings pt 
+  ON t.topping = pt.topping_id
+JOIN pizza_names pn 
+  ON t.pizza_id = pn.pizza_id
 GROUP BY pn.pizza_name;
