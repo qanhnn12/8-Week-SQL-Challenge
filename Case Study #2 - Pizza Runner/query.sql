@@ -119,6 +119,7 @@ SELECT
 FROM #customer_orders_temp
 GROUP BY DATENAME(weekday, order_time);
 
+
 -------------------------------------
 --B. Runner and Customer Experience--
 -------------------------------------
@@ -221,3 +222,27 @@ SELECT
   100 * COUNT(distance) / COUNT(order_id) AS successful_pct
 FROM #runner_orders_temp
 GROUP BY runner_id;
+
+
+-------------------------------
+--C. Ingredient Optimisations--
+-------------------------------
+
+-- 1. What are the standard ingredients for each pizza?
+
+WITH toppingBreak AS(
+	SELECT 
+		pizza_id,
+		toppings,
+		TRIM(value) AS topping
+	FROM pizza_recipes
+	CROSS APPLY STRING_SPLIT(toppings, ',')
+)
+
+SELECT 
+	pn.pizza_name, 
+	STRING_AGG(pt.topping_name, ', ') WITHIN GROUP (ORDER BY pt.topping_id) AS ingredients
+FROM toppingBreak t
+JOIN pizza_toppings pt ON t.topping = pt.topping_id
+JOIN pizza_names pn ON t.pizza_id = pn.pizza_id
+GROUP BY pn.pizza_name;
