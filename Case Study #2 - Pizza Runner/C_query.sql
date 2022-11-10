@@ -98,9 +98,9 @@ WITH ingredients AS (
 
     -- Add a 2x in front of topping_names if their topping_id appear in the #extrasBreak table
     CASE WHEN t.topping_id IN (
-        SELECT extra_id 
-        FROM #extrasBreak e 
-        WHERE e.record_id = c.record_id)
+          SELECT extra_id 
+          FROM #extrasBreak e 
+          WHERE e.record_id = c.record_id)
       THEN '2x' + t.topping_name
       ELSE t.topping_name
     END AS topping
@@ -113,9 +113,9 @@ WITH ingredients AS (
 
   -- Exclude toppings if their topping_id appear in the #exclusionBreak table
   WHERE t.topping_id NOT IN (
-    SELECT exclusion_id 
-    FROM #exclusionsBreak e 
-    WHERE c.record_id = e.record_id)
+      SELECT exclusion_id 
+      FROM #exclusionsBreak e 
+      WHERE c.record_id = e.record_id)
 )
 
 SELECT 
@@ -135,3 +135,41 @@ GROUP BY
   order_time,
   pizza_name
 ORDER BY record_id;
+
+
+--5. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
+
+WITH frequentIngredients AS (
+	SELECT 
+		c.record_id,
+		t.topping_name,
+		CASE
+		-- if extra ingredient, add 2
+			WHEN t.topping_id IN (
+				  SELECT extra_id 
+				  FROM #extrasBreak e
+				  WHERE e.record_id = c.record_id) 
+			THEN 2
+		-- if excluded ingredient, add 0
+			WHEN t.topping_id IN (
+				  SELECT exclusion_id 
+				  FROM #exclusionsBreak e 
+				  WHERE c.record_id = e.record_id)
+			THEN 0
+		-- no extras, no exclusion, add 1
+			ELSE 1
+		END AS times_used
+	FROM #customer_orders_temp c
+	JOIN #toppingsBreak t
+		ON t.pizza_id = c.pizza_id
+	JOIN pizza_names p
+		ON p.pizza_id = c.pizza_id
+)
+
+SELECT 
+    topping_name,
+    SUM(times_used) AS times_used 
+FROM frequentIngredients
+GROUP BY topping_name
+ORDER BY times_used DESC;
+
