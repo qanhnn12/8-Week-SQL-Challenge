@@ -3,10 +3,10 @@
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/2.png" align="center" width="400" height="400" >
   
 ## 📕 Table of Contents
-* [Bussiness Task]()
-* [Entity Relationship Diagram]()
-* [Case Study Questions]()
-* [My Solution]()
+* [Bussiness Task](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/README.md#%EF%B8%8F-bussiness-task)
+* [Entity Relationship Diagram](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/README.md#-entity-relationship-diagram)
+* [Case Study Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/README.md#-case-study-questions)
+* [My Solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/README.md#-my-solution)
   
 ## 🛠️ Bussiness Task
 Danny wanted to expand his new Pizza Empire and intended to Uberize it with Pizza Runner. 
@@ -50,7 +50,7 @@ Danny started by recruiting “runners” to deliver fresh pizza from Pizza Runn
     * ```Meat Lovers - Extra Bacon```
     * ```Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers```
 5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
-  * For example: ```"Meat Lovers: 2xBacon, Beef, ... , Salami"```
+    * For example: ```"Meat Lovers: 2xBacon, Beef, ... , Salami"```
 6. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
 
 ### D. Pricing and Ratings
