@@ -37,3 +37,55 @@ SELECT
 INTO #exclusionsBreak 
 FROM #customer_orders_temp c
   CROSS APPLY STRING_SPLIT(exclusions, ',') AS e;
+
+
+--5. Generate an alphabetically ordered comma separated ingredient list for each pizza order 
+--from the customer_orders table and add a 2x in front of any relevant ingredients
+--For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
+
+
+-- Each line displays an ingredient for an ordered pizza (add 2x for extras and remove exclusions as well)
+WITH ingredients AS (
+	SELECT 
+		c.*,
+		p.pizza_name,
+
+		-- Add a 2x in front of topping_name if its topping_id appears in the #extrasBreak table
+		CASE WHEN t.topping_id IN (
+				SELECT extra_id 
+				FROM #extrasBreak e 
+				WHERE e.record_id = c.record_id)
+			THEN '2x' + t.topping_name
+			ELSE t.topping_name
+		END AS topping
+
+	FROM #customer_orders_temp c
+	JOIN #toppingsBreak t
+		ON t.pizza_id = c.pizza_id
+	JOIN pizza_names p
+		ON p.pizza_id = c.pizza_id
+
+	-- Exclude toppings if they appear in the #exclusionBreak table
+	WHERE t.topping_id NOT IN (
+		SELECT exclusion_id 
+		FROM #exclusionsBreak e 
+		WHERE c.record_id = e.record_id)
+)
+
+SELECT 
+	record_id,
+	order_id,
+	customer_id,
+	pizza_id,
+	order_time,
+	CONCAT(pizza_name + ': ', STRING_AGG(topping, ', ')) AS ingredients_list
+FROM ingredients
+GROUP BY 
+	record_id, 
+	record_id,
+	order_id,
+	customer_id,
+	pizza_id,
+	order_time,
+	pizza_name
+ORDER BY record_id;
