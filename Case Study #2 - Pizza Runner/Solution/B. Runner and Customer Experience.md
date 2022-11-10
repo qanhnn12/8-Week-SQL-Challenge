@@ -71,6 +71,10 @@ GROUP BY pizza_count;
 | 2           | 18             |
 | 3           | 30             |
 
+More pizzas, longer time to prepare. 
+2 pizzas took 6 minutes more to prepare, 3 pizza took 12 minutes more to prepare.
+On average, it took 6 * (number of pizzas - 1) minutes more to prepare the next pizza.
+
 ### Q4. What was the average distance travelled for each customer?
 ```TSQL
 SELECT
@@ -123,6 +127,10 @@ GROUP BY r.runner_id, c.order_id, r.distance, r.duration;
 | 2         | 7        | 25       | 25           | 1           | 60         |
 | 2         | 8        | 23.4     | 15           | 1           | 93.6       |
 | 3         | 5        | 10       | 15           | 1           | 40         |
+
+* Runner ```1``` had the average speed from 37.5 km/h to 60 km/h
+* Runner ```2``` had the average speed from 35.1 km/h to 93.6 km/h. With the same distance (23.4 km), order ```4``` was delivered at 35.1 km/h, while order ```8``` was delivered at 93.6 km/h. There must be something wrong here!
+* Runner ```3``` had the average speed at 40 km/h
 
 ### Q7. What is the successful delivery percentage for each runner?
 ```TSQL
