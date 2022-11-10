@@ -44,7 +44,7 @@ FROM #customer_orders_temp c
 --For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
 
 
--- Each line displays an ingredient for an ordered pizza (add 2x for extras and remove exclusions as well)
+-- Create a CTE: Each line displays an ingredient for an ordered pizza (add 2x for extras and remove exclusions as well)
 WITH ingredients AS (
   SELECT 
     c.*,
