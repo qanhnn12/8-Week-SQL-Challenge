@@ -14,11 +14,17 @@ FROM pizza_recipes pr
 JOIN pizza_toppings pt
   ON TRIM(t.value) = pt.topping_id;
   
-  
+SELECT *
+FROM #toppingsBreak;
+
+
 -- 2. Add a new column [record_id] to select each ordered pizza more easily
 
 ALTER TABLE #customer_orders_temp
 ADD record_id INT IDENTITY(1,1);
+
+SELECT *
+FROM #customer_orders_temp;
 
 
 -- 3. Create a new temporary table to separate [extras] into multiple rows: #extrasBreak
@@ -28,12 +34,18 @@ SELECT
 INTO #extrasBreak 
 FROM #customer_orders_temp c
   CROSS APPLY STRING_SPLIT(extras, ',') AS e;
-  
+
+SELECT *
+FROM #extrasBreak;
+
 -- 4. Create a new temporary table to separate [exclusions] into multiple rows: #exclusionsBreak
  
 SELECT 
   c.record_id,
   TRIM(e.value) AS exclusion_id
-INTO #exclusionsBreak 
+INTO #exclusionsBreak
 FROM #customer_orders_temp c
   CROSS APPLY STRING_SPLIT(exclusions, ',') AS e;
+  
+SELECT *
+FROM #exclusionsBreak;
