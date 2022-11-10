@@ -141,7 +141,7 @@ GROUP BY
 ORDER BY record_id;
 
 
---5. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
+--6. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
 
 WITH frequentIngredients AS (
   SELECT 
