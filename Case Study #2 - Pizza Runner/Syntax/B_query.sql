@@ -19,7 +19,7 @@ WITH runners_pickup AS (
     c.order_id, 
     c.order_time, 
     r.pickup_time, 
-    DATEDIFF(MINUTE, c.order_time, r.pickup_time) AS pickup_time
+    DATEDIFF(MINUTE, c.order_time, r.pickup_time) AS pickup_minutes
   FROM #customer_orders_temp AS c
   JOIN #runner_orders_temp AS r
     ON c.order_id = r.order_id
