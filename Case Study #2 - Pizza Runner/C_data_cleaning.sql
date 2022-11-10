@@ -23,7 +23,7 @@ ADD record_id INT IDENTITY(1,1);
 
 -- 3. Create a new temporary table to separate [extras] into multiple rows: #extrasBreak
 SELECT 
-  c.*,
+  c.record_id,
   TRIM(e.value) AS extra_id
 INTO #extrasBreak 
 FROM #customer_orders_temp c
@@ -32,7 +32,7 @@ FROM #customer_orders_temp c
 -- 4. Create a new temporary table to separate [exclusions] into multiple rows: #exclusionsBreak
  
 SELECT 
-  c.*,
+  c.record_id,
   TRIM(e.value) AS exclusion_id
 INTO #exclusionsBreak 
 FROM #customer_orders_temp c
