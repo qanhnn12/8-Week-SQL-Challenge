@@ -20,6 +20,8 @@ SELECT
 INTO #customer_orders_temp
 FROM customer_orders;
 
+SELECT *
+FROM #customer_orders_temp;
 
 -- Create a new temporary table: #runner_orders_temp
 
@@ -49,3 +51,6 @@ SELECT
         END AS cancellation
 INTO #runner_orders_temp
 FROM runner_orders;
+
+SELECT *
+FROM #runner_orders_temp;
