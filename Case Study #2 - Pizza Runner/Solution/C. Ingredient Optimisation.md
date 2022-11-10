@@ -282,7 +282,7 @@ GROUP BY
 ORDER BY record_id;
 ```
 
-**```cteExtra```**
+**Table ```cteExtra```**
 | record_id | record_options        |
 |-----------|-----------------------|
 | 8         | Extra Bacon           |
@@ -290,7 +290,7 @@ ORDER BY record_id;
 | 12        | Extra Bacon, Chicken  |
 | 14        | Extra Bacon, Cheese   |
 
-**```cteExclusion```**
+**Table ```cteExclusion```**
 | record_id | record_options                 |
 |-----------|--------------------------------|
 | 5         | Exclusion Cheese               |
@@ -299,7 +299,7 @@ ORDER BY record_id;
 | 12        | Exclusion Cheese               |
 | 14        | Exclusion BBQ Sauce, Mushrooms |
 
-**```cteUnion```**
+**Table ```cteUnion```**
 | record_id | record_options                  |
 |-----------|---------------------------------|
 | 5         | Exclusion Cheese                |
@@ -336,7 +336,7 @@ ORDER BY record_id;
 </details>
 
 ### Q5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the ```customer_orders``` table and add a 2x in front of any relevant ingredients.
-* For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
+* For example: ```"Meat Lovers: 2xBacon, Beef, ... , Salami"```
 
 To solve this question:
 * Create a CTE in which each line displays an ingredient for an ordered pizza (add '2x' for extras and remove exclusions as well)
