@@ -1,6 +1,6 @@
---------------------
---A. DATA CLEANING--
---------------------
+-----------------------------------
+--A. Data Cleaning: Pizza Metrics--
+-----------------------------------
 
 -- Create a new temporary table: #customer_orders_temp
 
@@ -31,7 +31,7 @@ SELECT
 	AS DATETIME) AS pickup_time,
     CAST(
     	CASE 
-	    WHEN distance LIKE 'null' THEN null
+	    WHEN distance LIKE 'null' THEN NULL
 	    WHEN distance LIKE '%km' THEN TRIM('km' FROM distance)
 	    ELSE distance END
         AS FLOAT) AS distance,
