@@ -1,6 +1,6 @@
-----------------------
---DATA PREPROCESSING--
-----------------------
+--------------------
+--A. DATA CLEANING--
+--------------------
 
 -- Create a new temporary table: #customer_orders_temp
 
