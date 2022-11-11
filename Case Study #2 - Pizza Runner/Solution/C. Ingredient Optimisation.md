@@ -1,6 +1,6 @@
 # C. Ingredient Optimisation
 ## 1. Data cleaning
-**1.1. Create a new temporary table ```#toppingsBreak``` to separate ```toppings``` into multiple rows.**
+* Create a new temporary table ```#toppingsBreak``` to separate ```toppings``` into multiple rows.
 ```TSQL
 SELECT 
   pr.pizza_id,
@@ -50,7 +50,7 @@ FROM #toppingsBreak;
 </p>
 </details>
 
-**1.2. Add an identity column ```record_id``` to ```#customer_orders_temp``` to select each ordered pizza more easily**
+* Add an identity column ```record_id``` to ```#customer_orders_temp``` to select each ordered pizza more easily
 ```TSQL
 ALTER TABLE #customer_orders_temp
 ADD record_id INT IDENTITY(1,1);
@@ -81,7 +81,7 @@ FROM #customer_orders_temp;
 </p>
 </details>
 
-**1.3. Create a new temporary table ```extrasBreak``` to separate ```extras``` into multiple rows.**
+* Create a new temporary table ```extrasBreak``` to separate ```extras``` into multiple rows.
 ```TSQL
 SELECT 
   c.record_id,
@@ -118,7 +118,7 @@ FROM #extrasBreak;
 </p>
 </details>
 
-**1.4. Create a new temporary table ```exclusionsBreak``` to separate into ```exclusions``` into multiple rows.**
+* Create a new temporary table ```exclusionsBreak``` to separate into ```exclusions``` into multiple rows.
 ```TSQL
 SELECT 
   c.record_id,
@@ -231,9 +231,9 @@ The most common exclusion was Cheese.
 * ```Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers```
 
 To solve this question:
-* Create 3 CTEs: ```extras_cte```, ```exclusions_cte```, and ```union_cte``` combining two tables above
-* Use the ```union_cte``` to LEFT JOIN with the ```customer_orders_temp``` and JOIN with the ```pizza_name``` table
-* Use the ```CONCAT_WS``` function with ```STRING_AGG``` to get the result
+* Create 3 CTEs: ```extras_cte```, ```exclusions_cte```, and ```union_cte``` combining two tables
+* Use the ```union_cte``` to LEFT JOIN with the ```customer_orders_temp``` and JOIN with the ```pizza_name```
+* Use the ```CONCAT_WS``` with ```STRING_AGG``` to get the result
 
 ```TSQL
 WITH cteExtras AS (
@@ -340,7 +340,7 @@ ORDER BY record_id;
 
 To solve this question:
 * Create a CTE in which each line displays an ingredient for an ordered pizza (add '2x' for extras and remove exclusions as well)
-* Used ```CONCAT``` and ```STRING_AGG``` to get the result
+* Use ```CONCAT``` and ```STRING_AGG``` to get the result
 
 ```TSQL
 WITH ingredients AS (
@@ -416,7 +416,7 @@ To solve this question:
 * Create a CTE to record the number of times each ingredient was used
   * if extra ingredient, add 2 
   * if excluded ingredient, add 0
-  * no extras, no exclusion, add 1, add 1
+  * no extras, no exclusions, add 1, add 1
 ```TSQL
 WITH frequentIngredients AS (
   SELECT 
@@ -435,7 +435,7 @@ WITH frequentIngredients AS (
           FROM #exclusionsBreak e 
           WHERE c.record_id = e.record_id)
       THEN 0
-      -- no extras, no exclusion, add 1
+      -- no extras, no exclusions, add 1
       ELSE 1
     END AS times_used
   FROM #customer_orders_temp c
