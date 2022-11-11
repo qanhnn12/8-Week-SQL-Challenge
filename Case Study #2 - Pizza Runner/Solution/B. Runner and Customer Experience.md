@@ -71,9 +71,9 @@ GROUP BY pizza_count;
 | 2           | 18             |
 | 3           | 30             |
 
-More pizzas, longer time to prepare. 
-2 pizzas took 6 minutes more to prepare, 3 pizza took 12 minutes more to prepare.
-On average, it took 6 * (number of pizzas - 1) minutes more to prepare the next pizza.
+* More pizzas, longer time to prepare. 
+* 2 pizzas took 6 minutes more to prepare, 3 pizza took 12 minutes more to prepare.
+* On average, it took 6 * (number of pizzas - 1) minutes more to prepare the next pizza.
 
 ### Q4. What was the average distance travelled for each customer?
 ```TSQL
