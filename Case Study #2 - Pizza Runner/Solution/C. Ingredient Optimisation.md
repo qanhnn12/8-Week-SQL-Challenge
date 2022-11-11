@@ -1,6 +1,6 @@
 # C. Ingredient Optimisation
 ## 1. Data cleaning
-* Create a new temporary table ```#toppingsBreak``` to separate ```toppings``` into multiple rows.
+**1.1. Create a new temporary table ```#toppingsBreak``` to separate ```toppings``` into multiple rows**
 ```TSQL
 SELECT 
   pr.pizza_id,
@@ -15,8 +15,6 @@ JOIN pizza_toppings pt
 SELECT *
 FROM #toppingsBreak;
 ```
-<details><summary>Result</summary>
-<p>  
   
 | pizza_id | topping_id | topping_name  |
 |----------|------------|---------------|
@@ -46,11 +44,9 @@ FROM #toppingsBreak;
 | 3        | 10         | Salami        |
 | 3        | 11         | Tomatoes      |
 | 3        | 12         | Tomato Sauce  |
-  
-</p>
-</details>
 
-* Add an identity column ```record_id``` to ```#customer_orders_temp``` to select each ordered pizza more easily
+
+**1.2. Add an identity column ```record_id``` to ```#customer_orders_temp``` to select each ordered pizza more easily**
 ```TSQL
 ALTER TABLE #customer_orders_temp
 ADD record_id INT IDENTITY(1,1);
@@ -58,8 +54,6 @@ ADD record_id INT IDENTITY(1,1);
 SELECT *
 FROM #customer_orders_temp;
 ```
-<details><summary>Result</summary>
-<p>  
   
 | order_id | customer_id | pizza_id | exclusions | extras | order_time              | record_id  |
 |----------|-------------|----------|------------|--------|-------------------------|------------|
@@ -78,10 +72,8 @@ FROM #customer_orders_temp;
 | 10       | 104         | 1        |            |        | 2020-01-11 18:34:49.000 | 13         |
 | 10       | 104         | 1        | 2, 6       | 1, 4   | 2020-01-11 18:34:49.000 | 14         |
   
-</p>
-</details>
 
-* Create a new temporary table ```extrasBreak``` to separate ```extras``` into multiple rows.
+**1.3. Create a new temporary table ```extrasBreak``` to separate ```extras``` into multiple rows**
 ```TSQL
 SELECT 
   c.record_id,
@@ -93,8 +85,6 @@ FROM #customer_orders_temp c
 SELECT *
 FROM #extrasBreak;
 ```
-<details><summary>Result</summary>
-<p>  
   
 | record_id | extra_id  |
 |-----------|-----------|
@@ -115,10 +105,7 @@ FROM #extrasBreak;
 | 14        | 1         |
 | 14        | 4         |
 
-</p>
-</details>
-
-* Create a new temporary table ```exclusionsBreak``` to separate into ```exclusions``` into multiple rows.
+**1.4. Create a new temporary table ```exclusionsBreak``` to separate into ```exclusions``` into multiple rows**
 ```TSQL
 SELECT 
   c.record_id,
@@ -130,8 +117,6 @@ FROM #customer_orders_temp c
 SELECT *
 FROM #exclusionsBreak;
 ```
-<details><summary>Result</summary>
-<p>
   
 | record_id | exclusion_id  |
 |-----------|---------------|
@@ -151,9 +136,6 @@ FROM #exclusionsBreak;
 | 14        | 2             |
 | 14        | 6             |
 
-</p>
-</details>
-
 ## 2. Solution
 ### Q1. What are the standard ingredients for each pizza?
 ```TSQL
@@ -165,16 +147,11 @@ JOIN pizza_names p
   ON t.pizza_id = p.pizza_id
 GROUP BY p.pizza_name;
 ```
-<details><summary>Result</summary>
-<p>  
   
 | pizza_name | ingredients                                                            |
 |------------|------------------------------------------------------------------------|
 | Meatlovers | Bacon, BBQ Sauce, Beef, Cheese, Chicken, Mushrooms, Pepperoni, Salami  |
 | Vegetarian | Cheese, Mushrooms, Onions, Peppers, Tomatoes, Tomato Sauce             |
-
-</p>
-</details>
 
 ### Q2. What was the most commonly added extra?
 ```TSQL
@@ -187,8 +164,6 @@ JOIN pizza_toppings p
 GROUP BY p.topping_name
 ORDER BY COUNT(*) DESC;
 ```
-<details><summary>Result</summary>
-<p>
   
 | topping_name | extra_count  |
 |--------------|--------------|
@@ -197,8 +172,6 @@ ORDER BY COUNT(*) DESC;
 | Chicken      | 1            |
 
 The most commonly added extra was Bacon.
-</p>
-</details>
 
 ### Q3. What was the most common exclusion?
 ```TSQL
@@ -211,8 +184,6 @@ JOIN pizza_toppings p
 GROUP BY p.topping_name
 ORDER BY COUNT(*) DESC;
 ```
-<details><summary>Result</summary>
-<p>
   
 | topping_name | exclusion_count  |
 |--------------|------------------|
@@ -221,8 +192,6 @@ ORDER BY COUNT(*) DESC;
 | BBQ Sauce    | 1                |
 
 The most common exclusion was Cheese.
-</p>
-</details>
 
 ### Q4.Generate an order item for each record in the ```customers_orders``` table in the format of one of the following
 * ```Meat Lovers```
@@ -312,8 +281,7 @@ ORDER BY record_id;
 | 14        | Exclusion BBQ Sauce, Mushrooms  |
 | 14        | Extra Bacon, Cheese             |
 
-<details><summary>Result</summary>
-<p>
+**Result**
   
 | record_id | order_id | customer_id | pizza_id | order_time              | pizza_info                                                        |
 |-----------|----------|-------------|----------|-------------------------|-------------------------------------------------------------------|
@@ -332,8 +300,6 @@ ORDER BY record_id;
 | 13        | 10       | 104         | 1        | 2020-01-11 18:34:49.000 | Meatlovers                                                        |
 | 14        | 10       | 104         | 1        | 2020-01-11 18:34:49.000 | Meatlovers - Exclusion BBQ Sauce, Mushrooms - Extra Bacon, Cheese |
 
-</p>
-</details>
 
 ### Q5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the ```customer_orders``` table and add a 2x in front of any relevant ingredients.
 * For example: ```"Meat Lovers: 2xBacon, Beef, ... , Salami"```
@@ -388,8 +354,6 @@ GROUP BY
   pizza_name
 ORDER BY record_id;
 ```
-<details><summary>Result</summary>
-<p>
   
 | record_id | order_id | customer_id | pizza_id | order_time              | ingredients_list                                                                     |
 |-----------|----------|-------------|----------|-------------------------|--------------------------------------------------------------------------------------|
@@ -407,9 +371,6 @@ ORDER BY record_id;
 | 12        | 9        | 103         | 1        | 2020-01-10 11:22:59.000 | Meatlovers: 2xChicken, Beef, BBQ Sauce, 2xBacon, Pepperoni, Mushrooms, Salami        |
 | 13        | 10       | 104         | 1        | 2020-01-11 18:34:49.000 | Meatlovers: Salami, Cheese, Mushrooms, Pepperoni, Bacon, BBQ Sauce, Beef, Chicken    |
 | 14        | 10       | 104         | 1        | 2020-01-11 18:34:49.000 | Meatlovers: Chicken, Beef, 2xBacon, Pepperoni, 2xCheese, Salami                      |
-
-</p>
-</details>
 
 ### Q6. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
 To solve this question:
@@ -452,8 +413,6 @@ FROM frequentIngredients
 GROUP BY topping_name
 ORDER BY times_used DESC;
 ```
-<details><summary>Result</summary>
-<p>
   
 | topping_name | times_used  |
 |--------------|-------------|
@@ -470,5 +429,3 @@ ORDER BY times_used DESC;
 | Tomato Sauce | 4           |
 | Tomatoes     | 4           |
   
-</p>
-</details>
