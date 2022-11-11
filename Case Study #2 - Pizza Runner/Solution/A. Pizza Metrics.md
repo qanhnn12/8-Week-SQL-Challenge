@@ -247,11 +247,11 @@ ORDER BY hour_of_day;
 ```TSQL
 SELECT 
   DATENAME(weekday, order_time) AS week_day,
-  COUNT(order_id) AS pizza_volume
+  COUNT(order_id) AS order_volume
 FROM #customer_orders_temp
 GROUP BY DATENAME(weekday, order_time);
 ```
-| week_day  | pizza_volume  |
+| week_day  | order_volume  |
 |-----------|---------------|
 | Friday    | 1             |
 | Saturday  | 5             |
