@@ -1,8 +1,8 @@
 # A. Pizza Metrics
 ## 1. Data cleaning
   
-  **Create a temporary table ```#customer_orders_temp``` from ```customer_orders``` table:**
-  * Convert ```null``` values and ```'null'``` text values in ```exclusions``` and ```extras``` into blank ```''```.
+  * Create a temporary table ```#customer_orders_temp``` from ```customer_orders``` table:
+  	* Convert ```null``` values and ```'null'``` text values in ```exclusions``` and ```extras``` into blank ```''```.
   
   ```TSQL
   SELECT 
@@ -41,11 +41,11 @@
 | 10       | 104         | 1        |            |        | 2020-01-11 18:34:49.000  |
   
   
-  **Create a temporary table ```#runner_orders_temp``` from ```runner_orders``` table:**
-  * Convert ```'null'``` text values in ```pickup_time```, ```duration``` and ```cancellation``` into ```null``` values. 
-  * Cast ```pickup_time``` to DATETIME.
-  * Cast ```distance``` to FLOAT.
-  * Cast ```duration``` to INT.
+  * Create a temporary table ```#runner_orders_temp``` from ```runner_orders``` table:
+  	* Convert ```'null'``` text values in ```pickup_time```, ```duration``` and ```cancellation``` into ```null``` values. 
+	* Cast ```pickup_time``` to DATETIME.
+	* Cast ```distance``` to FLOAT.
+	* Cast ```duration``` to INT.
   
   ```TSQL
   SELECT 
