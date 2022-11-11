@@ -8,7 +8,7 @@
 /*  
 Note: 
 Table [subscriptions] contains up to 2650 rows. SQL Server only allows us to insert 1000 rows each.
-Therefore, when inserting data to the schema, we should break them down to 3 sets to insert.
+Therefore, when inserting data to the schema, we should break them down to 3 sets.
 */
 
 
