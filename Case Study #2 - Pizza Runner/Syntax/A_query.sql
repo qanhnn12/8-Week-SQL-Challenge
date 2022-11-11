@@ -115,6 +115,6 @@ ORDER BY hour_of_day;
 
 SELECT 
   DATENAME(weekday, order_time) AS week_day,
-  COUNT(order_id) AS pizza_volume
+  COUNT(order_id) AS order_volume
 FROM #customer_orders_temp
 GROUP BY DATENAME(weekday, order_time);
