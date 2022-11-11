@@ -1,3 +1,17 @@
+----------------------------
+--CASE STUDY #3: FOODIE-FI--
+----------------------------
+--Author: Anh Nguyen
+--Date: 11/11/2022
+--Tool used: SQL Server
+
+/*  
+Note: 
+Table [subscriptions] contains up to 2650 rows, but SQL Server only allows us to insert 1000 rows each time.
+Therefore, when inserting data to the schema, we should break them down to insert 3 times.
+*/
+
+
 CREATE TABLE plans (
   plan_id INTEGER,
   plan_name VARCHAR(13),
@@ -12,8 +26,6 @@ VALUES
   ('2', 'pro monthly', '19.90'),
   ('3', 'pro annual', '199'),
   ('4', 'churn', null);
-
-
 
 CREATE TABLE subscriptions (
   customer_id INTEGER,
