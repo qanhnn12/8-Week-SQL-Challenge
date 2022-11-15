@@ -63,3 +63,30 @@ SELECT
 FROM customersPlan
 WHERE plan_name = 'trial' 
   AND next_plan = 'churn';
+
+
+--9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
+
+WITH trialPlan AS (
+  SELECT 
+    s.customer_id,
+    s.start_date AS trial_date
+  FROM subscriptions s
+  JOIN plans p ON s.plan_id = p.plan_id
+  WHERE p.plan_name = 'trial'
+)
+,
+annualPlan AS (
+  SELECT 
+    s.customer_id,
+    s.start_date AS annual_date
+  FROM subscriptions s
+  JOIN plans p ON s.plan_id = p.plan_id
+  WHERE p.plan_name = 'pro annual'
+)
+
+SELECT 
+  AVG(CAST(DATEDIFF(d, trial_date, annual_date) AS FLOAT)) AS avg_days_to_annual
+FROM trialPlan t
+JOIN annualPlan a 
+ON t.customer_id = a.customer_id;
