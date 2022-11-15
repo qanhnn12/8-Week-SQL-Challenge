@@ -89,6 +89,32 @@ WHERE next_plan IS NOT NULL
 GROUP BY next_plan;
 
 
+--7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
+
+WITH plansDate AS (
+  SELECT 
+    s.customer_id,
+    s.start_date,
+	p.plan_id,
+    p.plan_name,
+    LEAD(s.start_date) OVER(PARTITION BY s.customer_id 
+			ORDER BY s.start_date) AS next_date
+  FROM subscriptions s
+  JOIN plans p ON s.plan_id = p.plan_id
+)
+
+SELECT 
+  plan_id,
+  plan_name,
+  COUNT(*) AS customers,
+  CAST(100*COUNT(*) AS FLOAT) / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions) AS conversion_rate
+FROM plansDate
+WHERE (next_date IS NOT NULL AND (start_date < '2020-12-31' AND next_date > '2020-12-31'))
+  OR (next_date IS NULL AND start_date < '2020-12-31')
+GROUP BY plan_id, plan_name
+ORDER BY plan_id;
+
+
 --9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
 
 WITH trialPlan AS (
