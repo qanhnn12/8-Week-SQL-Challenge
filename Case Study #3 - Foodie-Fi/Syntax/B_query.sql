@@ -65,6 +65,30 @@ WHERE plan_name = 'trial'
   AND next_plan = 'churn';
 
 
+--6. What is the number and percentage of customer plans after their initial free trial?
+
+WITH nextPlan AS (
+  SELECT 
+    s.customer_id,
+    s.start_date,
+    p.plan_name,
+    LEAD(p.plan_name) OVER(PARTITION BY s.customer_id 
+			ORDER BY p.plan_id) AS next_plan
+  FROM subscriptions s
+  JOIN plans p ON s.plan_id = p.plan_id
+)
+
+SELECT 
+  next_plan,
+  COUNT(*) AS customer_plan,
+  CAST(100 * COUNT(*) AS FLOAT) 
+      / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions) AS percentage
+FROM nextPlan
+WHERE next_plan IS NOT NULL
+  AND plan_name = 'trial'
+GROUP BY next_plan;
+
+
 --9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
 
 WITH trialPlan AS (
