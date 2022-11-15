@@ -37,7 +37,7 @@ GROUP BY YEAR(s.start_date), p.plan_name;
 
 SELECT 
   SUM(CASE WHEN p.plan_name = 'churn' THEN 1 END) AS churn_count,
-  CAST(100*SUM(CASE WHEN p.plan_name = 'churn' THEN 1 END) AS FLOAT) 
+  CAST(100*SUM(CASE WHEN p.plan_name = 'churn' THEN 1 END) AS FLOAT(1)) 
     / COUNT(DISTINCT customer_id) AS churn_pct
 FROM subscriptions s
 JOIN plans p 
@@ -51,8 +51,7 @@ WITH customersPlan AS (
     s.customer_id,
     s.start_date,
     p.plan_name,
-    LEAD(p.plan_name) OVER(PARTITION BY s.customer_id 
-			ORDER BY p.plan_id) AS next_plan
+    LEAD(p.plan_name) OVER(PARTITION BY s.customer_id ORDER BY p.plan_id) AS next_plan
   FROM subscriptions s
   JOIN plans p ON s.plan_id = p.plan_id
 )
@@ -81,8 +80,7 @@ WITH nextPlan AS (
 SELECT 
   next_plan,
   COUNT(*) AS customer_plan,
-  CAST(100 * COUNT(*) AS FLOAT) 
-      / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions) AS percentage
+  CAST(100 * COUNT(*) AS FLOAT) / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions) AS percentage
 FROM nextPlan
 WHERE next_plan IS NOT NULL
   AND plan_name = 'trial'
@@ -97,8 +95,7 @@ WITH plansDate AS (
     s.start_date,
 	p.plan_id,
     p.plan_name,
-    LEAD(s.start_date) OVER(PARTITION BY s.customer_id 
-			ORDER BY s.start_date) AS next_date
+    LEAD(s.start_date) OVER(PARTITION BY s.customer_id ORDER BY s.start_date) AS next_date
   FROM subscriptions s
   JOIN plans p ON s.plan_id = p.plan_id
 )
