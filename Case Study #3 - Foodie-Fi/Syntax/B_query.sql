@@ -80,7 +80,8 @@ WITH nextPlan AS (
 SELECT 
   next_plan,
   COUNT(*) AS customer_plan,
-  CAST(100 * COUNT(*) AS FLOAT) / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions) AS percentage
+  CAST(100 * COUNT(*) AS FLOAT) 
+      / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions) AS percentage
 FROM nextPlan
 WHERE next_plan IS NOT NULL
   AND plan_name = 'trial'
@@ -104,7 +105,8 @@ SELECT
   plan_id,
   plan_name,
   COUNT(*) AS customers,
-  CAST(100*COUNT(*) AS FLOAT) / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions) AS conversion_rate
+  CAST(100*COUNT(*) AS FLOAT) 
+      / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions) AS conversion_rate
 FROM plansDate
 WHERE (next_date IS NOT NULL AND (start_date < '2020-12-31' AND next_date > '2020-12-31'))
   OR (next_date IS NULL AND start_date < '2020-12-31')
