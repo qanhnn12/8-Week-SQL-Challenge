@@ -26,7 +26,7 @@ FROM subscriptions s
 JOIN plans p ON s.plan_id = p.plan_id
 WHERE 1=0;
 
---Use a revursive CTE to increment one month for all paid plans in 2020, except 'pro annual'
+--Use a recursive CTE to increment rows for all paid plans in 2020, except 'pro annual'
 
 WITH dateRecursion AS (
   SELECT 
