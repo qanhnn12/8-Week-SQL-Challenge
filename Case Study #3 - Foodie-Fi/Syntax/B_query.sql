@@ -133,8 +133,7 @@ WITH trialPlan AS (
   FROM subscriptions s
   JOIN plans p ON s.plan_id = p.plan_id
   WHERE p.plan_name = 'trial'
-)
-,
+),
 annualPlan AS (
   SELECT 
     s.customer_id,
@@ -149,3 +148,50 @@ SELECT
 FROM trialPlan t
 JOIN annualPlan a 
 ON t.customer_id = a.customer_id;
+
+
+--10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)
+
+WITH trialPlan AS (
+  SELECT 
+    s.customer_id,
+    s.start_date AS trial_date
+  FROM subscriptions s
+  JOIN plans p ON s.plan_id = p.plan_id
+  WHERE p.plan_name = 'trial'
+),
+annualPlan AS (
+  SELECT 
+    s.customer_id,
+    s.start_date AS annual_date
+  FROM subscriptions s
+  JOIN plans p ON s.plan_id = p.plan_id
+  WHERE p.plan_name = 'pro annual'
+),
+daysRecursion AS (
+  SELECT 
+    0 AS start_period, 
+    30 AS end_period
+  UNION ALL
+  SELECT 
+    end_period + 1 AS start_period,
+    end_period + 30 AS end_period
+  FROM daysRecursion
+  WHERE end_period < 360
+),
+datesDiff AS (
+  SELECT 
+    t.customer_id,
+    DATEDIFF(d, trial_date, annual_date) AS diff
+  FROM trialPlan t
+  JOIN annualPlan a ON t.customer_id = a.customer_id
+)
+
+SELECT 
+  dr.start_period,
+  dr.end_period,
+  COUNT(*) AS customer_count
+FROM daysRecursion dr
+LEFT JOIN datesDiff dd 
+  ON (dd.diff >= dr.start_period AND dd.diff <= dr.end_period)
+GROUP BY dr.start_period, dr.end_period;
