@@ -4,7 +4,7 @@
 
 --1. How many customers has Foodie-Fi ever had?
 
-SELECT COUNT(DISTINCT customer_id)
+SELECT COUNT(DISTINCT customer_id) AS unique_customers
 FROM subscriptions;
 
 
@@ -46,7 +46,7 @@ JOIN plans p
 
 --5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
 
-WITH customersPlan AS (
+WITH nextPlan AS (
   SELECT 
     s.customer_id,
     s.start_date,
@@ -59,7 +59,7 @@ WITH customersPlan AS (
 SELECT 
   COUNT(*) AS churn_after_trial,
   100*COUNT(*) / (SELECT COUNT(DISTINCT customer_id) FROM subscriptions) AS pct
-FROM customersPlan
+FROM nextPlan
 WHERE plan_name = 'trial' 
   AND next_plan = 'churn';
 
