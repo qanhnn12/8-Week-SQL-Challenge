@@ -195,3 +195,22 @@ FROM daysRecursion dr
 LEFT JOIN datesDiff dd 
   ON (dd.diff >= dr.start_period AND dd.diff <= dr.end_period)
 GROUP BY dr.start_period, dr.end_period;
+
+
+--11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
+ 
+ WITH nextPlan AS (
+  SELECT 
+    s.customer_id,
+    s.start_date,
+    p.plan_name,
+    LEAD(p.plan_name) OVER(PARTITION BY s.customer_id ORDER BY p.plan_id) AS next_plan
+  FROM subscriptions s
+  JOIN plans p ON s.plan_id = p.plan_id
+)
+
+SELECT COUNT(*)
+FROM nextPlan
+WHERE plan_name = 'pro monthly'
+  AND next_plan = 'basic monthly'
+  AND YEAR(start_date) = 2020;
