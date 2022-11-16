@@ -12,7 +12,8 @@ by each customer in the subscriptions table with the following requirements:
 */
 
 
---Copy the column definitions from [subscriptions] and [plans]
+--Copy the column definition from table [subscriptions] and [plans] and paste them to table [payments]
+
 SELECT 
   s.customer_id, 
   s.plan_id, 
@@ -25,7 +26,9 @@ FROM subscriptions s
 JOIN plans p ON s.plan_id = p.plan_id
 WHERE 1=0;
 
---Use CTE recursive to add 1 month for all paid plans in 2020 except 'pro annual',
+
+--Use CTE recursive to add 1 month for all paid plans in 2020 except 'pro annual'
+
 WITH dateRecursion AS (
   SELECT 
     s.customer_id,
@@ -52,8 +55,12 @@ WITH dateRecursion AS (
     AND plan_name != 'pro annual'
 )
 
+
+--Insert values to table [payments]
+
 INSERT INTO payments 
   (customer_id, plan_id, plan_name, payment_date, amount, payment_order)
+  
   SELECT *,
     ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY payment_date) AS payment_order
   FROM dateRecursion
