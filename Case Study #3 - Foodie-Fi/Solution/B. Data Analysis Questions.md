@@ -286,4 +286,4 @@ WHERE plan_name = 'pro monthly'
 |---------------------|
 | 0                   |
 
-There was no customers downgrading from a pro monthly to a basic monthly plan in 2020.
+There were no customers downgrading from a pro monthly to a basic monthly plan in 2020.
