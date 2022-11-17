@@ -34,14 +34,14 @@ WITH dateRecursion AS (
     s.plan_id,
     p.plan_name,
     s.start_date AS payment_date,
-    --next_date: last day of the current plan
+    --last_date: last day of the current plan
     CASE 
-      --if a customer kept using the current plan, next_date = '2020-12-31'
+      --if a customer kept using the current plan, last_date = '2020-12-31'
       WHEN LEAD(s.start_date) OVER(PARTITION BY s.customer_id ORDER BY s.start_date) IS NULL THEN '2020-12-31'
-      --if a customer changed the plan, next_date = (month difference between start_date and changing date) + start_date
+      --if a customer changed the plan, last_date = (month difference between start_date and changing date) + start_date
       ELSE DATEADD(MONTH, 
 		   DATEDIFF(MONTH, start_date, LEAD(s.start_date) OVER(PARTITION BY s.customer_id ORDER BY s.start_date)),
-		   start_date) END AS next_date,
+		   start_date) END AS last_date,
     p.price AS amount
   FROM subscriptions s
   JOIN plans p ON s.plan_id = p.plan_id
@@ -58,11 +58,11 @@ WITH dateRecursion AS (
     plan_name,
     --increment payment_date by monthly
     DATEADD(MONTH, 1, payment_date) AS payment_date,
-    next_date,
+    last_date,
     amount
   FROM dateRecursion
-  --stop incrementing when payment_date = next_date
-  WHERE DATEADD(MONTH, 1, payment_date) <= next_date
+  --stop incrementing when payment_date = last_date
+  WHERE DATEADD(MONTH, 1, payment_date) <= last_date
     AND plan_name != 'pro annual'
 )
 
