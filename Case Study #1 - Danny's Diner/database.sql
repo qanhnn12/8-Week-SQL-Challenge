@@ -6,7 +6,7 @@
 --Tool used: SQL Server
 
 
-CREATE SCHEMA dannys_diner;
+CREATE DATABASE dannys_diner;
 
 CREATE TABLE sales (
   "customer_id" VARCHAR(1),
