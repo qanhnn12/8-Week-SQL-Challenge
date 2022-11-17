@@ -36,10 +36,10 @@ To create that table:
     * create a new column ```last_date```: last day of the current plan
     * if a customer kept using the current plan, last_date = '2020-12-31'
     * if a customer changed the plan, last_date = (month difference between start_date and changing date) + start_date
-  * Insert data into ```payments``` table by selecting the required columns
+  * Insert data into ```payments``` by selecting the required columns
 
 ```TSQL
---Copy the column definition from table [subscriptions], [plans] and paste them to the new table [payments]
+--Copy the column definition from [subscriptions], [plans] and paste them to the new table [payments]
 SELECT 
   s.customer_id, 
   s.plan_id, 
