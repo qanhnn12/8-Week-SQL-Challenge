@@ -44,7 +44,6 @@ WITH dateRecursion AS (
     p.price AS amount
   FROM subscriptions s
   JOIN plans p ON s.plan_id = p.plan_id
-	
   --exclude trials because they didn't generate payments 
   WHERE p.plan_name NOT IN ('trial')
     AND YEAR(start_date) = 2020
