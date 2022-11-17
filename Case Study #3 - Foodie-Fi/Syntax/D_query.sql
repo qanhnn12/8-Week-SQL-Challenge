@@ -48,8 +48,10 @@ FROM monthlyRevenue;
 
 /*
 - What is the primary reason for the cancellation? 
+  + Taste
   + Price
-  + Service quality
+  + Delivery service
+  + Techinical issues
   + Found an alternative
   + Others (please specify)
 - Overall, how satisfied were you with the subscription? (Likert scale: Very Satisfied - Very Unsatisfied)
@@ -63,7 +65,7 @@ FROM monthlyRevenue;
 /*
 - From the exit survey, look for the most common reasons why customers cancelled the subscription
   + Price: increase the number of discounts in some seasons of a year, extend the trial time, or add more benefits to customers 
-  + Service quality: work with the technical support department and fix the issue
+  + Service quality: work with the relevant department to fix the issue
   + Found an alternative: do some competitor analysis to see their competitive advantages over us
 - To validate the effectiveness of those ideas, check:
   + Churn rate
