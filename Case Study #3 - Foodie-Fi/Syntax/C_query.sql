@@ -68,12 +68,12 @@ WITH dateRecursion AS (
 INSERT INTO payments 
   (customer_id, plan_id, plan_name, payment_date, amount, payment_order)
 SELECT 
-	customer_id,
-	plan_id,
-	plan_name,
-	payment_date,
-	amount,
-	ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY payment_date) AS payment_order
+  customer_id,
+  plan_id,
+  plan_name,
+  payment_date,
+  amount,
+  ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY payment_date) AS payment_order
 FROM dateRecursion
 --exclude churns
 WHERE amount IS NOT NULL
