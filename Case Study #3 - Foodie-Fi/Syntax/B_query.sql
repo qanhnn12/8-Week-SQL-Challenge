@@ -150,7 +150,7 @@ JOIN annualPlan a
 ON t.customer_id = a.customer_id;
 
 
---10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)
+--10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)?
 
 WITH trialPlan AS (
   SELECT 
