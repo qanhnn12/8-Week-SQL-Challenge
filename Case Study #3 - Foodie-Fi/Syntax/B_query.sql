@@ -121,7 +121,7 @@ SELECT
 FROM subscriptions s
 JOIN plans p ON s.plan_id = p.plan_id
 WHERE p.plan_name = 'pro annual'
-  AND YEAR(s.start_date) = 2020
+  AND YEAR(s.start_date) = 2020;
   
   
 --9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
@@ -209,7 +209,7 @@ WITH nextPlan AS (
   JOIN plans p ON s.plan_id = p.plan_id
 )
 
-SELECT COUNT(*)
+SELECT COUNT(*) AS pro_to_basic_monthly
 FROM nextPlan
 WHERE plan_name = 'pro monthly'
   AND next_plan = 'basic monthly'
