@@ -48,10 +48,9 @@ FROM monthlyRevenue;
 
 /*
 - What is the primary reason for the cancellation? 
-  + Taste
   + Price
-  + Delivery service
   + Techinical issues
+  + Customer support
   + Found an alternative
   + Others (please specify)
 - Overall, how satisfied were you with the subscription? (Likert scale: Very Satisfied - Very Unsatisfied)
