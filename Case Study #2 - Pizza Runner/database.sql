@@ -16,7 +16,7 @@ Otherwise, we will face the error in Q4.
 */ 
 
 
-CREATE SCHEMA pizza_runner;
+CREATE DATABASE pizza_runner;
 
 DROP TABLE IF EXISTS runners;
 CREATE TABLE runners (
