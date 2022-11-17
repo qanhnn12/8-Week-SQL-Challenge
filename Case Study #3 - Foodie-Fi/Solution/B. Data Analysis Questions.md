@@ -199,6 +199,11 @@ ON t.customer_id = a.customer_id;
 On average, it takes 105 days for a customer to an annual plan from the day they join Foodie-Fi.
 
 ### 10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)?
+To solve this question: 
+* Utilize 2 CTEs in the previous question: ```trialPlan``` and ```annualPlan``` to calculate the number of days between ```trial_date``` and ```annual_date```, then put that to new CTE named ```datesDiff```
+* Create a recursive CTE named ```daysRecursion``` to generate 30-day periods (i.e. 0-30 days, 31-60 days etc)
+* Left join from ```daysRecursion``` to ```datesDiff``` 
+    
 ```TSQL
 WITH trialPlan AS (
   SELECT 
@@ -216,6 +221,13 @@ annualPlan AS (
   JOIN plans p ON s.plan_id = p.plan_id
   WHERE p.plan_name = 'pro annual'
 ),
+datesDiff AS (
+  SELECT 
+    t.customer_id,
+    DATEDIFF(d, trial_date, annual_date) AS diff
+  FROM trialPlan t
+  JOIN annualPlan a ON t.customer_id = a.customer_id
+),
 daysRecursion AS (
   SELECT 
     0 AS start_period, 
@@ -226,13 +238,6 @@ daysRecursion AS (
     end_period + 30 AS end_period
   FROM daysRecursion
   WHERE end_period < 360
-),
-datesDiff AS (
-  SELECT 
-    t.customer_id,
-    DATEDIFF(d, trial_date, annual_date) AS diff
-  FROM trialPlan t
-  JOIN annualPlan a ON t.customer_id = a.customer_id
 )
 
 SELECT 
