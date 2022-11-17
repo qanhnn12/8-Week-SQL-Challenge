@@ -1,5 +1,6 @@
-# A. Pizza Metrics
-## 1. Data cleaning
+# 🍕 Case Study #2 - Pizza Runner
+## A. Pizza Metrics
+### Data cleaning
   
   * Create a temporary table ```#customer_orders_temp``` from ```customer_orders``` table:
   	* Convert ```null``` values and ```'null'``` text values in ```exclusions``` and ```extras``` into blank ```''```.
@@ -89,7 +90,6 @@ FROM #runner_orders_temp;
 | 9        | 2         | NULL                    | NULL     | NULL     | Customer Cancellation    |
   
  
-## 2. Solution
 ### Q1. How many pizzas were ordered?
 ```TSQL
 SELECT COUNT(order_id) AS pizza_count
