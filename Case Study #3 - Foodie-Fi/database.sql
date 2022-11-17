@@ -11,6 +11,7 @@ Table [subscriptions] contains up to 2650 rows. SQL Server only allows us to ins
 Therefore, when inserting data to the schema, we should break them down to 3 sets.
 */
 
+CREATE DATABASE foodie_fi;
 
 CREATE TABLE plans (
   plan_id INTEGER,
