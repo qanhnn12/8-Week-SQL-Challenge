@@ -12,3 +12,4 @@ ALTER COLUMN toppings VARCHAR(50);
 INSERT INTO pizza_recipes (pizza_id, toppings)
 VALUES (3, '1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12');
 ```
+Notice that I had to update the column ```toppings``` because the Supreme pizza had all the toppings.
