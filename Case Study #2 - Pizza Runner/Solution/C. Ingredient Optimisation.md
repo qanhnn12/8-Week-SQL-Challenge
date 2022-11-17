@@ -1,6 +1,7 @@
-# C. Ingredient Optimisation
-## 1. Data cleaning
-**1.1. Create a new temporary table ```#toppingsBreak``` to separate ```toppings``` into multiple rows**
+# 🍕 Case Study #2 - Pizza Runner
+## C. Ingredient Optimisation
+### Data cleaning
+**1. Create a new temporary table ```#toppingsBreak``` to separate ```toppings``` into multiple rows**
 ```TSQL
 SELECT 
   pr.pizza_id,
@@ -46,7 +47,7 @@ FROM #toppingsBreak;
 | 3        | 12         | Tomato Sauce  |
 
 
-**1.2. Add an identity column ```record_id``` to ```#customer_orders_temp``` to select each ordered pizza more easily**
+**2. Add an identity column ```record_id``` to ```#customer_orders_temp``` to select each ordered pizza more easily**
 ```TSQL
 ALTER TABLE #customer_orders_temp
 ADD record_id INT IDENTITY(1,1);
@@ -73,7 +74,7 @@ FROM #customer_orders_temp;
 | 10       | 104         | 1        | 2, 6       | 1, 4   | 2020-01-11 18:34:49.000 | 14         |
   
 
-**1.3. Create a new temporary table ```extrasBreak``` to separate ```extras``` into multiple rows**
+**3. Create a new temporary table ```extrasBreak``` to separate ```extras``` into multiple rows**
 ```TSQL
 SELECT 
   c.record_id,
@@ -105,7 +106,7 @@ FROM #extrasBreak;
 | 14        | 1         |
 | 14        | 4         |
 
-**1.4. Create a new temporary table ```exclusionsBreak``` to separate into ```exclusions``` into multiple rows**
+**4. Create a new temporary table ```exclusionsBreak``` to separate into ```exclusions``` into multiple rows**
 ```TSQL
 SELECT 
   c.record_id,
@@ -136,7 +137,6 @@ FROM #exclusionsBreak;
 | 14        | 2             |
 | 14        | 6             |
 
-## 2. Solution
 ### Q1. What are the standard ingredients for each pizza?
 ```TSQL
 SELECT 
