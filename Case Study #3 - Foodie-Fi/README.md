@@ -3,10 +3,10 @@
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/3.png" align="center" width="400" height="400" >
   
 ## 📕 Table of Contents
-* [Bussiness Task]()
-* [Entity Relationship Diagram]()
-* [Case Study Questions]()
-* [My Solution]()
+* [Bussiness Task](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi#%EF%B8%8F-bussiness-task)
+* [Entity Relationship Diagram](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi#-entity-relationship-diagram)
+* [Case Study Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi#-case-study-questions)
+* [My Solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi#-my-solution)
   
 ## 🛠️ Bussiness Task
 Danny and his friends launched a new startup called "Food-Fi" in 2020 and started selling monthly and annual subscriptions, 
