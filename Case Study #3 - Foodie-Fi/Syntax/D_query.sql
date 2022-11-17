@@ -47,14 +47,24 @@ FROM monthlyRevenue;
 --4. If the Foodie-Fi team were to create an exit survey shown to customers who wish to cancel their subscription, what questions would you include in the survey?
 
 /*
-- What is the primary reason for the cancellation? Price, Service quality, Found an alternative, Others (please specify)
-- Overall, how satisfied were you with the subscription? Very Satisfied, Satisfied, Neutral, Unsatisfied, Very Unsatisfied
-- Would you consider using our products / services in the future? Definitely, Probably, Not Sure, Probably Not, Definitely Not
-- Would you recommend our company to a colleague, friend or family member? Definitely, Probably, Not Sure, Probably Not, Definitely Not
+- What is the primary reason for the cancellation? 
+  + Price
+  + Service quality
+  + Found an alternative
+  + Others (please specify)
+- Overall, how satisfied were you with the subscription? (Likert scale: Very Satisfied - Very Unsatisfied)
+- Would you consider using our services in the future? (Likert scale: Very Satisfied - Very Unsatisfied)
+- Would you recommend our company to a colleague, friend or family member? (Likert scale: Very Satisfied - Very Unsatisfied)
 */
 
 
 --5. What business levers could the Foodie-Fi team use to reduce the customer churn rate? How would you validate the effectiveness of your ideas?
 
 /*
-- From the exit survey, collect
+- From the exit survey, look for the most common reasons why customers cancelled the subscription
+  + Price: increase the number of discounts in some seasons of a year, extend the trial time, or add more benefits to customers 
+  + Service quality: work with the technical support department and fix the issue
+  + Found an alternative: do some competitor analysis to see their competitive advantages over us
+- To validate the effectiveness of those ideas, check:
+  + Churn rate
+  + Conversion rate
