@@ -68,3 +68,4 @@ FROM monthlyRevenue;
 - To validate the effectiveness of those ideas, check:
   + Churn rate
   + Conversion rate
+*/
