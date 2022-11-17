@@ -26,40 +26,54 @@ FROM subscriptions s
 JOIN plans p ON s.plan_id = p.plan_id
 WHERE 1=0;
 
---Use a recursive CTE to increment rows for all paid plans in 2020, except 'pro annual'
+--Use a recursive CTE to increment rows for all paid plans in 2020 by monthly until customers changed the plan, except 'pro annual'
 
 WITH dateRecursion AS (
-  SELECT 
-    s.customer_id,
-    s.plan_id,
-    p.plan_name,
-    s.start_date AS payment_date,
-    p.price AS amount
-  FROM subscriptions s
-  JOIN plans p ON s.plan_id = p.plan_id
-  WHERE p.plan_name NOT IN ('trial', 'churn')
-  AND YEAR(start_date) = 2020
+	SELECT 
+		s.customer_id,
+		s.plan_id,
+		p.plan_name,
+		s.start_date AS payment_date,
+		CASE 
+      --if a customer still used the current plan, next_date = '2020-12-31'
+      WHEN LEAD(s.start_date) OVER(PARTITION BY s.customer_id ORDER BY s.start_date) IS NULL THEN '2020-12-31'
+      -- if a customer changed the plan, next_date = (month difference between start_date and changing date) + start_date
+			ELSE DATEADD(MONTH, DATEDIFF(MONTH, start_date, LEAD(s.start_date) OVER(PARTITION BY s.customer_id ORDER BY s.start_date)),
+						 start_date) END AS next_date,
+		p.price AS amount
+	FROM subscriptions s
+	JOIN plans p ON s.plan_id = p.plan_id
+  --exclude trials because they didn't generate payments 
+	WHERE p.plan_name NOT IN ('trial')
+	AND YEAR(start_date) = 2020
 
-  UNION ALL
+	UNION ALL
 
-  SELECT 
-    customer_id,
-    plan_id,
-    plan_name,
-    DATEADD(MONTH, 1, payment_date) AS payment_date,
-    amount
-  FROM dateRecursion
-  WHERE DATEDIFF(MONTH, DATEADD(MONTH, 1, payment_date), '2020-12-31') >= 0
-    AND plan_name != 'pro annual'
+	SELECT 
+		customer_id,
+		plan_id,
+		plan_name,
+    --increment payment_date by monthly
+		DATEADD(MONTH, 1, payment_date) AS payment_date,
+		next_date,
+		amount
+	FROM dateRecursion
+  --stop incrementing when payment_date = next_date
+	WHERE DATEADD(MONTH, 1, payment_date) <= next_date
+	AND plan_name != 'pro annual'
 )
-
---Insert values to table [payments]
 
 INSERT INTO payments 
   (customer_id, plan_id, plan_name, payment_date, amount, payment_order)
-  
-  SELECT *,
-    ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY payment_date) AS payment_order
-  FROM dateRecursion
-  ORDER BY customer_id
-  OPTION (MAXRECURSION 365);
+SELECT 
+	customer_id,
+	plan_id,
+	plan_name,
+	payment_date,
+	amount,
+	ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY payment_date) AS payment_order
+FROM dateRecursion
+--exclude churns
+WHERE amount IS NOT NULL
+ORDER BY customer_id
+OPTION (MAXRECURSION 365);
