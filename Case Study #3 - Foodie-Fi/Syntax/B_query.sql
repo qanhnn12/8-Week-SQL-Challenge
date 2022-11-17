@@ -168,6 +168,13 @@ annualPlan AS (
   JOIN plans p ON s.plan_id = p.plan_id
   WHERE p.plan_name = 'pro annual'
 ),
+datesDiff AS (
+  SELECT 
+    t.customer_id,
+    DATEDIFF(d, trial_date, annual_date) AS diff
+  FROM trialPlan t
+  JOIN annualPlan a ON t.customer_id = a.customer_id
+),
 daysRecursion AS (
   SELECT 
     0 AS start_period, 
@@ -178,13 +185,6 @@ daysRecursion AS (
     end_period + 30 AS end_period
   FROM daysRecursion
   WHERE end_period < 360
-),
-datesDiff AS (
-  SELECT 
-    t.customer_id,
-    DATEDIFF(d, trial_date, annual_date) AS diff
-  FROM trialPlan t
-  JOIN annualPlan a ON t.customer_id = a.customer_id
 )
 
 SELECT 
