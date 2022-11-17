@@ -10,7 +10,9 @@
   
 ## 🛠️ Bussiness Task
 Danny and his friends launched a new startup called "Food-Fi" in 2020 and started selling monthly and annual subscriptions, 
-  giving their customers unlimited on-demand access to exclusive food videos from around the world. This case study focuses 
+  giving their customers unlimited on-demand access to exclusive food videos from around the world. 
+  
+  This case study focuses 
   on using subscription style digital data to answer some important questions such as business performance, payments, and customer journey.
   
 ## 🔐 Entity Relationship Diagram
