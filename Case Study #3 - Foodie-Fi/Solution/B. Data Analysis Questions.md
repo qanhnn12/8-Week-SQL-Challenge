@@ -282,7 +282,8 @@ WHERE plan_name = 'pro monthly'
   AND next_plan = 'basic monthly'
   AND YEAR(start_date) = 2020;
 ```
-| pro_to_basic_monthly  |
+| pro_to_basic_monthly|
 |---------------------|
-| 0     |
+| 0                   |
+
 There was no customers downgrading from a pro monthly to a basic monthly plan in 2020.
