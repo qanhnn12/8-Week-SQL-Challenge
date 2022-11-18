@@ -31,9 +31,9 @@ Example outputs for this table might look like the following:
 | 18          | 2       | pro monthly   | 2020-10-13   | 19.90  | 4              |
 
 To create that table:
-  * Create a new table named ```payments``` by coping the column definition from two tables ```subscriptions``` and ```plans```
-    This is just my personal approach, you can create it manually with ```CREATE TABLE``` and specify the data type in each column
-  * Use a recursive CTE to increment rows for all paid plans in 2020 by monthly until customers changing the plan, except 'pro annual'
+  * Create a new table named ```payments``` by copying the column definition from two tables ```subscriptions``` and ```plans```. 
+  This is just my personal approach, you can create ```payments``` manually with ```CREATE TABLE``` and specify the data type in each column.
+  * Use a recursive CTE to increment rows for all monthly paid plans in 2020 until customers changing the plan, except 'pro annual'.
     * use ```CASE``` to create a new column ```last_date```: last day of the current plan
     * if a customer kept using the current plan, last_date = '2020-12-31'
     * if a customer changed the plan, last_date = (month difference between start_date and changing date) + start_date
@@ -54,7 +54,7 @@ JOIN plans p ON s.plan_id = p.plan_id
 WHERE 1=0;
 
 
---Use a recursive CTE to increment rows for all paid plans in 2020 by monthly until customers changed the plan, except 'pro annual'
+--Use a recursive CTE to increment rows for all monthly paid plans until customers changing the plan, except 'pro annual'
 WITH dateRecursion AS (
   SELECT 
     s.customer_id,
