@@ -26,7 +26,7 @@ JOIN plans p ON s.plan_id = p.plan_id
 WHERE 1=0;
 
 
---Use a recursive CTE to increment rows for all monthly paid plans in 2020 until customers changing the plan, except 'pro annual'
+--Use a recursive CTE to increment rows for all monthly paid plans in 2020 until customers changing their plans, except 'pro annual'
 WITH dateRecursion AS (
   SELECT 
     s.customer_id,
