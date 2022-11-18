@@ -59,7 +59,7 @@ WITH dateRecursion AS (
     last_date,
     amount
   FROM dateRecursion
-  --stop incrementing when payment_date > last_date
+  --stop incrementing when payment_date = last_date
   WHERE DATEADD(MONTH, 1, payment_date) <= last_date
     AND plan_name != 'pro annual'
 )
