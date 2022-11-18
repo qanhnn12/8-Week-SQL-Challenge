@@ -12,7 +12,7 @@ by each customer in the subscriptions table with the following requirements:
 */
 
 
---Copy the column definition from table [subscriptions], [plans] and paste them to the new table [payments]
+--Copy the column definition from [subscriptions], [plans] and paste them to the new table [payments]
 SELECT 
   s.customer_id, 
   s.plan_id, 
@@ -26,7 +26,7 @@ JOIN plans p ON s.plan_id = p.plan_id
 WHERE 1=0;
 
 
---Use a recursive CTE to increment rows for all paid plans in 2020 by monthly until customers changed the plan, except 'pro annual'
+--Use a recursive CTE to increment rows for all monthly paid plans in 2020 until customers changing the plan, except 'pro annual'
 WITH dateRecursion AS (
   SELECT 
     s.customer_id,
@@ -59,7 +59,7 @@ WITH dateRecursion AS (
     last_date,
     amount
   FROM dateRecursion
-  --stop incrementing when payment_date = last_date
+  --stop incrementing when payment_date > last_date
   WHERE DATEADD(MONTH, 1, payment_date) <= last_date
     AND plan_name != 'pro annual'
 )
