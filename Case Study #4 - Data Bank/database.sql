@@ -1,3 +1,22 @@
+----------------------------
+--CASE STUDY #4: DATA BANK--
+----------------------------
+--Author: Anh Nguyen
+--Date: 18/11/2022
+--Tool used: SQL Server
+
+/*  
+Note: 
+Table [regions] contains 5 rows.
+Table [customer_nodes] contains up to 3500 rows
+Table [customer_transactions] contains up to 5868 rows. 
+
+SQL Server only allows us to insert 1000 rows each. Therefore, when inserting data to 
+[customer_nodes] and [customer_transactions], we should break them down to many sets.
+Each Insert set contains 1000 rows.
+*/
+
+
 CREATE DATABASE data_bank;
 
 CREATE TABLE regions (
