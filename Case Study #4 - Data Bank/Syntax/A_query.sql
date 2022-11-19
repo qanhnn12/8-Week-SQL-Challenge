@@ -26,7 +26,7 @@ ORDER BY r.region_id;
 SELECT 
   r.region_id,
   r.region_name,
-  COUNT(n.customer_id) AS nodes
+  COUNT(n.customer_id) AS customers
 FROM customer_nodes n
 JOIN regions r
   ON n.region_id = r.region_id
