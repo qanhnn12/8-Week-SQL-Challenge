@@ -58,3 +58,35 @@ reallocation AS (
 SELECT 
   AVG(CAST(moving_days AS FLOAT)) AS avg_moving_days
 FROM reallocation;
+
+
+--5. What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
+
+WITH customerDates AS (
+	SELECT 
+		customer_id,
+		region_id,
+		node_id,
+		MIN(start_date) AS start_date
+	FROM customer_nodes
+	GROUP BY customer_id, region_id, node_id
+),
+reallocation AS (
+	SELECT
+		customer_id,
+		region_id,
+		node_id,
+		start_date,
+		DATEDIFF(DAY, start_date, LEAD(start_date) OVER(PARTITION BY customer_id ORDER BY start_date)) AS moving_days
+	FROM customerDates
+)
+
+SELECT 
+	DISTINCT r.region_id,
+	rg.region_name,
+	PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY r.moving_days) OVER(PARTITION BY r.region_id) AS median,
+	PERCENTILE_CONT(0.8) WITHIN GROUP (ORDER BY r.moving_days) OVER(PARTITION BY r.region_id) AS percentile_80,
+	PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY r.moving_days) OVER(PARTITION BY r.region_id) AS percentile_95
+FROM reallocation r
+JOIN regions rg ON r.region_id = rg.region_id
+WHERE moving_days IS NOT NULL
