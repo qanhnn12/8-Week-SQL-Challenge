@@ -64,8 +64,8 @@ WITH monthly_transactions AS (
   SELECT
     customer_id,
     EOMONTH(txn_date) AS end_date,
-    SUM(CASE WHEN txn_type = 'deposit' THEN txn_amount
-             ELSE -txn_amount END) AS transactions
+    SUM(CASE WHEN txn_type IN ('withdrawal', 'purchase') THEN -txn_amount
+             ELSE txn_amount END) AS transactions
   FROM customer_transactions
   GROUP BY customer_id, EOMONTH(txn_date)
 ),
@@ -107,8 +107,8 @@ WITH monthly_transactions AS (
   SELECT
     customer_id,
     EOMONTH(txn_date) AS end_date,
-    SUM(CASE WHEN txn_type = 'deposit' THEN txn_amount
-             ELSE -txn_amount END) AS transactions
+    SUM(CASE WHEN txn_type IN ('withdrawal', 'purchase') THEN -txn_amount
+             ELSE txn_amount END) AS transactions
   FROM customer_transactions
   GROUP BY customer_id, EOMONTH(txn_date)
 ),
@@ -156,7 +156,7 @@ pct_increase AS (
   WHERE closing_balance ! = 0 AND next_balance IS NOT NULL
 )
 
---Create a temporary table
+--Create a temporary table because of the error: Null value is eliminated by an aggregate or other SET operation
 SELECT *
 INTO #temp
 FROM pct_increase;
