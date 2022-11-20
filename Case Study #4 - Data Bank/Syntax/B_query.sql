@@ -88,9 +88,8 @@ recursive_dates AS (
 SELECT 
   r.customer_id,
   r.end_date,
-  SUM(m.transactions) OVER 
-  (PARTITION BY r.customer_id ORDER BY r.end_date 
-  ROWS UNBOUNDED PRECEDING) AS closing_balance
+  SUM(m.transactions) OVER (PARTITION BY r.customer_id ORDER BY r.end_date 
+      ROWS UNBOUNDED PRECEDING) AS closing_balance
 FROM recursive_dates r
 LEFT JOIN  monthly_transactions m
   ON r.customer_id = m.customer_id
