@@ -64,11 +64,10 @@ WITH monthly_transactions AS (
   SELECT
     customer_id,
     EOMONTH(txn_date) AS end_date,
-    txn_type,
     SUM(CASE WHEN txn_type = 'deposit' THEN txn_amount
              ELSE -txn_amount END) AS transactions
   FROM customer_transactions
-  GROUP BY customer_id, EOMONTH(txn_date), txn_type
+  GROUP BY customer_id, EOMONTH(txn_date)
 ),
 
 --CTE 2: Increment last days of each month till they are equal to @maxDate 
@@ -88,6 +87,7 @@ recursive_dates AS (
 SELECT 
   r.customer_id,
   r.end_date,
+  m.transactions,
   SUM(m.transactions) OVER (PARTITION BY r.customer_id ORDER BY r.end_date 
       ROWS UNBOUNDED PRECEDING) AS closing_balance
 FROM recursive_dates r
