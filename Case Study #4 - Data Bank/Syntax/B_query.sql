@@ -160,7 +160,8 @@ INTO #temp
 FROM pct_increase;
 
 --Calculate the percentage of customers whose closing balance increasing 5% compared to the previous month
-SELECT CAST(100.0*COUNT(DISTINCT customer_id) AS FLOAT)
+SELECT *,
+  CAST(100.0*COUNT(DISTINCT customer_id) AS FLOAT)
       / (SELECT COUNT(DISTINCT customer_id) FROM customer_transactions) AS pct_customers
 FROM #temp
 WHERE pct > 5;
