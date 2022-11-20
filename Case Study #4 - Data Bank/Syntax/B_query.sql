@@ -59,7 +59,7 @@ GROUP BY months;
 DECLARE @maxDate DATE;
 SET @maxDate = (SELECT EOMONTH(MAX(txn_date)) FROM customer_transactions);
 
---CTE 1: Monthly transactions for each customer - inflow or outflow
+--CTE 1: Monthly transactions of each customer
 WITH monthly_transactions AS (
   SELECT
     customer_id,
@@ -102,7 +102,7 @@ LEFT JOIN  monthly_transactions m
 DECLARE @maxDate DATE;
 SET @maxDate = (SELECT EOMONTH(MAX(txn_date)) FROM customer_transactions);
 
---CTE 1: Monthly transactions for each customer - inflow or outflow (Q4)
+--CTE 1: Monthly transactions of each customer (Q4)
 WITH monthly_transactions AS (
   SELECT
     customer_id,
@@ -142,7 +142,7 @@ customers_balance AS (
 ),
 
 --CTE 4: CTE 3 & next_balance
-next_balance_customer AS (
+customers_next_balance AS (
   SELECT *,
     LEAD(closing_balance) OVER(PARTITION BY customer_id ORDER BY end_date) AS next_balance
   FROM customers_balance
@@ -150,18 +150,19 @@ next_balance_customer AS (
 
 --CTE 5: Calculate the increase percentage of closing balance for each customer
 pct_increase AS (
-  SELECT 100.0*(next_balance-closing_balance)/closing_balance AS pct
-  FROM next_balance_customer
+  SELECT *,
+    100.0*(next_balance-closing_balance)/closing_balance AS pct
+  FROM customers_next_balance
   WHERE closing_balance ! = 0 AND next_balance IS NOT NULL
 )
+
 --Create a temporary table
 SELECT *
 INTO #temp
 FROM pct_increase;
 
 --Calculate the percentage of customers whose closing balance increasing 5% compared to the previous month
-SELECT *,
-  CAST(100.0*COUNT(DISTINCT customer_id) AS FLOAT)
+SELECT CAST(100.0*COUNT(DISTINCT customer_id) AS FLOAT)
       / (SELECT COUNT(DISTINCT customer_id) FROM customer_transactions) AS pct_customers
 FROM #temp
 WHERE pct > 5;
