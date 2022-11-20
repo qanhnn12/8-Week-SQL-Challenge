@@ -94,3 +94,75 @@ FROM recursive_dates r
 LEFT JOIN  monthly_transactions m
   ON r.customer_id = m.customer_id
   AND r.end_date = m.end_date;
+
+
+--5. What is the percentage of customers who increase their closing balance by more than 5%?
+
+--End date in the month of the max date of our dataset
+DECLARE @maxDate DATE;
+SET @maxDate = (SELECT EOMONTH(MAX(txn_date)) FROM customer_transactions);
+
+--CTE 1: Monthly transactions for each customer - inflow or outflow
+WITH monthly_transactions AS (
+  SELECT
+    customer_id,
+    EOMONTH(txn_date) AS end_date,
+    SUM(CASE WHEN txn_type = 'deposit' THEN txn_amount
+             ELSE -txn_amount END) AS transactions
+  FROM customer_transactions
+  GROUP BY customer_id, EOMONTH(txn_date)
+),
+
+--CTE 2: Increment last days of each month till they are equal to @maxDate 
+recursive_dates AS (
+  SELECT
+    DISTINCT customer_id,
+    CAST('2020-01-31' AS DATE) AS end_date
+  FROM customer_transactions
+  UNION ALL
+  SELECT 
+    customer_id,
+    EOMONTH(DATEADD(MONTH, 1, end_date)) AS end_date
+  FROM recursive_dates
+  WHERE EOMONTH(DATEADD(MONTH, 1, end_date)) <= @maxDate
+),
+
+-- CTE 3: Closing balance of each customer by monthly
+customers_balance AS (
+	SELECT 
+	  r.customer_id,
+	  r.end_date,
+	  COALESCE(m.transactions, 0) AS transactions,
+	  SUM(m.transactions) OVER (PARTITION BY r.customer_id ORDER BY r.end_date 
+		  ROWS UNBOUNDED PRECEDING) AS closing_balance
+	FROM recursive_dates r
+	LEFT JOIN  monthly_transactions m
+	  ON r.customer_id = m.customer_id
+	  AND r.end_date = m.end_date
+),
+
+--CTE 4: CTE 3 & next_balance
+next_balance_customer AS (
+SELECT *,
+	LEAD(closing_balance) OVER(PARTITION BY customer_id ORDER BY end_date) AS next_balance
+FROM customers_balance
+),
+
+--CTE 5: Calculate the increase percentage of closing balance for each customer
+pct_increase AS (
+	SELECT 
+		*,
+		100.0*(next_balance-closing_balance)/closing_balance AS pct
+	FROM next_balance_customer
+	WHERE closing_balance ! = 0 AND next_balance IS NOT NULL
+)
+--Create a temporary table
+SELECT *
+INTO #temp
+FROM pct_increase;
+
+--Calculate the percentage of customers whose closing balance increasing 5% compared to the previous month
+SELECT CAST(100.0*COUNT(DISTINCT customer_id) AS FLOAT)
+		/ (SELECT COUNT(DISTINCT customer_id) FROM customer_transactions) AS pct_customers
+FROM #temp
+WHERE pct > 5;
