@@ -51,3 +51,47 @@ FROM cte_transaction
 WHERE deposit_count > 1
   AND (purchase_count = 1 OR withdrawal_count = 1)
 GROUP BY months;
+
+
+--4. What is the closing balance for each customer at the end of the month?
+
+--End date in the month of the max date of our dataset
+DECLARE @maxDate DATE;
+SET @maxDate = (SELECT EOMONTH(MAX(txn_date)) FROM customer_transactions);
+
+--CTE 1: Monthly transactions for each customer - inflow or outflow
+WITH monthly_transactions AS (
+	SELECT
+		customer_id,
+		EOMONTH(txn_date) AS end_date,
+		txn_type,
+		SUM(CASE WHEN txn_type = 'deposit' THEN txn_amount
+			 ELSE -txn_amount END) AS transactions
+	FROM customer_transactions
+	GROUP BY customer_id, EOMONTH(txn_date), txn_type
+),
+
+--CTE 2: Increment last days of each month till they are equal to @maxDate 
+recursive_dates AS (
+	SELECT
+		DISTINCT customer_id,
+		CAST('2020-01-31' AS DATE) AS end_date
+	FROM customer_transactions
+	UNION ALL
+	SELECT 
+		customer_id,
+		EOMONTH(DATEADD(MONTH, 1, end_date)) AS end_date
+	FROM recursive_dates
+	WHERE EOMONTH(DATEADD(MONTH, 1, end_date)) <= @maxDate
+)
+
+SELECT 
+	r.customer_id,
+	r.end_date,
+	SUM(m.transactions) OVER 
+		(PARTITION BY r.customer_id ORDER BY r.end_date 
+		ROWS UNBOUNDED PRECEDING) AS closing_balance
+FROM recursive_dates r
+LEFT JOIN  monthly_transactions m
+	ON r.customer_id = m.customer_id
+AND r.end_date = m.end_date
