@@ -218,3 +218,8 @@ SELECT CAST(100.0*COUNT(DISTINCT customer_id) AS FLOAT)
 FROM #temp
 WHERE pct > 5;
 ```
+| pct_customers  |
+|----------------|
+| 75.8           |
+
+75.8% of customers increasing their closing balance by more than 5% compared to the previous month.
