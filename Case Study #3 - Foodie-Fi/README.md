@@ -51,5 +51,5 @@ The Foodie-Fi team wants to create a new payments table for the year 2020 that i
 5. What business levers could the Foodie-Fi team use to reduce the customer churn rate? How would you validate the effectiveness of your ideas?
   
 ## 🚀 My Solution
-* View the complete syntax [here](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi/Syntax)
-* View the result and explanation [here](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution)  
+* View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi/Syntax)
+* View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution)  
