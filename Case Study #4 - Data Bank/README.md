@@ -3,10 +3,10 @@
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/4.png" align="center" width="400" height="400" >
 
 ## 📕 Table of Contents
-* [Bussiness Task]()
-* [Entity Relationship Diagram]()
-* [Case Study Questions]()
-* [My Solution]()
+* [Bussiness Task](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank#%EF%B8%8F-bussiness-task)
+* [Entity Relationship Diagram](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank#-entity-relationship-diagram)
+* [Case Study Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank#-case-study-questions)
+* [My Solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank#-my-solution)
 
 ## 🛠️ Bussiness Task
 Danny launched a new initiative, Data Bank which runs banking activities and also acts as the world’s most secure distributed data storage platform!
