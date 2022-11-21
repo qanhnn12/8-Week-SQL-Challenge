@@ -43,7 +43,7 @@ WITH customerDates AS (
     node_id,
     MIN(start_date) AS start_date
   FROM customer_nodes
-  GROUP BY customer_id, node_id
+  GROUP BY customer_id, region_id, node_id
 ),
 reallocation AS (
   SELECT
@@ -51,7 +51,9 @@ reallocation AS (
     node_id,
     region_id,
     start_date,
-    DATEDIFF(DAY, start_date, LEAD(start_date) OVER(PARTITION BY customer_id ORDER BY start_date)) AS moving_days
+    DATEDIFF(DAY, start_date, 
+             LEAD(start_date) OVER(PARTITION BY customer_id 
+                                   ORDER BY start_date)) AS moving_days
   FROM customerDates
 )
 
