@@ -266,7 +266,7 @@ GROUP BY dr.start_period, dr.end_period;
 
 ### 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
 ```TSQL
-ITH nextPlan AS (
+WITH nextPlan AS (
   SELECT 
     s.customer_id,
     s.start_date,
