@@ -36,4 +36,4 @@ This case study is all about calculating metrics, growth and helping the busines
   
 ## 🚀 My Solution
 * View the complete syntax [here](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Syntax)
-* View the result and explanation [here]()  
+* View the result and explanation [here](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Solution)  
