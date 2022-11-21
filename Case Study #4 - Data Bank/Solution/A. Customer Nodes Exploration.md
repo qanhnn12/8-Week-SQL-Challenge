@@ -59,7 +59,7 @@ WITH customerDates AS (
     customer_id,
     region_id,
     node_id,
-    MIN(start_date) AS start_date
+    MIN(start_date) AS first_date
   FROM customer_nodes
   GROUP BY customer_id, region_id, node_id
 ),
@@ -68,10 +68,10 @@ reallocation AS (
     customer_id,
     node_id,
     region_id,
-    start_date,
-    DATEDIFF(DAY, start_date, 
-             LEAD(start_date) OVER(PARTITION BY customer_id 
-                                   ORDER BY start_date)) AS moving_days
+    first_date,
+    DATEDIFF(DAY, first_date, 
+             LEAD(first_date) OVER(PARTITION BY customer_id 
+                                   ORDER BY first_date)) AS moving_days
   FROM customerDates
 )
 
@@ -93,7 +93,7 @@ WITH customerDates AS (
     customer_id,
     region_id,
     node_id,
-    MIN(start_date) AS start_date
+    MIN(start_date) AS first_date
   FROM customer_nodes
   GROUP BY customer_id, region_id, node_id
 ),
@@ -102,8 +102,10 @@ reallocation AS (
     customer_id,
     region_id,
     node_id,
-    start_date,
-    DATEDIFF(DAY, start_date, LEAD(start_date) OVER(PARTITION BY customer_id ORDER BY start_date)) AS moving_days
+    first_date,
+    DATEDIFF(DAY, first_date, 
+             LEAD(first_date) OVER(PARTITION BY customer_id 
+                                   ORDER BY first_date)) AS moving_days
   FROM customerDates
 )
 
