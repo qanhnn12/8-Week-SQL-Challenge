@@ -35,5 +35,5 @@ This case study is all about calculating metrics, growth and helping the busines
 5. What is the percentage of customers who increase their closing balance by more than 5%?
   
 ## 🚀 My Solution
-* View the complete syntax [here](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Syntax)
-* View the result and explanation [here](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Solution)  
+  * View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Syntax)
+* View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Solution)
