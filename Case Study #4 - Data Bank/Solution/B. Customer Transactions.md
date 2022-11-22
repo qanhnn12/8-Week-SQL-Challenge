@@ -71,7 +71,7 @@ If the outflow (withdrawal and purchase) > inflow (deposit), the transaction is 
   * Create a CTE ```monthly_transaction``` to find the SUM of all transactions in every month for each customer.
   * Create a CTE ```recursive_date``` to make a list of last days in each month for each customer. 
   * ```LEFT JOIN``` from ```recursive_dates``` to ```monthly_transactions``` to display all end dates of every month for each customer.
-  * Calculate the monthly balance by take the sum of all transactions between the preceding row and current row.
+  * Calculate the monthly closing balance by taking the SUM of all transactions between the preceding row and current row.
 
 ```TSQL
 --End date in the month of the max date of our dataset
@@ -140,12 +140,12 @@ A part of the result (2000 rows):
 
 ### 5. What is the percentage of customers who increase their closing balance by more than 5%?
 This question is not clear. It should be "*calculate the percentage of customers who increase their closing balance by more than 5% compared to the previous month*".
-  * Copy 2 CTEs in the previous questions.
-  * Crate a CTE ```customers_balance```by using the calculation for the closing balance in the previous question. 
+  * Copy 2 CTEs in the previous question.
+  * Create a CTE ```customers_balance```by using the calculation for the closing balance in the previous question. 
   * Create a new CTE ```customers_next_balance``` to calculate the closing balance next month: ```next_balance```.
-  * The percentage increase of the closing balance = (next balance - closing balance)*100 / closing balance. 
-  * Remember to exclude ```closing_balance``` rows that are 0 (prevent *divide by 0 error*) and ```next_balance``` rows are NULL (last row of each month in the ```LEAD``` function)
-  * Create a temporary table ```#temp``` to prevent the error *Null value is eliminated by an aggregate or other SET operation*.
+  * The percentage increase of the closing balance = 100 * (next balance - closing balance) / closing balance. 
+  * Exclude ```closing_balance``` rows that are 0 (prevent *divide by 0 error*) and ```next_balance``` rows that are NULL (last row of each partition in ```LEAD```)
+  * Create a temporary table ```#temp``` to prevent the error *"Warning: Null value is eliminated by an aggregate or other SET operation"*.
   * Count the number of customers increasing their closing balance by more than 5%, then divide that by the total number of customers.
   
 ```TSQL
