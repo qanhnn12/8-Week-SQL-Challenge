@@ -13,18 +13,18 @@ Table [customer_transactions] contains up to 5868 rows.
 
 SQL Server only allows us to insert 1000 rows each. Therefore, when inserting data to 
 [customer_nodes] and [customer_transactions], we should break them down into many sets.
-Each Insert set contains 1000 rows.
+Each Insert set contains about 1000 rows.
 */
 
 
 CREATE DATABASE data_bank;
 
-CREATE TABLE regions (
+CREATE TABLE data_bank.dbo.regions (
   region_id INTEGER,
   region_name VARCHAR(9)
 );
 
-INSERT INTO regions
+INSERT INTO data_bank.dbo.regions
   (region_id, region_name)
 VALUES
   ('1', 'Australia'),
@@ -34,7 +34,7 @@ VALUES
   ('5', 'Europe');
 
 
-CREATE TABLE customer_nodes (
+CREATE TABLE data_bank.dbo.customer_nodes (
   customer_id INTEGER,
   region_id INTEGER,
   node_id INTEGER,
@@ -42,7 +42,7 @@ CREATE TABLE customer_nodes (
   end_date DATE
 );
 
-INSERT INTO customer_nodes
+INSERT INTO data_bank.dbo.customer_nodes
   (customer_id, region_id, node_id, start_date, end_date)
 VALUES
   ('1', '3', '4', '2020-01-02', '2020-01-03'),
@@ -1043,7 +1043,7 @@ VALUES
   ('496', '3', '2', '2020-01-10', '2020-01-17'),
   ('497', '5', '5', '2020-02-28', '2020-03-17');
 
-INSERT INTO customer_nodes
+INSERT INTO data_bank.dbo.customer_nodes
   (customer_id, region_id, node_id, start_date, end_date)
 VALUES
   ('498', '1', '4', '2020-01-25', '2020-02-07'),
@@ -2043,7 +2043,7 @@ VALUES
   ('492', '1', '3', '2020-02-22', '2020-03-18'),
   ('493', '4', '2', '2020-02-15', '2020-02-26');
 
-INSERT INTO customer_nodes
+INSERT INTO data_bank.dbo.customer_nodes
   (customer_id, region_id, node_id, start_date, end_date)
 VALUES
   ('494', '5', '2', '2020-03-11', '2020-03-18'),
@@ -3043,7 +3043,7 @@ VALUES
   ('488', '5', '3', '2020-03-17', '2020-04-12'),
   ('489', '4', '1', '2020-03-11', '2020-03-24');
 
-INSERT INTO customer_nodes
+INSERT INTO data_bank.dbo.customer_nodes
   (customer_id, region_id, node_id, start_date, end_date)
 VALUES
   ('490', '5', '5', '2020-03-25', '2020-03-27'),
@@ -3559,14 +3559,14 @@ VALUES
   ('500', '2', '2', '2020-04-15', '9999-12-31');
   
   
-CREATE TABLE customer_transactions (
+CREATE TABLE data_bank.dbo.customer_transactions (
   customer_id INTEGER,
   txn_date DATE,
   txn_type VARCHAR(10),
   txn_amount INTEGER
 );
 
-INSERT INTO customer_transactions
+INSERT INTO data_bank.dbo.customer_transactions
   (customer_id, txn_date, txn_type, txn_amount)
 VALUES
   ('429', '2020-01-21', 'deposit', '82'),
@@ -4560,7 +4560,7 @@ VALUES
   ('21', '2020-03-23', 'purchase', '489'),
   ('21', '2020-03-06', 'deposit', '713');
 
-INSERT INTO customer_transactions
+INSERT INTO data_bank.dbo.customer_transactions
   (customer_id, txn_date, txn_type, txn_amount)
 VALUES
   ('69', '2020-01-22', 'deposit', '3'),
@@ -5560,7 +5560,7 @@ VALUES
   ('261', '2020-03-07', 'withdrawal', '959'),
   ('261', '2020-02-04', 'deposit', '974');
 
-INSERT INTO customer_transactions
+INSERT INTO data_bank.dbo.customer_transactions
   (customer_id, txn_date, txn_type, txn_amount)
 VALUES
   ('261', '2020-04-05', 'deposit', '298'),
@@ -6560,7 +6560,7 @@ VALUES
   ('131', '2020-02-08', 'purchase', '955'),
   ('131', '2020-01-21', 'deposit', '868');
 
-INSERT INTO customer_transactions
+INSERT INTO data_bank.dbo.customer_transactions
   (customer_id, txn_date, txn_type, txn_amount)
 VALUES
   ('131', '2020-03-14', 'deposit', '181'),
@@ -7560,7 +7560,7 @@ VALUES
   ('7', '2020-02-06', 'deposit', '688'),
   ('7', '2020-04-17', 'deposit', '615');
 
-INSERT INTO customer_transactions
+INSERT INTO data_bank.dbo.customer_transactions
   (customer_id, txn_date, txn_type, txn_amount)
 VALUES
   ('7', '2020-03-04', 'withdrawal', '29'),
@@ -8560,7 +8560,7 @@ VALUES
   ('456', '2020-03-21', 'deposit', '278'),
   ('456', '2020-01-09', 'deposit', '561');
 
-INSERT INTO customer_transactions
+INSERT INTO data_bank.dbo.customer_transactions
   (customer_id, txn_date, txn_type, txn_amount)
 VALUES
   ('456', '2020-02-14', 'deposit', '910'),
