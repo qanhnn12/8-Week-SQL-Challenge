@@ -19,7 +19,7 @@ Otherwise, we will face the error in Q4.
 CREATE DATABASE pizza_runner;
 
 DROP TABLE IF EXISTS pizza_runner.dbo.runners;
-CREATE TABLE runners (
+CREATE TABLE pizza_runner.dbo.runners (
   "runner_id" INTEGER,
   "registration_date" DATE
 );
