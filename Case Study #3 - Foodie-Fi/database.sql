@@ -13,13 +13,13 @@ Therefore, when inserting data to [subscriptions], we should break them down int
 
 CREATE DATABASE foodie_fi;
 
-CREATE TABLE plans (
+CREATE TABLE foodie_fi.dbo.plans (
   plan_id INTEGER,
   plan_name VARCHAR(13),
   price DECIMAL(5,2)
 );
 
-INSERT INTO plans
+INSERT INTO foodie_fi.dbo.plans
   (plan_id, plan_name, price)
 VALUES
   ('0', 'trial', '0'),
@@ -28,13 +28,13 @@ VALUES
   ('3', 'pro annual', '199'),
   ('4', 'churn', null);
 
-CREATE TABLE subscriptions (
+CREATE TABLE foodie_fi.dbo.subscriptions (
   customer_id INTEGER,
   plan_id INTEGER,
   start_date DATE
 );
 
-INSERT INTO subscriptions
+INSERT INTO foodie_fi.dbo.subscriptions
   (customer_id, plan_id, start_date)
 VALUES
   ('1', '0', '2020-08-01'),
@@ -1033,7 +1033,7 @@ VALUES
   ('373', '1', '2020-10-27'),
   ('373', '2', '2020-11-03');
 
-INSERT INTO subscriptions
+INSERT INTO foodie_fi.dbo.subscriptions
   (customer_id, plan_id, start_date)
 VALUES
   ('374', '0', '2020-05-18'),
@@ -2036,7 +2036,7 @@ VALUES
   ('755', '1', '2020-05-16'),
   ('755', '3', '2020-10-22');
  
-INSERT INTO subscriptions
+INSERT INTO foodie_fi.dbo.subscriptions
   (customer_id, plan_id, start_date)
 VALUES
   ('756', '0', '2020-02-19'),
