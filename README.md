@@ -77,7 +77,7 @@ Data Mart is Danny’s latest venture and after running international operations
 
 In June 2020 - large scale supply changes were made at Data Mart. All Data Mart products now use sustainable packaging methods in every single step from the farm all the way to the customer. Danny needs your help to quantify the impact of this change on the sales performance for Data Mart and it’s separate business areas.
 
-***View the case study [here](https://8weeksqlchallenge.com/case-study-5/) and my solution here.***
+***View the case study [here](https://8weeksqlchallenge.com/case-study-5/) and my solution [here](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart).***
   
 ---
 ## :briefcase: Case Study #6 - Clique Bait
