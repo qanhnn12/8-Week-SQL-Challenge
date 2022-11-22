@@ -8,13 +8,13 @@
 
 CREATE DATABASE dannys_diner;
 
-CREATE TABLE sales (
+CREATE TABLE dannys_diner.dbo.sales (
   "customer_id" VARCHAR(1),
   "order_date" DATE,
   "product_id" INTEGER
 );
 
-INSERT INTO sales
+INSERT INTO dannys_diner.dbo.sales
   ("customer_id", "order_date", "product_id")
 VALUES
   ('A', '2021-01-01', '1'),
@@ -34,13 +34,13 @@ VALUES
   ('C', '2021-01-07', '3');
  
 
-CREATE TABLE menu (
+CREATE TABLE dannys_diner.dbo.menu (
   "product_id" INTEGER,
   "product_name" VARCHAR(5),
   "price" INTEGER
 );
 
-INSERT INTO menu
+INSERT INTO dannys_diner.dbo.menu
   ("product_id", "product_name", "price")
 VALUES
   ('1', 'sushi', '10'),
@@ -48,12 +48,12 @@ VALUES
   ('3', 'ramen', '12');
   
 
-CREATE TABLE members (
+CREATE TABLE dannys_diner.dbo.members (
   "customer_id" VARCHAR(1),
   "join_date" DATE
 );
 
-INSERT INTO members
+INSERT INTO dannys_diner.dbo.members
   ("customer_id", "join_date")
 VALUES
   ('A', '2021-01-07'),
