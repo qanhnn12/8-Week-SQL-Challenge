@@ -16,6 +16,7 @@ SELECT
       WHEN LEFT(segment, 1) = 'C' THEN 'Couples'
       WHEN LEFT(segment, 1) = 'F' THEN 'Families'
       ELSE 'unknown' END AS demographic,
-    ROUND(CAST(sales AS FLOAT)/transactions, 2) AS avg_transaction
+    ROUND(CAST(sales AS FLOAT)/transactions, 2) AS avg_transaction,
+  sales
 INTO clean_weekly_sales
 FROM weekly_sales;
