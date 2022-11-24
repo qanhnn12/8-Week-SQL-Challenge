@@ -21,7 +21,7 @@ SELECT
       WHEN LEFT(segment, 1) = 'F' THEN 'Families'
       ELSE 'unknown' END AS demographic,
   transactions,
-  sales,
+  CAST(sales AS bigint) AS sales,
   ROUND(CAST(sales AS FLOAT)/transactions, 2) AS avg_transaction
 INTO clean_weekly_sales
 FROM weekly_sales;
