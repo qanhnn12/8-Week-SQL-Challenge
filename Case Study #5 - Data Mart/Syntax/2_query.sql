@@ -80,3 +80,23 @@ GROUP BY calendar_year,  month_number
 ORDER BY calendar_year, month_number;
 
 
+--7. What is the percentage of sales by demographic for each year in the dataset?
+
+WITH sales_by_demographic AS (
+  SELECT 
+    calendar_year,
+    demographic,
+    SUM(sales) AS sales
+  FROM clean_weekly_sales
+  GROUP BY calendar_year, demographic)
+
+SELECT 
+  calendar_year,
+  CAST(100.0 * MAX(CASE WHEN demographic = 'Families' THEN sales END)
+	/ SUM(sales) AS decimal(5, 2)) AS pct_families,
+  CAST(100.0 * MAX(CASE WHEN demographic = 'Couples' THEN sales END) 
+	/ SUM(sales) AS decimal(5, 2)) AS pct_couples,
+  CAST(100.0 * MAX(CASE WHEN demographic = 'unknown' THEN sales END)
+	/ SUM(sales) AS decimal(5, 2)) AS pct_unknown
+FROM sales_by_demographic
+GROUP BY calendar_year;
