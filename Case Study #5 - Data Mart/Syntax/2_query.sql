@@ -7,13 +7,13 @@
 SELECT DISTINCT(DATENAME(dw, week_date)) AS week_date_value
 FROM clean_weekly_sales;
 
+
 --2. What range of week numbers are missing from the dataset?
 
 WITH allWeeks AS (
   SELECT 1 AS pos
   UNION ALL
-  SELECT pos+1
-  FROM allWeeks
+  SELECT pos+1 FROM allWeeks
   WHERE pos+1 <= 52)
 
 SELECT 
@@ -24,3 +24,15 @@ LEFT JOIN clean_weekly_sales c
   ON a.pos = c.week_number
 ORDER BY a.pos;
 
+
+--3. How many total transactions were there for each year in the dataset?
+
+SELECT 
+	calendar_year,
+	SUM(transactions) AS total_transactions
+FROM clean_weekly_sales
+GROUP BY calendar_year
+ORDER BY calendar_year;
+
+
+--4. 
