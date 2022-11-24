@@ -28,11 +28,20 @@ ORDER BY a.pos;
 --3. How many total transactions were there for each year in the dataset?
 
 SELECT 
-	calendar_year,
-	SUM(transactions) AS total_transactions
+  calendar_year,
+  SUM(transactions) AS total_transactions
 FROM clean_weekly_sales
 GROUP BY calendar_year
 ORDER BY calendar_year;
 
 
---4. 
+--4. What is the total sales for each region for each month?
+
+SELECT 
+  region, 
+  month_number, 
+  -- Cast to 'bigint' because the SUM exceeds the maximum of 'int'
+  SUM(CAST(sales AS bigint)) AS total_sales
+FROM clean_weekly_sales
+GROUP BY region, month_number
+ORDER BY region, month_number;
