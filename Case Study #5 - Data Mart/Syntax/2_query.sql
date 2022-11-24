@@ -71,9 +71,9 @@ WITH sales_cte AS (
 SELECT 
   calendar_year, 
   month_number, 
-  CAST(100.0 * MAX(CASE WHEN platform = 'Retail' THEN monthly_sales ELSE 0 END)
+  CAST(100.0 * MAX(CASE WHEN platform = 'Retail' THEN monthly_sales END)
 	/ SUM(monthly_sales) AS decimal(5, 2)) AS pct_retail,
-  CAST(100.0 * MAX(CASE WHEN platform = 'Shopify' THEN monthly_sales ELSE 0 END)
+  CAST(100.0 * MAX(CASE WHEN platform = 'Shopify' THEN monthly_sales END)
 	/ SUM(monthly_sales) AS decimal(5, 2)) AS pct_shopify
 FROM sales_cte
 GROUP BY calendar_year,  month_number
