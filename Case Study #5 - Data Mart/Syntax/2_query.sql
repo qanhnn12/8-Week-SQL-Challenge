@@ -45,3 +45,13 @@ SELECT
 FROM clean_weekly_sales
 GROUP BY region, month_number
 ORDER BY region, month_number;
+
+
+--5. What is the total count of transactions for each platform
+
+SELECT 
+	platform,
+	SUM(transactions) AS total_transactions
+FROM clean_weekly_sales
+GROUP BY platform;
+
