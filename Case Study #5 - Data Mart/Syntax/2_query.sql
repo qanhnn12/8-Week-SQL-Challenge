@@ -100,3 +100,22 @@ SELECT
 	/ SUM(sales) AS decimal(5, 2)) AS pct_unknown
 FROM sales_by_demographic
 GROUP BY calendar_year;
+
+
+--8. Which age_band and demographic values contribute the most to Retail sales?
+
+DECLARE @retailSales bigint = (
+  SELECT SUM(sales)
+  FROM clean_weekly_sales
+  WHERE platform = 'Retail')
+				
+SELECT 
+  age_band,
+  demographic,
+  SUM(sales) AS sales,
+  CAST(100.0 * SUM(sales)/@retailSales AS decimal(5, 2)) AS contribution
+FROM clean_weekly_sales
+WHERE platform = 'Retail'
+GROUP BY age_band, demographic
+ORDER BY contribution DESC;
+
