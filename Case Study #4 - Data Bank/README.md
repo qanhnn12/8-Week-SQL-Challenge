@@ -21,6 +21,8 @@ This case study is all about calculating metrics, growth and helping the busines
 
 ## ❓ Case Study Questions
 ### A. Customer Nodes Exploration
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%234%20-%20Data%20Bank/Solution/A.%20Customer%20Nodes%20Exploration.md).
+
 1. How many unique nodes are there on the Data Bank system?
 2. What is the number of nodes per region?
 3. How many customers are allocated to each region?
@@ -28,6 +30,8 @@ This case study is all about calculating metrics, growth and helping the busines
 5. What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
 
 ### B. Customer Transactions
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%234%20-%20Data%20Bank/Solution/B.%20Customer%20Transactions.md).
+
 1. What is the unique count and total amount for each transaction type?
 2. What is the average total historical deposit counts and amounts for all customers?
 3. For each month - how many Data Bank customers make more than 1 deposit and either 1 purchase or 1 withdrawal in a single month?
