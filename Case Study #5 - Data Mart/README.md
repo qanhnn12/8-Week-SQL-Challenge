@@ -49,7 +49,8 @@ In a single query, perform the following operations and generate a new table in 
   
   * Ensure all ```null``` string values with an ```"unknown"``` string value in the original ```segment``` column as well as the new ```age_band``` and ```demographic``` columns
   * Generate a new ```avg_transaction``` column as the sales value divided by ```transactions``` rounded to 2 decimal places for each record
-  
+
+---
 ### B. Data Exploration
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/B.%20Data%20Exploration.md).
   
@@ -63,6 +64,7 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
 8. Which ```age_band``` and ```demographic``` values contribute the most to Retail sales?
 9. Can we use the ```avg_transaction``` column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
 
+---
 ### C. Before & After Analysis
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/C.%20Before%20%26%20After%20Analysis.md).
   
@@ -76,6 +78,7 @@ Using this analysis approach - answer the following questions:
 2. What about the entire 12 weeks before and after?
 3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
 
+---
 ### D. Bonus Question
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/D.%20Bonus%20Question.md).
   
@@ -87,6 +90,7 @@ Which areas of the business have the highest negative impact in sales metrics pe
   * ```customer_type```
 Do you have any further recommendations for Danny’s team at Data Mart or any interesting insights based off this analysis?
 
+---
 ## 🚀 My Solution
 * View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart/Syntax)
 * View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart/Solution)
