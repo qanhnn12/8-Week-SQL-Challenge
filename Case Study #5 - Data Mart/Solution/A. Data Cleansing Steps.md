@@ -80,3 +80,6 @@ The first 10 rows:
 | 2020-08-31 | 36          | 8            | 2020          | ASIA   | Shopify  | F1      | Existing      | Young Adults | Families    | 2158         | 371417   | 172.11           |
 | 2020-08-31 | 36          | 8            | 2020          | AFRICA | Shopify  | F2      | New           | Middle Aged  | Families    | 318          | 49557    | 155.84           |
 | 2020-08-31 | 36          | 8            | 2020          | AFRICA | Retail   | C3      | New           | Retirees     | Couples     | 111032       | 3888162  | 35.02            |
+
+---
+My solution for **[B. Data Exploration](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/B.%20Data%20Exploration.md)**.
