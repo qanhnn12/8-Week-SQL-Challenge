@@ -10,6 +10,8 @@ Note:
 Change all TIMESTAMP columns to DATETIME2
 */
 
+CREATE DATABASE clique_bait;
+
 CREATE TABLE clique_bait.dbo.event_identifier (
   "event_type" INTEGER,
   "event_name" VARCHAR(13)
