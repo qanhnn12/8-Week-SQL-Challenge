@@ -28,16 +28,16 @@ Remember to include the ```DECLARE @weekNum``` in the beginning of each part bel
 WITH regionChanges AS (
   SELECT
     region,
-    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
   FROM clean_weekly_sales
   GROUP BY region
 )
 SELECT *,
-  CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
+  CAST(100.0 * (after_changes-before_changes)/before_changes AS decimal(5,2)) AS pct_change
 FROM regionChanges;
 ```
-| region        | before_sales | after_sales | pct_change  |
+| region        | before_changes | after_changes | pct_change  |
 |---------------|--------------|-------------|-------------|
 | OCEANIA       | 6698586333   | 6640244793  | -0.87       |
 | EUROPE        | 328141414    | 344420043   | 4.96        |
@@ -58,16 +58,16 @@ Danny should consider reducing the number of products wrapped by this kind of pa
 WITH platformChanges AS (
   SELECT
     platform,
-    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
   FROM clean_weekly_sales
   GROUP BY platform
 )
 SELECT *,
-  CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
+  CAST(100.0 * (after_changes-before_changes)/before_changes AS decimal(5,2)) AS pct_change
 FROM platformChanges;
 ```
-| platform | before_sales | after_sales | pct_change  |
+| platform | before_changes | after_changes | pct_change  |
 |----------|--------------|-------------|-------------|
 | Retail   | 19886040272  | 19768576165 | -0.59       |
 | Shopify  | 520181589    | 568836201   | 9.35        |
@@ -81,16 +81,16 @@ FROM platformChanges;
 WITH ageBandChanges AS (
   SELECT
     age_band,
-    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
   FROM clean_weekly_sales
   GROUP BY age_band
 )
 SELECT *,
-  CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
+  CAST(100.0 * (after_changes-before_changes)/before_changes AS decimal(5,2)) AS pct_change
 FROM ageBandChanges;
 ```
-| age_band     | before_sales | after_sales | pct_change  |
+| age_band     | before_changes | after_changes | pct_change  |
 |--------------|--------------|-------------|-------------|
 | unknown      | 8191628826   | 8146983408  | -0.55       |
 | Young Adults | 2290835366   | 2285973456  | -0.21       |
