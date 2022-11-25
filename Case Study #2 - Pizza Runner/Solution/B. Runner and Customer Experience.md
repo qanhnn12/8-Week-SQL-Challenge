@@ -14,6 +14,7 @@ GROUP BY DATEPART(week, registration_date);
 | 2           | 2             |
 | 3           | 1             |
 
+---
 ### Q2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
 ```TSQL
 WITH runners_pickup AS (
@@ -42,6 +43,7 @@ GROUP BY runner_id;
 | 2         | 20            |
 | 3         | 10            |
 
+---
 ### Q3. Is there any relationship between the number of pizzas and how long the order takes to prepare?
 ```TSQL
 WITH pizzaPrepration AS (
@@ -75,6 +77,7 @@ GROUP BY pizza_count;
 * 2 pizzas took 6 minutes more to prepare, 3 pizza took 12 minutes more to prepare.
 * On average, it took 6 * (number of pizzas - 1) minutes more to prepare the next pizza.
 
+---
 ### Q4. What was the average distance travelled for each customer?
 ```TSQL
 SELECT
@@ -93,6 +96,7 @@ GROUP BY c.customer_id;
 | 104         | 10                |
 | 105         | 25                |
 
+---
 ### Q5. What was the difference between the longest and shortest delivery times for all orders?
 ```TSQL
 SELECT MAX(duration) - MIN(duration) AS time_difference
@@ -102,6 +106,7 @@ FROM #runner_orders_temp;
 |----------------|
 | 30             |
 
+---
 ### Q6. What was the average speed for each runner for each delivery and do you notice any trend for these values?
 ```TSQL
 SELECT 
@@ -132,6 +137,7 @@ GROUP BY r.runner_id, c.order_id, r.distance, r.duration;
 * Runner ```2``` had the average speed from 35.1 km/h to 93.6 km/h. With the same distance (23.4 km), order ```4``` was delivered at 35.1 km/h, while order ```8``` was delivered at 93.6 km/h. There must be something wrong here!
 * Runner ```3``` had the average speed at 40 km/h
 
+---
 ### Q7. What is the successful delivery percentage for each runner?
 ```TSQL
 
@@ -148,3 +154,6 @@ GROUP BY runner_id;
 | 1         | 4         | 4     | 100             |
 | 2         | 3         | 4     | 75              |
 | 3         | 1         | 2     | 50              |
+
+---
+My solution for **[C. Ingredient Optimisation](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/Solution/C.%20Ingredient%20Optimisation.md).**
