@@ -9,6 +9,7 @@ FROM subscriptions;
 |-------------------|
 | 1000              |
 
+---
 ### 2. What is the monthly distribution of trial plan start_date values for our dataset - use the start of the month as the group by value?
 ```TSQL
 SELECT 
@@ -35,6 +36,7 @@ GROUP BY MONTH(s.start_date);
 | 11     | 75                   |
 | 12     | 84                   |
 
+---
 ### 3. What plan start_date values occur after the year 2020 for our dataset? Show the breakdown by count of events for each plan_name?
 ```TSQL
 SELECT 
@@ -54,6 +56,7 @@ GROUP BY YEAR(s.start_date), p.plan_name;
 | 2021   | pro annual    | 63      |
 | 2021   | pro monthly   | 60      |
 
+---
 ### 4. What is the customer count and percentage of customers who have churned rounded to 1 decimal place?
 ```TSQL
 SELECT 
@@ -68,6 +71,7 @@ JOIN plans p
 |-------------|-------------|
 | 307         | 30.7        |
 
+---
 ### 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
 ```TSQL
 WITH nextPlan AS (
@@ -91,6 +95,7 @@ WHERE plan_name = 'trial'
 |-------------------|-------------|
 | 92                | 9           |
 
+---
 ### 6. What is the number and percentage of customer plans after their initial free trial?
 ```TSQL
 WITH nextPlan AS (
@@ -121,6 +126,7 @@ GROUP BY next_plan;
 | pro annual    | 37            | 3.7         |
 | pro monthly   | 325           | 32.5        |
 
+---
 ### 7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
 ```TSQL
 WITH plansDate AS (
@@ -154,6 +160,7 @@ ORDER BY plan_id;
 | 3       | pro annual    | 195       | 19.5             |
 | 4       | churn         | 235       | 23.5             |
 
+---
 ### 8. How many customers have upgraded to an annual plan in 2020?
 ```TSQL
 SELECT 
@@ -167,6 +174,7 @@ WHERE p.plan_name = 'pro annual'
 |-----------------|
 | 195             |
 
+---
 ### 9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
 ```TSQL
 WITH trialPlan AS (
@@ -198,6 +206,7 @@ ON t.customer_id = a.customer_id;
 
 On average, it takes 105 days for a customer to an annual plan from the day they join Foodie-Fi.
 
+---
 ### 10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)?
 To solve this question: 
 * Utilize 2 CTEs in the previous question: ```trialPlan``` and ```annualPlan``` to calculate the number of days between ```trial_date``` and ```annual_date```, then put that to new CTE named ```datesDiff```
@@ -264,6 +273,7 @@ GROUP BY dr.start_period, dr.end_period;
 | 301          | 330        | 1               |
 | 331          | 360        | 1               |
 
+---
 ### 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
 ```TSQL
 WITH nextPlan AS (
@@ -287,3 +297,6 @@ WHERE plan_name = 'pro monthly'
 | 0                   |
 
 There were no customers downgrading from a pro monthly to a basic monthly plan in 2020.
+
+---
+My solution for **[C. Challenge Payment Question](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution/C.%20Challenge%20Payment%20Question.md)**.
