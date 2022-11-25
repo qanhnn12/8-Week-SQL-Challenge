@@ -15,6 +15,7 @@ GROUP BY txn_type;
 | deposit    | 2671         | 1359168       |
 | purchase   | 1617         | 806537        |
 
+---
 ### 2. What is the average total historical deposit counts and amounts for all customers?
 ```TSQL
 WITH customerDeposit AS (
@@ -37,6 +38,7 @@ FROM customerDeposit;
 |---------------|-----------------|
 | 5             | 2718            |
 
+---
 ### 3. For each month - how many Data Bank customers make more than 1 deposit and either 1 purchase or 1 withdrawal in a single month?
 ```TSQL
 WITH cte_transaction AS (
@@ -65,6 +67,7 @@ GROUP BY months;
 | 3      | 113             |
 | 4      | 50              |
 
+---
 ### 4. What is the closing balance for each customer at the end of the month?
 Closing balance of at the end of this month = closing balance in the previous month + total transaction in this month. 
 If the outflow (withdrawal and purchase) > inflow (deposit), the transaction is negative.
@@ -138,6 +141,7 @@ A part of the result (2000 rows):
 | 5           | 2020-02-29 | 0            | 954              |
 | 5           | 2020-03-31 | -2877        | -1923            |
 
+---
 ### 5. What is the percentage of customers who increase their closing balance by more than 5%?
 This question is not clear. It should be "*calculate the percentage of customers who increase their closing balance by more than 5% compared to the previous month*".
   * Copy 2 CTEs in the previous question.
