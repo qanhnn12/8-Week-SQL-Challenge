@@ -29,6 +29,7 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
 4. How many days on average are customers reallocated to a different node?
 5. What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
 
+---
 ### B. Customer Transactions
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%234%20-%20Data%20Bank/Solution/B.%20Customer%20Transactions.md).
 
@@ -37,7 +38,8 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
 3. For each month - how many Data Bank customers make more than 1 deposit and either 1 purchase or 1 withdrawal in a single month?
 4. What is the closing balance for each customer at the end of the month?
 5. What is the percentage of customers who increase their closing balance by more than 5%?
-  
+
+---
 ## 🚀 My Solution
   * View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Syntax)
   * View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Solution)
