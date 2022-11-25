@@ -17,9 +17,9 @@ SELECT
     WHEN RIGHT(segment, 1) IN ('3', '4') THEN 'Retirees'
     ELSE 'unknown' END AS age_band,
   CASE 
-      WHEN LEFT(segment, 1) = 'C' THEN 'Couples'
-      WHEN LEFT(segment, 1) = 'F' THEN 'Families'
-      ELSE 'unknown' END AS demographic,
+    WHEN LEFT(segment, 1) = 'C' THEN 'Couples'
+    WHEN LEFT(segment, 1) = 'F' THEN 'Families'
+    ELSE 'unknown' END AS demographic,
   transactions,
   CAST(sales AS bigint) AS sales,
   ROUND(CAST(sales AS FLOAT)/transactions, 2) AS avg_transaction
