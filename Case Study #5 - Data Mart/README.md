@@ -25,7 +25,7 @@ The key business question to answer are the following:
 
 ## ❓ Case Study Questions
 ### A. Data Cleansing Steps
-View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/A.%20Data%20Cleansing%20Steps.md)
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/A.%20Data%20Cleansing%20Steps.md).
   
 In a single query, perform the following operations and generate a new table in the ```data_mart``` schema named ```clean_weekly_sales```:
   * Convert the ```week_date``` to a ```DATE``` format
@@ -51,7 +51,7 @@ In a single query, perform the following operations and generate a new table in 
   * Generate a new ```avg_transaction``` column as the sales value divided by ```transactions``` rounded to 2 decimal places for each record
   
 ### B. Data Exploration
-View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/B.%20Data%20Exploration.md)
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/B.%20Data%20Exploration.md).
   
 1. What day of the week is used for each ```week_date``` value?
 2. What range of week numbers are missing from the dataset?
@@ -64,7 +64,7 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
 9. Can we use the ```avg_transaction``` column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
 
 ### C. Before & After Analysis
-View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/C.%20Before%20%26%20After%20Analysis.md)
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/C.%20Before%20%26%20After%20Analysis.md).
   
 This technique is usually used when we inspect an important event and want to inspect the impact before and after a certain point in time.
 Taking the week_date value of 2020-06-15 as the baseline week where the Data Mart sustainable packaging changes came into effect.
@@ -77,7 +77,8 @@ Using this analysis approach - answer the following questions:
 3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
 
 ### D. Bonus Question
-View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/D.%20Bonus%20Question.md)
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/D.%20Bonus%20Question.md).
+  
 Which areas of the business have the highest negative impact in sales metrics performance in 2020 for the 12 week before and after period?
   * ```region```
   * ```platform```
