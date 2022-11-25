@@ -122,7 +122,7 @@ To contribute to this project, see the GitHub documentation on [creating a pull 
 
 ---
 ## 👏 Support
-Give a ⭐️ if you like this project!
+Please give me a ⭐️ if you like this project!
 
 ---
 © 2022 Anh Nguyen
