@@ -22,6 +22,7 @@ SELECT
 FROM allWeeks a
 LEFT JOIN clean_weekly_sales c
   ON a.pos = c.week_number
+WHERE c.week_number IS NULL
 ORDER BY a.pos;
 
 
