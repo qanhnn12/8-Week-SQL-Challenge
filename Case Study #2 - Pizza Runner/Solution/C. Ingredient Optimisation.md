@@ -137,6 +137,7 @@ FROM #exclusionsBreak;
 | 14        | 2             |
 | 14        | 6             |
 
+---
 ### Q1. What are the standard ingredients for each pizza?
 ```TSQL
 SELECT 
@@ -153,6 +154,7 @@ GROUP BY p.pizza_name;
 | Meatlovers | Bacon, BBQ Sauce, Beef, Cheese, Chicken, Mushrooms, Pepperoni, Salami  |
 | Vegetarian | Cheese, Mushrooms, Onions, Peppers, Tomatoes, Tomato Sauce             |
 
+---
 ### Q2. What was the most commonly added extra?
 ```TSQL
 SELECT 
@@ -173,6 +175,7 @@ ORDER BY COUNT(*) DESC;
 
 The most commonly added extra was Bacon.
 
+---
 ### Q3. What was the most common exclusion?
 ```TSQL
 SELECT 
@@ -193,6 +196,7 @@ ORDER BY COUNT(*) DESC;
 
 The most common exclusion was Cheese.
 
+---
 ### Q4.Generate an order item for each record in the ```customers_orders``` table in the format of one of the following
 * ```Meat Lovers```
 * ```Meat Lovers - Exclude Beef```
@@ -300,7 +304,7 @@ ORDER BY record_id;
 | 13        | 10       | 104         | 1        | 2020-01-11 18:34:49.000 | Meatlovers                                                        |
 | 14        | 10       | 104         | 1        | 2020-01-11 18:34:49.000 | Meatlovers - Exclusion BBQ Sauce, Mushrooms - Extra Bacon, Cheese |
 
-
+---
 ### Q5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the ```customer_orders``` table and add a 2x in front of any relevant ingredients.
 * For example: ```"Meat Lovers: 2xBacon, Beef, ... , Salami"```
 
@@ -372,6 +376,7 @@ ORDER BY record_id;
 | 13        | 10       | 104         | 1        | 2020-01-11 18:34:49.000 | Meatlovers: Salami, Cheese, Mushrooms, Pepperoni, Bacon, BBQ Sauce, Beef, Chicken    |
 | 14        | 10       | 104         | 1        | 2020-01-11 18:34:49.000 | Meatlovers: Chicken, Beef, 2xBacon, Pepperoni, 2xCheese, Salami                      |
 
+---
 ### Q6. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
 To solve this question:
 * Create a CTE to record the number of times each ingredient was used
@@ -429,3 +434,5 @@ ORDER BY times_used DESC;
 | Tomato Sauce | 4           |
 | Tomatoes     | 4           |
   
+---
+My solution for **[D. Pricing and Ratings](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/Solution/D.%20Pricing%20and%20Ratings.md)**.
