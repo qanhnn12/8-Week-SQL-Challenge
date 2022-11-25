@@ -10,7 +10,8 @@ DECLARE @weekNum int = (
   FROM clean_weekly_sales
   WHERE week_date = '2020-06-15'
   AND calendar_year =2020)
-  
+
+
 --1. Sales changes [regions]
 WITH regionChanges AS (
   SELECT
