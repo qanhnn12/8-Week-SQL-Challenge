@@ -53,6 +53,7 @@ FROM regionChanges;
 Danny should consider reducing the number of products wrapped by this kind of packages.
 * Only Europe saw a significant increase of 4.96%, followed by Africa with 1.1%. These are areas that Danny should invest more.
 
+
 ### 2. Sales changes by ```platform```
 ```TSQL
 WITH platformChanges AS (
@@ -73,8 +74,9 @@ FROM platformChanges;
 | Shopify  | 520181589    | 568836201   | 9.35        |
 
 **Insights and recommendations:** 
-* For platforms, the Shopify stores saw an increase of 9.35% while the Retail decreased slightly by 0.59%. 
+* The Shopify stores saw an increase in sales of 9.35% while the Retail slightly decreased by 0.59%. 
 * Danny should put more products with sustanable packages in Shopify stores.
+
 
 ### 3. Sales changes by ```age_band```
 ```TSQL
@@ -98,5 +100,54 @@ FROM ageBandChanges;
 | Retirees     | 6646865322   | 6634706880  | -0.18       |
 
 **Insights and recommendations:** 
-* For platforms, the Shopify stores saw an increase of 9.35% while the Retail decreased slightly by 0.59%. 
-* Danny should put more products with sustanable packages in Shopify stores.
+* Overall, the sales slightly decreased in all bands
+* Middle Aged and Young Adults had more negative impact on sales than the Retirees. Those bands should not be targeted in this change.
+
+
+### 4. Sales changes by ```demographic```
+```TSQL
+WITH demographicChanges AS (
+  SELECT
+    demographic,
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
+  FROM clean_weekly_sales
+  GROUP BY demographic
+)
+SELECT *,
+  CAST(100.0 * (after_changes-before_changes)/before_changes AS decimal(5,2)) AS pct_change
+FROM demographicChanges;
+```
+| demographic | before_changes | after_changes | pct_change  |
+|-------------|----------------|---------------|-------------|
+| unknown     | 8191628826     | 8146983408    | -0.55       |
+| Families    | 6605726904     | 6598087538    | -0.12       |
+| Couples     | 5608866131     | 5592341420    | -0.29       |
+
+**Insights and recommendations:** 
+* Overall, the sales slightly decreased in all demographics
+* Couples had more negative impact on sales than Families. Those groups should not be targeted in this change.
+
+### 5. Sales changes by ```customer_type```
+```TSQL
+WITH customerTypeChanges AS (
+  SELECT
+    customer_type,
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
+  FROM clean_weekly_sales
+  GROUP BY customer_type
+)
+SELECT *,
+  CAST(100.0 * (after_changes-before_changes)/before_changes AS decimal(5,2)) AS pct_change
+FROM customerTypeChanges;
+```
+| customer_type | before_changes | after_changes | pct_change  |
+|---------------|----------------|---------------|-------------|
+| Guest         | 7630353739     | 7595150744    | -0.46       |
+| Existing      | 10168877642    | 10117367239   | -0.51       |
+| New           | 2606990480     | 2624894383    | 0.69        |
+
+**Insights and recommendations:** 
+* The sales for Guests and Existing customers decreased, but increased for New customers.
+* Further analysis should be taken to understand why they were interested in sustainable packages.
