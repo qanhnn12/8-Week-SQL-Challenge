@@ -50,5 +50,53 @@ FROM regionChanges;
 **Insights and recommendations:** 
 * Overall, the sales of most countries decreased after changing packages. 
 * The highest negative impact was in Asia with -1.33%. The sustainable packages didn't work well here. 
-Danny team should consider reducing the number of products wrapped by this kind of packages.
-* Only Europe saw a significant increase of 4.96%, followed by Africa with 1.1%. These are potential areas that Danny team should invest more.
+Danny should consider reducing the number of products wrapped by this kind of packages.
+* Only Europe saw a significant increase of 4.96%, followed by Africa with 1.1%. These are areas that Danny should invest more.
+
+### 2. Sales changes by ```platform```
+```TSQL
+WITH platformChanges AS (
+  SELECT
+    platform,
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+  FROM clean_weekly_sales
+  GROUP BY platform
+)
+SELECT *,
+  CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
+FROM platformChanges;
+```
+| platform | before_sales | after_sales | pct_change  |
+|----------|--------------|-------------|-------------|
+| Retail   | 19886040272  | 19768576165 | -0.59       |
+| Shopify  | 520181589    | 568836201   | 9.35        |
+
+**Insights and recommendations:** 
+* For platforms, the Shopify stores saw an increase of 9.35% while the Retail decreased slightly by 0.59%. 
+* Danny should put more products with sustanable packages in Shopify stores.
+
+### 3. Sales changes by ```age_band```
+```TSQL
+WITH ageBandChanges AS (
+  SELECT
+    age_band,
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+  FROM clean_weekly_sales
+  GROUP BY age_band
+)
+SELECT *,
+  CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
+FROM ageBandChanges;
+```
+| age_band     | before_sales | after_sales | pct_change  |
+|--------------|--------------|-------------|-------------|
+| unknown      | 8191628826   | 8146983408  | -0.55       |
+| Young Adults | 2290835366   | 2285973456  | -0.21       |
+| Middle Aged  | 3276892347   | 3269748622  | -0.22       |
+| Retirees     | 6646865322   | 6634706880  | -0.18       |
+
+**Insights and recommendations:** 
+* For platforms, the Shopify stores saw an increase of 9.35% while the Retail decreased slightly by 0.59%. 
+* Danny should put more products with sustanable packages in Shopify stores.
