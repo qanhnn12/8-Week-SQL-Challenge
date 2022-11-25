@@ -1,5 +1,5 @@
 # 🛒 Case Study #5 - Data Mart
-## 2. Data Exploration
+## B. Data Exploration
 
 ### 1. What day of the week is used for each week_date value?
 ```TSQL
