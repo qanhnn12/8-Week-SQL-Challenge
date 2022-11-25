@@ -266,3 +266,6 @@ GROUP BY DATENAME(weekday, order_time);
 | Saturday  | 5             |
 | Thursday  | 3             |
 | Wednesday | 5             |
+
+---
+My solution for **[B. Runner and Customer Experience](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/Solution/B.%20Runner%20and%20Customer%20Experience.md)**.
