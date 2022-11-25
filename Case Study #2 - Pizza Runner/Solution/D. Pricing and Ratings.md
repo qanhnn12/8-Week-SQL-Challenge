@@ -17,6 +17,7 @@ WHERE r.cancellation IS NULL;
 |---------------|
 | 138           |
 
+---
 ### Q2. What if there was an additional $1 charge for any pizza extras?
 * Add cheese is $1 extra
 ```TSQL
@@ -34,6 +35,7 @@ JOIN pizza_toppings p
 |----------------|
 | 145            |
 
+---
 ### Q3. The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
 ```TSQL
 DROP TABLE IF EXISTS ratings
@@ -65,6 +67,7 @@ VALUES
 | 8        | 4       |
 | 10       | 3       |
 
+---
 ### Q4. Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
 * ```customer_id```
 * ```order_id```
@@ -112,6 +115,7 @@ GROUP BY
 | 104         | 10       | 1         | 2020-01-11 18:34:49.000 | 2020-01-11 18:50:20.000 | 16              | 10       | 60        | 2            |
 | 105         | 7        | 2         | 2020-01-08 21:20:29.000 | 2020-01-08 21:30:45.000 | 10              | 25       | 60        | 1            |
 
+---
 ### Q5. If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
 ```TSQL
 DECLARE @basecost INT
@@ -126,3 +130,6 @@ FROM #runner_orders_temp;
 | revenue | runner_paid | money_left  |
 |---------|-------------|-------------|
 | 138     | 43.56       | 94.44       |
+
+---
+My solution for **[E. Bonus questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/Solution/E.%20Bonus%20Questions.md)**.
