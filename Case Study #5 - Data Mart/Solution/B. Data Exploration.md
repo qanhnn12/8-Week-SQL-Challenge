@@ -10,6 +10,7 @@ FROM clean_weekly_sales;
 |------------------|
 | Monday           |
 
+---
 ### 2. What range of week numbers are missing from the dataset?
 * Create a recursive CTE ```allWeeks``` to generate 52 weeks in a year
 * ```LEFT JOIN``` from ```allWeeks``` to ```clean_weekly_sales```. ```NULL``` rows in ```week_number``` are missing weeks
@@ -47,6 +48,7 @@ ORDER BY a.pos;
 
 Week 1-12 and week 37-52 are missing from the dataset.
 
+---
 ### 3. How many total transactions were there for each year in the dataset?
 ```TSQL
 SELECT 
@@ -62,6 +64,7 @@ ORDER BY calendar_year;
 | 2019          | 365639285           |
 | 2020          | 375813651           |
 
+---
 ### 4. What is the total sales for each region for each month?
 ```TSQL
 SELECT 
@@ -90,6 +93,7 @@ ORDER BY region, month_number;
 | ASIA   | 8            | 1663320609   |
 | ASIA   | 9            | 252836807    |
 
+---
 ### 5. What is the total count of transactions for each platform?
 ```TSQL
 SELECT 
@@ -103,6 +107,7 @@ GROUP BY platform;
 | Retail   | 1081934227          |
 | Shopify  | 5925169             |
 
+---
 ### 6. What is the percentage of sales for Retail vs Shopify for each month?
 ```TSQL
 WITH sales_cte AS (
@@ -149,6 +154,7 @@ ORDER BY calendar_year, month_number;
 | 2020          | 7            | 96.67      | 3.33         |
 | 2020          | 8            | 96.51      | 3.49         |
 
+---
 ### 7. What is the percentage of sales by demographic for each year in the dataset?
 ```TSQL
 WITH sales_by_demographic AS (
@@ -176,6 +182,7 @@ GROUP BY calendar_year;
 | 2019          | 32.47        | 27.28       | 40.25        |
 | 2020          | 32.73        | 28.72       | 38.55        |
 
+---
 ### 8. Which age_band and demographic values contribute the most to Retail sales?
 ```TSQL
 DECLARE @retailSales bigint = (
@@ -205,6 +212,7 @@ ORDER BY contribution DESC;
 
 The highest retail sales are contributed by *unknown* ```age_band``` and ```demographic``` at 40.52%, followed by *retired families* at 16.73% and *retired couples* at 16.07%.
 
+---
 ### 9. Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
 ```TSQL
 SELECT 
@@ -230,3 +238,6 @@ What's the difference between ```avg_transaction_row``` and ```avg_transaction_g
 * ```avg_transaction_group``` is the average transaction of each ```platform``` in each ```calendar_year```
 
 The average transaction size for each year by platform is actually ```avg_transaction_group```.
+
+---
+My solution for **[C. Before & After Analysis](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/C.%20Before%20%26%20After%20Analysis.md)**.
