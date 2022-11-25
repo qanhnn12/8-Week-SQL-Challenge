@@ -3,10 +3,10 @@
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/5.png" align="center" width="400" height="400" >
 
 ## 📕 Table of Contents
-* [Bussiness Task]()
-* [Entity Relationship Diagram]()
-* [Case Study Questions]()
-* [My Solution]()
+* [Bussiness Task](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart#%EF%B8%8F-bussiness-task)
+* [Entity Relationship Diagram](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart#-entity-relationship-diagram)
+* [Case Study Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart#-case-study-questions)
+* [My Solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart#-my-solution)
 
 ## 🛠️ Bussiness Task
 Data Mart is an online supermarket that specialises in fresh produce.
@@ -25,6 +25,8 @@ The key business question to answer are the following:
 
 ## ❓ Case Study Questions
 ### A. Data Cleansing Steps
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/A.%20Data%20Cleansing%20Steps.md)
+  
 In a single query, perform the following operations and generate a new table in the ```data_mart``` schema named ```clean_weekly_sales```:
   * Convert the ```week_date``` to a ```DATE``` format
   * Add a ```week_number``` as the second column for each ```week_date``` value, for example any value from the 1st of January to 7th of January will be 1, 8th to 14th will be 2 etc
@@ -49,6 +51,8 @@ In a single query, perform the following operations and generate a new table in 
   * Generate a new ```avg_transaction``` column as the sales value divided by ```transactions``` rounded to 2 decimal places for each record
   
 ### B. Data Exploration
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/B.%20Data%20Exploration.md)
+  
 1. What day of the week is used for each ```week_date``` value?
 2. What range of week numbers are missing from the dataset?
 3. How many total transactions were there for each year in the dataset?
@@ -60,6 +64,8 @@ In a single query, perform the following operations and generate a new table in 
 9. Can we use the ```avg_transaction``` column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
 
 ### C. Before & After Analysis
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/C.%20Before%20%26%20After%20Analysis.md)
+  
 This technique is usually used when we inspect an important event and want to inspect the impact before and after a certain point in time.
 Taking the week_date value of 2020-06-15 as the baseline week where the Data Mart sustainable packaging changes came into effect.
 We would include all week_date values for 2020-06-15 as the start of the period after the change and the previous week_date values would be before.
@@ -71,6 +77,7 @@ Using this analysis approach - answer the following questions:
 3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
 
 ### D. Bonus Question
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/D.%20Bonus%20Question.md)
 Which areas of the business have the highest negative impact in sales metrics performance in 2020 for the 12 week before and after period?
   * ```region```
   * ```platform```
@@ -81,4 +88,4 @@ Do you have any further recommendations for Danny’s team at Data Mart or any i
 
 ## 🚀 My Solution
 * View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart/Syntax)
-* View the result and explanation [HERE]
+* View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart/Solution)
