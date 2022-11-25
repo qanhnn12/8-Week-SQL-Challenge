@@ -18,8 +18,8 @@ WITH packageChanges AS (
   FROM clean_weekly_sales
   WHERE week_number BETWEEN @weekNum-4 AND @weekNum+3
   AND calendar_year = 2020
-  GROUP BY week_number)
-,
+  GROUP BY week_number
+),
 --Sepatate sales before and after @weekNum
 salesChanges AS (
   SELECT
@@ -49,8 +49,8 @@ WITH packageChanges AS (
   FROM clean_weekly_sales
   WHERE week_number BETWEEN @weekNum-12 AND @weekNum+11
   AND calendar_year = 2020
-  GROUP BY week_number)
-,
+  GROUP BY week_number
+),
 --Sepatate sales before and after @weekNum
 salesChanges AS (
   SELECT
