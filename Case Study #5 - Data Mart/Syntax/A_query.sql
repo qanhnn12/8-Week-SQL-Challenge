@@ -1,5 +1,5 @@
 ---------------------------
---1. Data Cleansing Steps--
+--A. Data Cleansing Steps--
 ---------------------------
 
 SELECT
