@@ -11,21 +11,12 @@ DECLARE @weekNum int = (
   WHERE week_date = '2020-06-15')
 
 --Find the total sales of 4 weeks before and after @weekNum
-WITH packageChanges AS (
-  SELECT 
-    week_number,
-    SUM(sales) AS total_sales
-  FROM clean_weekly_sales
-  WHERE week_number BETWEEN @weekNum-4 AND @weekNum+3
-  AND calendar_year = 2020
-  GROUP BY week_number
-),
---Sepatate sales before and after @weekNum
-salesChanges AS (
+WITH salesChanges AS (
   SELECT
-    SUM(CASE WHEN week_number BETWEEN @weekNum-4 AND @weekNum-1 THEN total_sales END) AS before_changes,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+3 THEN total_sales END) AS after_changes
-  FROM packageChanges
+    SUM(CASE WHEN week_number BETWEEN @weekNum-4 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+3 THEN sales END) AS after_changes
+  FROM clean_weekly_sales
+  WHERE calendar_year = 2020
 )
 
 SELECT *,
@@ -42,21 +33,12 @@ DECLARE @weekNum int = (
   WHERE week_date = '2020-06-15')
 
 --Find the total sales of 12 weeks before and after @weekNum
-WITH packageChanges AS (
-  SELECT 
-    week_number,
-    SUM(sales) AS total_sales
-  FROM clean_weekly_sales
-  WHERE week_number BETWEEN @weekNum-12 AND @weekNum+11
-  AND calendar_year = 2020
-  GROUP BY week_number
-),
---Sepatate sales before and after @weekNum
-salesChanges AS (
+WITH salesChanges AS (
   SELECT
-    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN total_sales END) AS before_changes,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN total_sales END) AS after_changes
-  FROM packageChanges
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
+  FROM clean_weekly_sales
+  WHERE calendar_year = 2020
 )
 
 SELECT *,
@@ -74,22 +56,12 @@ DECLARE @weekNum int = (
   WHERE week_date = '2020-06-15')
 
 --Find the total sales of 4 weeks before and after @weekNum
-WITH packageChanges AS (
-  SELECT 
-    calendar_year,
-    week_number,
-    SUM(sales) AS total_sales
-  FROM clean_weekly_sales
-  WHERE week_number BETWEEN @weekNum-4 AND @weekNum+3
-  GROUP BY calendar_year, week_number
-),
---Sepatate sales before and after @weekNum
-salesChanges AS (
+WITH salesChanges AS (
   SELECT
     calendar_year,
-    SUM(CASE WHEN week_number BETWEEN @weekNum-3 AND @weekNum-1 THEN total_sales END) AS before_sales,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+3 THEN total_sales END) AS after_sales
-  FROM packageChanges
+    SUM(CASE WHEN week_number BETWEEN @weekNum-3 AND @weekNum-1 THEN sales END) AS before_sales,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+3 THEN sales END) AS after_sales
+  FROM clean_weekly_sales
   GROUP BY calendar_year
 )
 
@@ -105,22 +77,12 @@ DECLARE @weekNum int = (
   WHERE week_date = '2020-06-15')
 
 --Find the total sales of 12 weeks before and after @weekNum
-WITH packageChanges AS (
-  SELECT 
-    calendar_year,
-    week_number,
-    SUM(sales) AS total_sales
-  FROM clean_weekly_sales
-  WHERE week_number BETWEEN @weekNum-12 AND @weekNum+11
-  GROUP BY calendar_year, week_number
-),
---Sepatate sales before and after @weekNum
-salesChanges AS (
+WITH salesChanges AS (
   SELECT
     calendar_year,
-    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN total_sales END) AS before_sales,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN total_sales END) AS after_sales
-  FROM packageChanges
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+  FROM clean_weekly_sales
   GROUP BY calendar_year
 )
 
