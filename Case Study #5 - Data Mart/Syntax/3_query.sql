@@ -2,6 +2,8 @@
 --3. Before & After Analysis--
 ------------------------------
 
+--1. What is the total sales for the 4 weeks before and after 2020-06-15? What is the growth or reduction rate in actual values and percentage of sales?
+
 --Find the week_number of '2020-06-15' (@weekNum=25)
 DECLARE @weekNum int = (
   SELECT DISTINCT week_number
