@@ -89,7 +89,7 @@ FROM #runner_orders_temp;
 | 8        | 2         | 2020-01-10 00:15:02.000 | 23.4     | 15       | NULL                     |
 | 9        | 2         | NULL                    | NULL     | NULL     | Customer Cancellation    |
   
- 
+--- 
 ### Q1. How many pizzas were ordered?
 ```TSQL
 SELECT COUNT(order_id) AS pizza_count
@@ -99,6 +99,7 @@ FROM #customer_orders_temp;
 |--------------|
 | 14           |
 
+---
 ### Q2. How many pizzas were ordered?
 ```TSQL
 SELECT COUNT(DISTINCT order_id) AS order_count
@@ -108,6 +109,7 @@ FROM #customer_orders_temp;
 |--------------|
 | 10           |
 
+---
 ### Q3. How many successful orders were delivered by each runner?
 ```TSQL
 SELECT 
@@ -122,6 +124,7 @@ GROUP BY runner_id;
 | 1         | 4                  |
 | 2         | 3                  |
 
+---
 ### Q4. How many successful orders were delivered by each runner?
 Approach 1: Use subquery.
 ```TSQL
@@ -157,6 +160,7 @@ GROUP BY p.pizza_name;
 | Meatlovers | 9              |
 | Vegetarian | 3              |
 
+---
 ### Q5. How many Vegetarian and Meatlovers were ordered by each customer?
 ```TSQL
 SELECT 
@@ -174,6 +178,7 @@ GROUP BY customer_id;
 | 104         | 3          | 0           |
 | 105         | 0          | 1           |
 
+---
 ### Q6. What was the maximum number of pizzas delivered in a single order?
 ```TSQL
 SELECT MAX(pizza_count) AS max_count
@@ -192,6 +197,7 @@ FROM (
 |------------|
 | 3          |
 
+---
 ### Q7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
 ```TSQL
 SELECT 
@@ -212,6 +218,7 @@ GROUP BY c.customer_id;
 | 104         | 2          | 1          |
 | 105         | 1          | 0          |
 
+---
 ### Q8. How many pizzas were delivered that had both exclusions and extras?
 ```TSQL
 SELECT 
@@ -225,6 +232,7 @@ WHERE r.cancellation IS NULL;
 |--------------|
 | 1            |
 
+---
 ### Q9. What was the total volume of pizzas ordered for each hour of the day?
 ```TSQL
 SELECT 
@@ -243,6 +251,7 @@ ORDER BY hour_of_day;
 | 21          | 3             |
 | 23          | 3             |
 
+---
 ### Q10. What was the volume of orders for each day of the week?
 ```TSQL
 SELECT 
