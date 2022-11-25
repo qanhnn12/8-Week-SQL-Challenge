@@ -9,6 +9,7 @@ Which areas of the business have the highest negative impact in sales metrics pe
   
 Do you have any further recommendations for Danny’s team at Data Mart or any interesting insights based off this analysis?
 
+---
 ## Solution
 Using the technique in part C, we first find the ```week_number``` of ```2020-06-15```.
 ```TSQL
