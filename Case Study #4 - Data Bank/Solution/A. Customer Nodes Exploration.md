@@ -9,6 +9,7 @@ FROM customer_nodes;
 |---------------|
 | 5             |
 
+---
 ### 2. What is the number of nodes per region?
 ```TSQL
 SELECT 
@@ -29,6 +30,7 @@ ORDER BY r.region_id;
 | 4         | Asia        | 665    |
 | 5         | Europe      | 616    |
 
+---
 ### 3. How many customers are allocated to each region?
 ```TSQL
 SELECT 
@@ -49,6 +51,7 @@ ORDER BY r.region_id;
 | 4         | Asia        | 95         |
 | 5         | Europe      | 88         |
 
+---
 ### 4. How many days on average are customers reallocated to a different node?
   * Create a CTE ```customerDates``` containing the first date of every customer in each node
   * Create a CTE ```reallocation``` to calculate the difference in days between the first date in this node and the first date in next node
@@ -85,6 +88,7 @@ FROM reallocation;
 
 On average, it takes 24 days for a customer to reallocate to a different node.
 
+---
 ### 5. What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
 Using 2 CTEs in the previous questions ```customerDates``` and ```reallocation``` to calculate the median, 80th and 95th percentile for reallocation days in each region.
 ```TSQL
@@ -126,3 +130,6 @@ WHERE moving_days IS NOT NULL;
 | 3         | Africa      | 21     | 33.2          | 58.8           |
 | 4         | Asia        | 22     | 32.4          | 49.85          |
 | 5         | Europe      | 22     | 31            | 54.3           |
+
+---
+My solution for **[B. Customer Transactions](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%234%20-%20Data%20Bank/Solution/B.%20Customer%20Transactions.md)**.
