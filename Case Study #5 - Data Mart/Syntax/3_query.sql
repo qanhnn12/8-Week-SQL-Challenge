@@ -2,7 +2,7 @@
 --3. Before & After Analysis--
 ------------------------------
 
---Find the week_number of '2020-06-15' (@weekNum)
+--Find the week_number of '2020-06-15' (@weekNum=25)
 DECLARE @weekNum int = (
   SELECT DISTINCT week_number
   FROM clean_weekly_sales
