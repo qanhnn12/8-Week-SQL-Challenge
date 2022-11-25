@@ -56,8 +56,7 @@ GROUP BY months;
 --4. What is the closing balance for each customer at the end of the month?
 
 --End date in the month of the max date of our dataset
-DECLARE @maxDate DATE;
-SET @maxDate = (SELECT EOMONTH(MAX(txn_date)) FROM customer_transactions);
+DECLARE @maxDate DATE = (SELECT EOMONTH(MAX(txn_date)) FROM customer_transactions)
 
 --CTE 1: Monthly transactions of each customer
 WITH monthly_transactions AS (
@@ -99,8 +98,7 @@ LEFT JOIN  monthly_transactions m
 --5. What is the percentage of customers who increase their closing balance by more than 5%?
 
 --End date in the month of the max date of our dataset (Q4)
-DECLARE @maxDate DATE;
-SET @maxDate = (SELECT EOMONTH(MAX(txn_date)) FROM customer_transactions);
+DECLARE @maxDate DATE = (SELECT EOMONTH(MAX(txn_date)) FROM customer_transactions)
 
 --CTE 1: Monthly transactions of each customer (Q4)
 WITH monthly_transactions AS (
