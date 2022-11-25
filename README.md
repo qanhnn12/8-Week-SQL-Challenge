@@ -112,7 +112,7 @@ Clients share their customer lists with the Fresh Segments team who then aggrega
 
 Danny has asked for your assistance to analyse aggregated metrics for an example client and provide some high level insights about the customer list and their interests.
 
-***View the case study [here](https://8weeksqlchallenge.com/case-study-8/) and my solution here.***
+***View the case study [here](https://8weeksqlchallenge.com/case-study-8/) and my solution [here](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co.).***
 
 ---
 ## ✨ Contribution
