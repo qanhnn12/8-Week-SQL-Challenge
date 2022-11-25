@@ -30,7 +30,8 @@ Example outputs for this table might look like the following:
 | 18          | 2       | pro monthly   | 2020-09-13   | 19.90  | 3              |
 | 18          | 2       | pro monthly   | 2020-10-13   | 19.90  | 4              |
 
-To create that table:
+---
+To create the table above:
   * Create a new table named ```payments``` by copying the column definition from two tables ```subscriptions``` and ```plans```. 
   This is just my personal approach, you can create ```payments``` manually with ```CREATE TABLE``` and specify the data type in each column.
   * Use a recursive CTE to increment rows for all monthly paid plans in 2020 until customers changing their plans, except 'pro annual'.
@@ -109,3 +110,5 @@ WHERE amount IS NOT NULL
 ORDER BY customer_id
 OPTION (MAXRECURSION 365);
 ```
+---
+My solution for **[D. Outside The Box Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution/D.%20Outside%20The%20Box%20Questions.md)**.
