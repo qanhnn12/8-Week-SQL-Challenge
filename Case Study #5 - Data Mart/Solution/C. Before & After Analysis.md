@@ -57,7 +57,7 @@ FROM salesChanges;
 | 7126273147     | 6973947753    | -2.14       |
 
 ### 3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
-Part 1: How do the sales metrics for 4 weeks before and after compared with the previous years in 2018 and 2019
+Part 1: How do the sales metrics for 4 weeks before and after compared with the previous years in 2018 and 2019?
 ```TSQL
 --Find the week_number of '2020-06-15' (@weekNum=25)
 DECLARE @weekNum int = (
@@ -86,7 +86,7 @@ ORDER BY calendar_year;
 | 2019          | 1688891616   | 2252326390  | 33.36       |
 | 2020          | 1760870267   | 2318994169  | 31.70       |
 
-Part 2: How do the sales metrics for 12 weeks before and after compared with the previous years in 2018 and 2019
+Part 2: How do the sales metrics for 12 weeks before and after compared with the previous years in 2018 and 2019?
 ```TSQL
 --Find the week_number of '2020-06-15' (@weekNum=25)
 DECLARE @weekNum int = (
