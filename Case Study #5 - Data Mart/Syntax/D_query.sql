@@ -12,17 +12,17 @@ DECLARE @weekNum int = (
   AND calendar_year =2020)
 
 
---1. Sales changes [regions]
+--1. Sales changes by [regions]
 WITH regionChanges AS (
   SELECT
     region,
-    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
   FROM clean_weekly_sales
   GROUP BY region
 )
 SELECT *,
-  CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
+  CAST(100.0 * (after_changes-before_changes)/before_changes AS decimal(5,2)) AS pct_change
 FROM regionChanges;
 
 
@@ -30,13 +30,13 @@ FROM regionChanges;
 WITH platformChanges AS (
   SELECT
     platform,
-    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
   FROM clean_weekly_sales
   GROUP BY platform
 )
 SELECT *,
-  CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
+  CAST(100.0 * (after_changes-before_changes)/before_changes AS decimal(5,2)) AS pct_change
 FROM platformChanges;
 
 
@@ -44,13 +44,13 @@ FROM platformChanges;
 WITH ageBandChanges AS (
   SELECT
     age_band,
-    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
   FROM clean_weekly_sales
   GROUP BY age_band
 )
 SELECT *,
-  CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
+  CAST(100.0 * (after_changes-before_changes)/before_changes AS decimal(5,2)) AS pct_change
 FROM ageBandChanges;
 
 
@@ -58,13 +58,13 @@ FROM ageBandChanges;
 WITH demographicChanges AS (
   SELECT
     demographic,
-    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
   FROM clean_weekly_sales
   GROUP BY demographic
 )
 SELECT *,
-  CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
+  CAST(100.0 * (after_changes-before_changes)/before_changes AS decimal(5,2)) AS pct_change
 FROM demographicChanges;
 
 
@@ -72,11 +72,11 @@ FROM demographicChanges;
 WITH customerTypeChanges AS (
   SELECT
     customer_type,
-    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_sales,
-    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_sales
+    SUM(CASE WHEN week_number BETWEEN @weekNum-12 AND @weekNum-1 THEN sales END) AS before_changes,
+    SUM(CASE WHEN week_number BETWEEN @weekNum AND @weekNum+11 THEN sales END) AS after_changes
   FROM clean_weekly_sales
   GROUP BY customer_type
 )
 SELECT *,
-  CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
+  CAST(100.0 * (after_changes-before_changes)/before_changes AS decimal(5,2)) AS pct_change
 FROM customerTypeChanges;
