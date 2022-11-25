@@ -97,7 +97,7 @@ SELECT *,
   CAST(100.0 * (after_sales-before_sales)/before_sales AS decimal(5,2)) AS pct_change
 FROM salesChanges;
 
---Part 2: How do the sales metrics for 4 weeks before and after compared with the previous years in 2018 and 2019
+--Part 2: How do the sales metrics for 12 weeks before and after compared with the previous years in 2018 and 2019
 --Find the week_number of '2020-06-15' (@weekNum)
 DECLARE @weekNum int = (
   SELECT DISTINCT week_number
