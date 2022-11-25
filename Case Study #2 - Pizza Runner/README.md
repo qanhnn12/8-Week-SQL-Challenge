@@ -33,6 +33,7 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
 9. What was the total volume of pizzas ordered for each hour of the day?
 10. What was the volume of orders for each day of the week?
 
+---
 ### B. Runner and Customer Experience
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/Solution/B.%20Runner%20and%20Customer%20Experience.md).
 
@@ -44,6 +45,7 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
 6. What was the average speed for each runner for each delivery and do you notice any trend for these values?
 7. What is the successful delivery percentage for each runner?
 
+---
 ### C. Ingredient Optimisation
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/Solution/C.%20Ingredient%20Optimisation.md).
 
@@ -59,6 +61,7 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
     * For example: ```"Meat Lovers: 2xBacon, Beef, ... , Salami"```
 6. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
 
+---
 ### D. Pricing and Ratings
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/Solution/D.%20Pricing%20and%20Ratings.md).
 
@@ -79,11 +82,13 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
     * Total number of pizzas
 5. If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
 
+---
 ### E. Bonus questions
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/Solution/E.%20Bonus%20Questions.md).
 
 If Danny wants to expand his range of pizzas - how would this impact the existing data design? Write an ```INSERT``` statement to demonstrate what would happen if a new ```Supreme``` pizza with all the toppings was added to the Pizza Runner menu?
 
+---
 ## 🚀 My Solution
 * View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%232%20-%20Pizza%20Runner/Syntax)
 * View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%232%20-%20Pizza%20Runner/Solution)
