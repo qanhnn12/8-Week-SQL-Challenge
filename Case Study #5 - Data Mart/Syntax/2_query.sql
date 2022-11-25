@@ -40,7 +40,6 @@ ORDER BY calendar_year;
 SELECT 
   region, 
   month_number, 
-  -- Cast to 'bigint' because the SUM exceeds the maximum of 'int'
   SUM(sales) AS total_sales
 FROM clean_weekly_sales
 GROUP BY region, month_number
