@@ -23,7 +23,8 @@ Danny and his friends launched a new startup called "Food-Fi" in 2020 and starte
 ### A. Customer Journey
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution/A.%20Customer%20Journey.md).
 * Based off the 8 sample customers provided in the sample from the subscriptions table, write a brief description about each customer’s onboarding journey.
-  
+---
+
 ### B. Data Analysis Questions
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution/B.%20Data%20Analysis%20Questions.md).
 
@@ -39,6 +40,7 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
 10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)
 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
 
+---
 ### C. Challenge Payment Question
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution/C.%20Challenge%20Payment%20Question.md).
 
@@ -47,7 +49,8 @@ The Foodie-Fi team wants to create a new payments table for the year 2020 that i
   * upgrades from basic to monthly or pro plans are reduced by the current paid amount in that month and start immediately
   * upgrades from pro monthly to pro annual are paid at the end of the current billing period and also starts at the end of the month period
   * once a customer churns they will no longer make payments
-  
+
+---
 ### D. Outside The Box Questions 
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution/D.%20Outside%20The%20Box%20Questions.md).
 
@@ -56,7 +59,8 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
 3. What are some key customer journeys or experiences that you would analyse further to improve customer retention?
 4. If the Foodie-Fi team were to create an exit survey shown to customers who wish to cancel their subscription, what questions would you include in the survey?
 5. What business levers could the Foodie-Fi team use to reduce the customer churn rate? How would you validate the effectiveness of your ideas?
-  
+
+---
 ## 🚀 My Solution
 * View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi/Syntax)
 * View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution)  
