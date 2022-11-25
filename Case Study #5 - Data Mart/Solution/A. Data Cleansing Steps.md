@@ -1,5 +1,5 @@
 # 🛒 Case Study #5 - Data Mart
-## 1. Data Cleansing Steps
+## A. Data Cleansing Steps
 In a single query, perform the following operations and generate a new table in the ```data_mart``` schema named ```clean_weekly_sales```:
   * Convert the ```week_date``` to a ```DATE``` format
   * Add a ```week_number``` as the second column for each ```week_date``` value, for example any value from the 1st of January to 7th of January will be 1, 8th to 14th will be 2 etc
