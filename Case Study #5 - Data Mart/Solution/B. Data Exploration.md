@@ -210,7 +210,7 @@ ORDER BY contribution DESC;
 | Middle Aged  | Couples     | 1854160330  | 4.68          |
 | Young Adults | Families    | 1770889293  | 4.47          |
 
-The highest retail sales are contributed by *unknown* ```age_band``` and ```demographic``` at 40.52%, followed by *retired families* at 16.73% and *retired couples* at 16.07%.
+The highest retail sales are contributed by *unknown* ```age_band``` and ```demographic``` at 40.52% followed by *retired families* at 16.73% and *retired couples* at 16.07%.
 
 ---
 ### 9. Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
