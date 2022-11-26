@@ -80,7 +80,7 @@ In June 2020 - large scale supply changes were made at Data Mart. All Data Mart 
 ***View the case study [here](https://8weeksqlchallenge.com/case-study-5/) and my solution [here](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart).***
   
 ---
-## :briefcase: Case Study #6 - Clique Bait
+## 🐟 Case Study #6 - Clique Bait
 <p align="center">
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/6.png" align="center" width="400" height="400" >
 
