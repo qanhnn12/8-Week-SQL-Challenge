@@ -2,12 +2,17 @@
 --CASE STUDY #6: CLIQUE BAIT--
 ------------------------------
 --Author: Anh Nguyen
---Date: 25/11/2022
+--Date: 27/11/2022
 --Tool used: SQL Server
 
 /*  
 Note: 
-Change all TIMESTAMP columns to DATETIME2
+- Change all TIMESTAMP columns to DATETIME2
+- Table [users] contains up to 1782 rows.
+- Table [events] contains up to 32734 rows
+- SQL Server only allows us to insert 1000 rows each. Therefore, when inserting data to 
+[users] and [events], we should break them down into many sets.
+Each Insert set contains about 1000 rows.
 */
 
 CREATE DATABASE clique_bait;
