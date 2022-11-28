@@ -50,7 +50,7 @@ SELECT
        / (SELECT COUNT(DISTINCT visit_id) FROM events) AS decimal(10,2)) AS purchase_pct
 FROM events e
 JOIN event_identifier ei
-ON e.event_type = ei.event_type
+  ON e.event_type = ei.event_type
 WHERE ei.event_name = 'Purchase';
 
 
@@ -81,3 +81,15 @@ WHERE e.event_type = 1	--'Page View'
 GROUP BY ph.page_name
 ORDER BY page_views DESC;
 
+
+--8. What is the number of views and cart adds for each product category?
+
+SELECT 
+  ph.product_category,
+  SUM(CASE WHEN e.event_type = 1 THEN 1 ELSE 0 END) AS page_views,
+  SUM(CASE WHEN e.event_type = 2 THEN 1 ELSE 0 END) AS cart_adds
+FROM events e
+JOIN page_hierarchy ph 
+  ON e.page_id = ph.page_id
+WHERE ph.product_category IS NOT NULL
+GROUP BY ph.product_category;
