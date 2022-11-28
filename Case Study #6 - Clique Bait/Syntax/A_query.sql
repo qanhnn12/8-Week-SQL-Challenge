@@ -97,7 +97,7 @@ GROUP BY ph.product_category;
 
 --9. What are the top 3 products by purchases?
 
- --Assumption: After customers add products to cart, they won't remove any of them
+ --Assumption: After customers add products to cart, they won't remove product
 WITH purchase_list AS (
   SELECT visit_id
   FROM events
