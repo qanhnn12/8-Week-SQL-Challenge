@@ -94,6 +94,7 @@ JOIN page_hierarchy ph
 WHERE ph.product_category IS NOT NULL
 GROUP BY ph.product_category;
 
+
 --9. What are the top 3 products by purchases?
 
 WITH purchase_list AS (
