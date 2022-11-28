@@ -93,3 +93,26 @@ JOIN page_hierarchy ph
   ON e.page_id = ph.page_id
 WHERE ph.product_category IS NOT NULL
 GROUP BY ph.product_category;
+
+--9. What are the top 3 products by purchases?
+
+WITH purchase_list AS (
+  SELECT visit_id
+  FROM events e
+  JOIN page_hierarchy ph 
+    ON e.page_id = ph.page_id
+  WHERE e.event_type = 3
+)
+
+SELECT 
+  TOP 3 ph.product_id,
+  ph.page_name,
+  ph.product_category,
+  COUNT(*) AS purchase_count
+FROM events e
+JOIN page_hierarchy ph 
+  ON e.page_id = ph.page_id
+WHERE e.visit_id IN (SELECT e.visit_id FROM purchase_list)
+AND ph.product_id IS NOT NULL
+GROUP BY ph.product_id,	ph.page_name, ph.product_category
+ORDER BY purchase_count DESC;
