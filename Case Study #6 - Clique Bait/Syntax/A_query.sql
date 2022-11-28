@@ -113,7 +113,7 @@ SELECT
 FROM events e
 JOIN page_hierarchy ph 
   ON e.page_id = ph.page_id
-WHERE e.visit_id IN (SELECT e.visit_id FROM purchase_list)
-AND ph.product_id IS NOT NULL
+WHERE event_type = 2
+AND e.visit_id IN (SELECT visit_id FROM purchase_list)
 GROUP BY ph.product_id,	ph.page_name, ph.product_category
 ORDER BY purchase_count DESC;
