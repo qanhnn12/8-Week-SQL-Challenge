@@ -46,9 +46,8 @@ ORDER BY e.event_type;
 --5. What is the percentage of visits which have a purchase event?
 
 SELECT 
-	CAST(100.0 * COUNT(DISTINCT e.visit_id) 
-  --select distinct here because each visit can have multiple events
-	/ (SELECT COUNT(DISTINCT visit_id) FROM events) AS decimal(10,2)) AS purchase_pct
+  CAST(100.0 * COUNT(DISTINCT e.visit_id) 
+       / (SELECT COUNT(DISTINCT visit_id) FROM events) AS decimal(10,2)) AS purchase_pct
 FROM events e
 JOIN event_identifier ei
 ON e.event_type = ei.event_type
@@ -58,25 +57,27 @@ WHERE ei.event_name = 'Purchase';
 --6. What is the percentage of visits which view the checkout page but do not have a purchase event?
 
 WITH view_checkout AS (
-  SELECT COUNT(DISTINCT visit_id) AS cnt 
+  SELECT COUNT(visit_id) AS cnt
   FROM events
-  WHERE event_type = 1
-    AND page_id = 12
-),
-purchase_list AS (
-  SELECT visit_id 
-  FROM events
-  WHERE event_type = 3)
+  WHERE event_type = 1	--'Page View'
+    AND page_id = 12	--'Checkout'
+)
+
+SELECT CAST(100-(100.0 * COUNT(DISTINCT visit_id) 
+		/ (SELECT cnt FROM view_checkout)) AS decimal(10, 2)) AS pct_view_checkout_not_purchase
+FROM events
+WHERE event_type = 3	--'Purchase'
+
+
+--7. What are the top 3 pages by number of views?
 
 SELECT 
-  CAST(100.0*COUNT(visit_id)
-	/ (SELECT cnt FROM view_checkout) AS decimal(10,2)) AS pct_view_checkout_not_purchase
-FROM events
---view the checkout page
-WHERE event_type = 1 AND page_id = 12
--- but not purchase
-  AND visit_id NOT IN (SELECT visit_id FROM purchase_list);
-
-
-
+  TOP 3 ph.page_name,
+  COUNT(*) page_views
+FROM events e
+JOIN page_hierarchy ph 
+  ON e.page_id = ph.page_id
+WHERE e.event_type = 1	--'Page View'
+GROUP BY ph.page_name
+ORDER BY page_views DESC;
 
