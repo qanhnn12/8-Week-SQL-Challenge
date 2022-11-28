@@ -97,6 +97,7 @@ GROUP BY ph.product_category;
 
 --9. What are the top 3 products by purchases?
 
+ --Assumption: After customers add products to cart, they won't remove any of them
 WITH purchase_list AS (
   SELECT visit_id
   FROM events e
@@ -113,7 +114,7 @@ SELECT
 FROM events e
 JOIN page_hierarchy ph 
   ON e.page_id = ph.page_id
-WHERE event_type = 2
-AND e.visit_id IN (SELECT visit_id FROM purchase_list)
+WHERE event_type = 2 --'Add to cart'
+AND e.visit_id IN (SELECT visit_id FROM purchase_list)	
 GROUP BY ph.product_id,	ph.page_name, ph.product_category
 ORDER BY purchase_count DESC;
