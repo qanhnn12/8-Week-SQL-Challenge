@@ -72,7 +72,7 @@ Additionally, create another table which further aggregates the data for the abo
 but this time for each product category instead of individual products.
 */
 
- WITH product_info AS (
+WITH category_info AS (
   SELECT 
     ph.product_category,
     SUM(CASE WHEN ei.event_name = 'Page View' THEN 1 ELSE 0 END) AS views,
@@ -83,7 +83,7 @@ but this time for each product category instead of individual products.
   WHERE ph.product_id IS NOT NULL
   GROUP BY ph.product_category 
 ),
-product_abandoned AS (
+category_abandoned AS (
   SELECT 
     ph.product_category,
     COUNT(*) AS abandoned
@@ -98,7 +98,7 @@ product_abandoned AS (
     WHERE ei.event_name = 'Purchase')
     GROUP BY ph.product_category
 ),
-product_purchased AS (
+category_purchased AS (
   SELECT 
     ph.product_category,
     COUNT(*) AS purchases
@@ -115,9 +115,9 @@ product_purchased AS (
 )
 
 SELECT 
-  pi.*,
-  pa.abandoned,
-  pp.purchases
-FROM product_info pi
-JOIN product_abandoned pa ON pi.product_category = pa.product_category
-JOIN product_purchased pp ON pi.product_category = pp.product_category;
+  ci.*,
+  ca.abandoned,
+  cp.purchases
+FROM category_info ci
+JOIN category_abandoned ca ON ci.product_category = ca.product_category
+JOIN category_purchased cp ON ci.product_category = cp.product_category;
