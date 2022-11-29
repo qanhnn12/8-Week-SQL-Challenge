@@ -153,9 +153,9 @@ ORDER BY abandoned DESC;
 
 --3. Which product had the highest view to purchase percentage?
 SELECT 
-	TOP 1 product_name,
-	product_category,
-	CAST(100.0 * purchases / views AS decimal(10, 2)) AS purchase_per_view_pct
+  TOP 1 product_name,
+  product_category,
+  CAST(100.0 * purchases / views AS decimal(10, 2)) AS purchase_per_view_pct
 FROM product_summary
 ORDER BY purchase_per_view_pct DESC;
 --> Lobster had the highest view to purchase percentage?
