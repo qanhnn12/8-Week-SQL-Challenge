@@ -136,12 +136,12 @@ ORDER BY views DESC;
 SELECT TOP 1 *
 FROM product_summary
 ORDER BY cart_adds DESC;
---> Lobster had the most cart adds
+--> Lobster had the most cart adds.
 
 SELECT TOP 1 *
 FROM product_summary
 ORDER BY purchases DESC;
---> Lobster had the most purchases
+--> Lobster had the most purchases.
 
 
 --2. Which product was most likely to be abandoned?
