@@ -110,7 +110,7 @@ JOIN event_identifier ei ON e.event_type = ei.event_type
 JOIN page_hierarchy ph ON e.page_id = ph.page_id
 WHERE ei.event_name = 'Add to cart'
 AND e.visit_id IN (
-  SELECT visit_id
+  SELECT e.visit_id
   FROM events e
   JOIN event_identifier ei ON e.event_type = ei.event_type
   WHERE ei.event_name = 'Purchase')
