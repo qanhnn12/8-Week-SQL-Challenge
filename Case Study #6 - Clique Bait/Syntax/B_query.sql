@@ -121,3 +121,17 @@ SELECT
 FROM category_info ci
 JOIN category_abandoned ca ON ci.product_category = ca.product_category
 JOIN category_purchased cp ON ci.product_category = cp.product_category;
+
+
+--1. Which product had the most views, cart adds and purchases?
+--2. Which product was most likely to be abandoned?
+
+/* Answer:
+- Oyster has the most views.
+- Lobster has the most cart adds and purchases.
+- Russian Caviar is most likely to be abandoned.
+*/
+
+--3. Which product had the highest view to purchase percentage?
+--4. What is the average conversion rate from view to cart add?
+--5. What is the average conversion rate from cart add to purchase?
