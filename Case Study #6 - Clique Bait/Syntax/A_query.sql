@@ -57,27 +57,30 @@ WHERE ei.event_name = 'Purchase';
 --6. What is the percentage of visits which view the checkout page but do not have a purchase event?
 
 WITH view_checkout AS (
-  SELECT COUNT(visit_id) AS cnt
-  FROM events
-  WHERE event_type = 1	--'Page View'
-    AND page_id = 12	--'Checkout'
+  SELECT COUNT(e.visit_id) AS cnt
+  FROM events e
+  JOIN event_identifier ei ON e.event_type = ei.event_type
+  JOIN page_hierarchy p ON e.page_id = p.page_id
+  WHERE ei.event_name = 'Page View'
+    AND p.page_name = 'Checkout'
 )
 
-SELECT CAST(100-(100.0 * COUNT(DISTINCT visit_id) 
+SELECT CAST(100-(100.0 * COUNT(DISTINCT e.visit_id) 
 		/ (SELECT cnt FROM view_checkout)) AS decimal(10, 2)) AS pct_view_checkout_not_purchase
-FROM events
-WHERE event_type = 3	--'Purchase'
+FROM events e
+JOIN event_identifier ei ON e.event_type = ei.event_type
+WHERE ei.event_name = 'Purchase'
 
 
 --7. What are the top 3 pages by number of views?
 
 SELECT 
   TOP 3 ph.page_name,
-  COUNT(*) page_views
+  COUNT(*) AS page_views
 FROM events e
-JOIN page_hierarchy ph 
-  ON e.page_id = ph.page_id
-WHERE e.event_type = 1	--'Page View'
+JOIN event_identifier ei ON e.event_type = ei.event_type 
+JOIN page_hierarchy ph ON e.page_id = ph.page_id
+WHERE ei.event_name = 'Page View'
 GROUP BY ph.page_name
 ORDER BY page_views DESC;
 
@@ -86,11 +89,11 @@ ORDER BY page_views DESC;
 
 SELECT 
   ph.product_category,
-  SUM(CASE WHEN e.event_type = 1 THEN 1 ELSE 0 END) AS page_views,
-  SUM(CASE WHEN e.event_type = 2 THEN 1 ELSE 0 END) AS cart_adds
+  SUM(CASE WHEN ei.event_name = 'Page View' THEN 1 ELSE 0 END) AS page_views,
+  SUM(CASE WHEN ei.event_name = 'Add to Cart' THEN 1 ELSE 0 END) AS cart_adds
 FROM events e
-JOIN page_hierarchy ph 
-  ON e.page_id = ph.page_id
+JOIN event_identifier ei ON e.event_type = ei.event_type
+JOIN page_hierarchy ph ON e.page_id = ph.page_id
 WHERE ph.product_category IS NOT NULL
 GROUP BY ph.product_category;
 
@@ -103,12 +106,13 @@ SELECT
   ph.product_category,
   COUNT(*) AS purchase_count
 FROM events e
-JOIN page_hierarchy ph 
-  ON e.page_id = ph.page_id
-WHERE e.event_type = 2	--'Add to cart'
+JOIN event_identifier ei ON e.event_type = ei.event_type
+JOIN page_hierarchy ph ON e.page_id = ph.page_id
+WHERE ei.event_name = 'Add to cart'
 AND e.visit_id IN (
   SELECT visit_id
-  FROM events
-  WHERE event_type = 3)	--'Purchase'
+  FROM events e
+  JOIN event_identifier ei ON e.event_type = ei.event_type
+  WHERE ei.event_name = 'Purchase')
 GROUP BY ph.product_id,	ph.page_name, ph.product_category
 ORDER BY purchase_count DESC;
