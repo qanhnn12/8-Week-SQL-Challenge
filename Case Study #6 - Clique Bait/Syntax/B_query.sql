@@ -65,3 +65,59 @@ SELECT
 FROM product_info pi
 JOIN product_abandoned pa ON pi.product_id = pa.product_id
 JOIN product_purchased pp ON pi.product_id = pp.product_id;
+
+
+/*
+Additionally, create another table which further aggregates the data for the above points 
+but this time for each product category instead of individual products.
+*/
+
+ WITH product_info AS (
+  SELECT 
+    ph.product_category,
+    SUM(CASE WHEN ei.event_name = 'Page View' THEN 1 ELSE 0 END) AS views,
+    SUM(CASE WHEN ei.event_name = 'Add To Cart' THEN 1 ELSE 0 END) AS cart_adds
+  FROM events e
+  JOIN event_identifier ei ON e.event_type = ei.event_type
+  JOIN page_hierarchy ph ON e.page_id = ph.page_id
+  WHERE ph.product_id IS NOT NULL
+  GROUP BY ph.product_category 
+),
+product_abandoned AS (
+  SELECT 
+    ph.product_category,
+    COUNT(*) AS abandoned
+  FROM events e
+  JOIN event_identifier ei ON e.event_type = ei.event_type
+  JOIN page_hierarchy ph ON e.page_id = ph.page_id
+  WHERE ei.event_name = 'Add to cart'
+  AND e.visit_id NOT IN (
+    SELECT e.visit_id
+    FROM events e
+    JOIN event_identifier ei ON e.event_type = ei.event_type
+    WHERE ei.event_name = 'Purchase')
+    GROUP BY ph.product_category
+),
+product_purchased AS (
+  SELECT 
+    ph.product_category,
+    COUNT(*) AS purchases
+  FROM events e
+  JOIN event_identifier ei ON e.event_type = ei.event_type
+  JOIN page_hierarchy ph ON e.page_id = ph.page_id
+  WHERE ei.event_name = 'Add to cart'
+  AND e.visit_id IN (
+    SELECT e.visit_id
+    FROM events e
+    JOIN event_identifier ei ON e.event_type = ei.event_type
+    WHERE ei.event_name = 'Purchase')
+    GROUP BY ph.product_category
+)
+
+SELECT 
+  pi.*,
+  pa.abandoned,
+  pp.purchases
+FROM product_info pi
+JOIN product_abandoned pa ON pi.product_category = pa.product_category
+JOIN product_purchased pp ON pi.product_category = pp.product_category;
