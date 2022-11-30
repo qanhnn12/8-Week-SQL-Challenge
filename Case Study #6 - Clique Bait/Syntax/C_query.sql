@@ -58,12 +58,14 @@ FROM #campaign_summary
 WHERE impression > 0
 AND campaign_name IS NOT NULL;
 
+
 --Number of users received impressions but didn't click on the ad = 127
 SELECT COUNT(DISTINCT user_id) AS received_impressions_not_clicked
 FROM #campaign_summary
 WHERE impression > 0
 AND click = 0
 AND campaign_name IS NOT NULL;
+
 
 --Number of users didn't receive impressions during campaign periods = 56
 SELECT COUNT(DISTINCT user_id) AS received_impressions
@@ -89,6 +91,7 @@ FROM #campaign_summary
 WHERE impression > 0
 AND campaign_name IS NOT NULL;
 
+
 --For users received impressions but not clicked
 DECLARE @received_not_clicked int 
 SET @received_not_clicked = 127
@@ -101,6 +104,7 @@ FROM #campaign_summary
 WHERE impression > 0
 AND click = 0
 AND campaign_name IS NOT NULL;
+
 
 --For users not received impressions 
 DECLARE @not_received int 
