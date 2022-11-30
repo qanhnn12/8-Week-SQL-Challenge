@@ -119,8 +119,8 @@ Now we know:
 * The number of users didn't receive impressions during campaign periods is 56.
 
 Using those numbers, we can calculate:
-* Overall, how well our ads reached to customers = 100 * 417 / (417+56) = 88.16 %
-* Overall, how many reached customers clicked on ads = 100 * 127 / 417 = 30.46 %
+* Overall, impression rate = 100 * 417 / (417+56) = 88.16 %
+* Overall, click rate = 100 * 127 / 417 = 30.46 %
 
 #### 2. Calculate the average clicks, average views, average cart adds, and average purchases per user of each group
 * For users not received impressions and users received impressions but not clicked, the average click is 0.
