@@ -238,3 +238,6 @@ FROM #product_summary;
 | avg_cart_to_purchase  |
 |-----------------------|
 | 0.76                  |
+
+---
+My solution for **[C. Campaigns Analysis](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%236%20-%20Clique%20Bait/Solution/C.%20Campaigns%20Analysis.md)**.
