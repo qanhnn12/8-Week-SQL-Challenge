@@ -10,8 +10,7 @@ FROM users;
 
 --2. How many cookies does each user have on average?
 
-SELECT 
-  CAST(AVG(cookies_count) AS FLOAT) AS avg_cookies_per_user
+SELECT CAST(AVG(cookies_count) AS FLOAT) AS avg_cookies_per_user
 FROM (
   SELECT 
     user_id,
