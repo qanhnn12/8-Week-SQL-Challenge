@@ -17,7 +17,7 @@ Generate a table that has 1 single row for every unique visit_id record and has 
 
 * `INNER JOIN` from table `events` to `users`
 * `INNER JOIN` from table `events` to `event_identifier`
-* `LEFT JOIN` from table `events` to `campaign_identifier` as we want all lines that have `event_time` between `start_date` and `end_date`.
+* `LEFT JOIN` from table `events` to `campaign_identifier` to display`campaign_name` in all rows regardless of `start_time` and `end_time`.
 * To generate earliest `visit_start_time` for each unique `visit_id`, use `MIN()` to find the 1st `visit_time`.
 * Use `SUM()` and `CASE` statement to calculate `page_views`, `cart_adds`, `purchase`, ad `impression` and ad `click` for each `visit_id`.
 * To get a list of products added to cart sorted by `sequence_number`:
@@ -71,7 +71,7 @@ users who do not receive an impression? What if we compare them with users who h
 ### Solution
 Since the number of users received impressions was higher than those who not received impressions, 
 the total views, total cart adds and total purchases of the prior group are definitely higher than the latter. 
-Therefore in this case, I compare the average rate between two groups (instead of the total) to see 
+Therefore, in this case, I compare the average rate between two groups (instead of the total) to see 
 if running ads could increase the number of `views`, `cart_adds`, and `purchases`.
 
 #### 1. Calculate the number of users in each group
@@ -105,14 +105,18 @@ SELECT COUNT(DISTINCT user_id) AS received_impressions
 FROM #campaign_summary
 WHERE campaign_name IS NOT NULL
 AND user_id NOT IN (
-	SELECT user_id
-	FROM #campaign_summary
-	WHERE impression > 0);
+  SELECT user_id
+  FROM #campaign_summary
+  WHERE impression > 0);
 ```
 | received_impressions  |
 |-----------------------|
 | 56                    |
 
+Now we know that:
+* The number of users received impressions during campaign periods is **417**.
+* The number of users received impressions but didn't click on the ad is **127**.
+* The number of users didn't receive impressions during campaign periods is **56**.
 
 #### 2. Calculate the average views, average cart adds and average purchases of users received and not received impressions groups
 
@@ -122,10 +126,10 @@ DECLARE @received int
 SET @received = 417
 
 SELECT 
-	CAST(1.0*SUM(click) / @received AS decimal(10,1)) AS avg_click,
-	CAST(1.0*SUM(page_views) / @received AS decimal(10,1)) AS avg_view,
-	CAST(1.0*SUM(cart_adds) / @received AS decimal(10,1)) AS avg_cart_adds,
-	CAST(1.0*SUM(purchase) / @received AS decimal(10,1)) AS avg_purchase
+  CAST(1.0*SUM(click) / @received AS decimal(10,1)) AS avg_click,
+  CAST(1.0*SUM(page_views) / @received AS decimal(10,1)) AS avg_view,
+  CAST(1.0*SUM(cart_adds) / @received AS decimal(10,1)) AS avg_cart_adds,
+  CAST(1.0*SUM(purchase) / @received AS decimal(10,1)) AS avg_purchase
 FROM #campaign_summary
 WHERE impression > 0
 AND campaign_name IS NOT NULL;
@@ -140,16 +144,16 @@ DECLARE @not_received int
 SET @not_received = 56
 
 SELECT 
-	CAST(1.0*SUM(click) / @not_received AS decimal(10,1)) AS avg_click,
-	CAST(1.0*SUM(page_views) / @not_received AS decimal(10,1)) AS avg_view,
-	CAST(1.0*SUM(cart_adds) / @not_received AS decimal(10,1)) AS avg_cart_adds,
-	CAST(1.0*SUM(purchase) / @not_received AS decimal(10,1)) AS avg_purchase
+  CAST(1.0*SUM(click) / @not_received AS decimal(10,1)) AS avg_click,
+  CAST(1.0*SUM(page_views) / @not_received AS decimal(10,1)) AS avg_view,
+  CAST(1.0*SUM(cart_adds) / @not_received AS decimal(10,1)) AS avg_cart_adds,
+  CAST(1.0*SUM(purchase) / @not_received AS decimal(10,1)) AS avg_purchase
 FROM #campaign_summary
 WHERE campaign_name IS NOT NULL
 AND user_id NOT IN (
-	SELECT user_id
-	FROM #campaign_summary
-	WHERE impression > 0);
+  SELECT user_id
+  FROM #campaign_summary
+  WHERE impression > 0);
 ```
 | avg_click | avg_view | avg_cart_adds | avg_purchase  |
 |-----------|----------|---------------|---------------|
