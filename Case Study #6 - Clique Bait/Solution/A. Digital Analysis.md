@@ -140,7 +140,6 @@ GROUP BY ph.product_category;
 
 ---
 ### 9. What are the top 3 products by purchases?
-* Products were purchased must be in the `Purchase` list and `Add to cart`
 ```TSQL
 SELECT 
   TOP 3 ph.product_id,
@@ -150,7 +149,9 @@ SELECT
 FROM events e
 JOIN event_identifier ei ON e.event_type = ei.event_type
 JOIN page_hierarchy ph ON e.page_id = ph.page_id
+--1st layer: products are added to cart
 WHERE ei.event_name = 'Add to cart'
+--2nd layer: add-to-cart products are purchased
 AND e.visit_id IN (
   SELECT e.visit_id
   FROM events e
