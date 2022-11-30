@@ -191,8 +191,7 @@ Combine results in (2), we have the table below:
 | *Increase by campaigns*     | *No*     | *Yes*         | *Yes*        |
 
 Insights:
-* The average view decreases, while the average of products added to cart and average of purchased products increase during the campaign period. 
-* During campaign periods, customers might not wander around many pages to select products, but click to the ad or directly go to the page having that products to purchase or add to cart. 
+* During campaign periods, the average view decreases while the average of products added to cart and average of purchased products increase. Customers might not wander around many pages to select products, but click to the ad or directly go to the relevant page having that products. 
 * Customers received impressions were more likely to add products to cart then to purchase them: (9-5.8) > (1.5-1.2).
 
 #### 4. Compare the average purchases per user received impressions and received impressions but not clicked
@@ -205,5 +204,5 @@ Combine results in (2), we have the table below:
 | *Increase by clicking to the ads*    | *Yes*         |
 
 Insights:
-* The average purchases for users received impressions but not clicked to ads were lower than those received impressions in overall. 
+* The average purchases for users received impressions but not clicked to ads is lower than those received impressions in overall. 
 * Clicking to ads might not lead to higher purchase rate.
