@@ -71,8 +71,8 @@ users who do not receive an impression? What if we compare them with users who h
 ### Solution
 Since the number of users received impressions was higher than those who not received impressions, 
 the total views, total cart adds and total purchases of the prior group are definitely higher than the latter. 
-Therefore, in this case, I compare the average rate between two groups (instead of the total) to see 
-if running ads could increase the number of `views`, `cart_adds`, and `purchases`.
+Therefore, in this case, I compare *the average rate per user* between two groups (instead of the total) to see 
+if running ads could increase the number of `page_views`, `cart_adds`, and `purchase`.
 
 #### 1. Calculate the number of users in each group
 
@@ -88,7 +88,7 @@ AND campaign_name IS NOT NULL;
 | 417                   |
 
 ```TSQL
---Number of users received impressions but didn't click on the ad
+--Number of users received impressions but didn't click on the ad during campaign periods
 SELECT COUNT(DISTINCT user_id) AS received_impressions_not_clicked
 FROM #campaign_summary
 WHERE impression > 0
@@ -113,15 +113,20 @@ AND user_id NOT IN (
 |-----------------------|
 | 56                    |
 
-Now we know that:
-* The number of users received impressions during campaign periods is **417**.
-* The number of users received impressions but didn't click on the ad is **127**.
-* The number of users didn't receive impressions during campaign periods is **56**.
+Now we know:
+* The number of users received impressions during campaign periods is 417.
+* The number of users received impressions but didn't click on the ad is 127.
+* The number of users didn't receive impressions during campaign periods is 56.
 
-#### 2. Calculate the average views, average cart adds and average purchases of users received and not received impressions groups
+Using those numbers, we can calculate:
+* Overall, how well our ads reached to customers = 100 * 417 / (417+56) = 88.16 %
+* Overall, how many reached customers clicked on ads = 100 * 127 / 417 = 30.46 %
+
+#### 2. Calculate the average clicks, average views, average cart adds, and average purchases per user of each group
+* For users not received impressions and users received impressions but not clicked, the average click is 0.
 
 ```TSQL
---For received impressions group
+--For users received impressions
 DECLARE @received int 
 SET @received = 417
 
@@ -139,7 +144,26 @@ AND campaign_name IS NOT NULL;
 | 1.4       | 15.3     | 9.0           | 1.5           |
 
 ```TSQL
---For not received impressions group
+--For users received impressions but not clicked
+DECLARE @received_not_clicked int 
+SET @received_not_clicked = 127
+
+SELECT
+	CAST(1.0*SUM(click) / @received_not_clicked AS decimal(10,1)) AS avg_click,
+  CAST(1.0*SUM(page_views) / @received_not_clicked AS decimal(10,1)) AS avg_view,
+  CAST(1.0*SUM(cart_adds) / @received_not_clicked AS decimal(10,1)) AS avg_cart_adds,
+  CAST(1.0*SUM(purchase) / @received_not_clicked AS decimal(10,1)) AS avg_purchase
+FROM #campaign_summary
+WHERE impression > 0
+AND click = 0
+AND campaign_name IS NOT NULL;
+```
+| avg_click | avg_view | avg_cart_adds | avg_purchase  |
+|-----------|----------|---------------|---------------|
+| 0.0       | 7.5      | 2.7           | 0.8           | 
+
+```TSQL
+--For users not received impressions 
 DECLARE @not_received int 
 SET @not_received = 56
 
@@ -161,29 +185,28 @@ AND user_id NOT IN (
 
 #### 3. Compare the average views, average cart adds and average purchases of users received impressions and not received impressions
 
-Combine two tables above:
+Combine results in (2), we have the table below:
+
 |                             | avg_click | avg_view | avg_cart_adds | avg_purchase  |
 |-----------------------------|-----------|----------|---------------|---------------|
 | Received impressions        | 1.4       | 15.3     | 9             | 1.5           |
 | Not received impressions    | 0         | 19.4     | 5.8           | 1.2           |
-| *% Increase by campaigns*   | *n/a*     | *No*     | *Yes*         | *Yes*         |
+| *Increase by campaigns*     | *n/a*     | *No*     | *Yes*         | *Yes*         |
 
+Insights:
+* The average view per user decreases, while the average of products added to cart and average of purchased products per user increase during the campaign period. 
+* Customers might not wander around many pages as before to select products, but go to the page having that products to purchase or add to cart. They could do that by either click to the ads or directly go to the relevant page.
+* For customers received impressions, they were more likely to add products to cart then purchase them (9-5.8 > 1.5-1.2).
 
-#### 4. Compare the average purchases of users received impressions and received impressions but not clicked
-```TSQL
---For users received impressions but not clicked
-DECLARE @received_not_clicked int 
-SET @received_not_clicked = 127
+#### 4. Compare the average purchases per user received impressions and received impressions but not clicked
+Combine results in (2), we have the table below:
 
-SELECT
-	CAST(1.0*SUM(purchase) / @received_not_clicked AS decimal(10,1)) AS avg_purchase
-FROM #campaign_summary
-WHERE impression > 0
-AND click = 0
-AND campaign_name IS NOT NULL;
-```
 |                                      | avg_purchase  |
 |--------------------------------------|---------------|
 | Received impressions                 | 1.5           |
 | Received impressions but not clicked | 0.8           |
-| Increase by clicking to the ads      | Yes           |
+| *Increase by clicking to the ads*    | *Yes*         |
+
+Insights:
+* The average purchases per user received impressions but not clicked to ads were lower than received impressions in overall. 
+* Clicking to ads might not lead to higher purchase rate
