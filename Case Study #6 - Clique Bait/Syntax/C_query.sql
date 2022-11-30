@@ -28,6 +28,7 @@ SELECT
   SUM(CASE WHEN ei.event_name = 'Ad Click' THEN 1 ELSE 0 END) AS click,
   STRING_AGG(CASE WHEN ei.event_name = 'Add to Cart' THEN ph.page_name END, ', ') 
     WITHIN GROUP (ORDER BY e.sequence_number) AS cart_products
+INTO campaign_summary
 FROM events e
 JOIN users u 
   ON e.cookie_id = u.cookie_id
