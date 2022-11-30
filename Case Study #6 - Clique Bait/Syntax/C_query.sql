@@ -22,7 +22,7 @@ SELECT
   MIN(event_time) AS visit_start_time,
   SUM(CASE WHEN ei.event_name = 'Page View' THEN 1 ELSE 0 END) AS page_views,
   SUM(CASE WHEN ei.event_name = 'Add to Cart' THEN 1 ELSE 0 END) AS cart_adds,
-  CASE WHEN ei.event_name = 'Purchase' THEN 1 ELSE 0 END AS purchase,
+  SUM(CASE WHEN ei.event_name = 'Purchase' THEN 1 ELSE 0 END) AS purchase,
   c.campaign_name,
   SUM(CASE WHEN ei.event_name = 'Ad Impression' THEN 1 ELSE 0 END) AS impression,
   SUM(CASE WHEN ei.event_name = 'Ad Click' THEN 1 ELSE 0 END) AS click,
@@ -38,4 +38,4 @@ JOIN page_hierarchy ph
   ON e.page_id = ph.page_id
 LEFT JOIN campaign_identifier c 
   ON e.event_time BETWEEN c.start_date AND c.end_date
-GROUP BY u.user_id, e.visit_id, c.campaign_name, ei.event_name;
+GROUP BY u.user_id, e.visit_id, c.campaign_name;
