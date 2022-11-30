@@ -1,8 +1,7 @@
 -------------------------
 --C. Campaigns Analysis--
 -------------------------
-/*
-Generate a table that has 1 single row for every unique visit_id record and has the following columns:
+/*Generate a table that has 1 single row for every unique visit_id record and has the following columns:
 - user_id
 - visit_id
 - visit_start_time: the earliest event_time for each visit
@@ -50,24 +49,91 @@ users who do not receive an impression? What if we compare them with users who j
 - What metrics can you use to quantify the success or failure of each campaign compared to each other?
 */
 
-WITH metrics AS (
-  SELECT 
-    SUM(CASE WHEN impression = 0 THEN page_views END) AS normal_views,
-    SUM(CASE WHEN impression > 0 THEN page_views END) AS campaign_views,
-    SUM(CASE WHEN impression = 0 THEN cart_adds END) AS normal_cart_adds,
-    SUM(CASE WHEN impression > 0 THEN cart_adds END) AS campaign_cart_adds,
-    SUM(CASE WHEN impression = 0 THEN click END) AS no_ad_click,
-    SUM(CASE WHEN impression > 0 THEN click END) AS campaign_ad_click,
-    SUM(CASE WHEN impression = 0 THEN purchase END) AS normal_purchase,
-    SUM(CASE WHEN impression > 0 THEN purchase END) AS campaign_purchase
+--1. Calculate the number of users in each group
+
+--Number of users received impressions during campaign periods = 417
+SELECT COUNT(DISTINCT user_id) AS received_impressions
 FROM #campaign_summary
-)
+WHERE impression > 0
+AND campaign_name IS NOT NULL;
+
+--Number of users received impressions but didn't click on the ad = 127
+SELECT COUNT(DISTINCT user_id) AS received_impressions_not_clicked
+FROM #campaign_summary
+WHERE impression > 0
+AND click = 0
+AND campaign_name IS NOT NULL;
+
+--Number of users didn't receive impressions during campaign periods = 56
+SELECT COUNT(DISTINCT user_id) AS received_impressions
+FROM #campaign_summary
+WHERE campaign_name IS NOT NULL
+AND user_id NOT IN (
+	SELECT user_id
+	FROM #campaign_summary
+	WHERE impression > 0)
+
+
+--2. Compare the average views, average cart adds and average purchases of users received impressions and not received impressions
+/* Since the number of users received impressions was higher than those who not received impressions, 
+the total views, total cart adds and total purchases of the prior group are definitely higher than the latter. 
+Therefore in this case, I compare the average rate between two groups (instead of the total) to see 
+if running ads could increase the number of views, cart_adds, and purchases.*/
+
+--For received impressions group
+DECLARE @received int 
+SET @received = 417
 
 SELECT 
-  CAST(100.0 * (campaign_views - normal_views)
-       / normal_views AS decimal(10,2)) AS views_increase_pct,
-  CAST(100.0 * (campaign_cart_adds - normal_cart_adds)
-       / normal_cart_adds AS decimal(10,2)) AS cart_adds_increase_pct,
-  CAST(100.0 * (campaign_purchase - normal_purchase)
-       / normal_purchase AS decimal(10,2)) AS purchase_increase_pct
-FROM metrics;
+	CAST(1.0*SUM(click) / @received AS decimal(10,1)) AS avg_click,
+	CAST(1.0*SUM(page_views) / @received AS decimal(10,1)) AS avg_view,
+	CAST(1.0*SUM(cart_adds) / @received AS decimal(10,1)) AS avg_cart_adds,
+	CAST(1.0*SUM(purchase) / @received AS decimal(10,1)) AS avg_purchase
+FROM #campaign_summary
+WHERE impression > 0
+AND campaign_name IS NOT NULL;
+
+--For not received impressions group
+DECLARE @not_received int 
+SET @not_received = 56
+
+SELECT 
+	CAST(1.0*SUM(click) / @received AS decimal(10,1)) AS avg_click,
+	CAST(1.0*SUM(page_views) / @not_received AS decimal(10,1)) AS avg_view,
+	CAST(1.0*SUM(cart_adds) / @not_received AS decimal(10,1)) AS avg_cart_adds,
+	CAST(1.0*SUM(purchase) / @not_received AS decimal(10,1)) AS avg_purchase
+FROM #campaign_summary
+WHERE campaign_name IS NOT NULL
+AND user_id NOT IN (
+	SELECT user_id
+	FROM #campaign_summary
+	WHERE impression > 0);
+
+/* Combine table
+|                             | avg_click | avg_view | avg_cart_adds | avg_purchase  |
+|-----------------------------|-----------|----------|---------------|---------------|
+| Received impressions        | 1.4       | 15.3     | 9             | 1.5           |
+| Not received impressions    | 0         | 19.4     | 5.8           | 1.2           |
+| % Increase by campaigns     | n/a       | No       | Yes           | Yes           |
+*/
+
+
+--3. Compare the average purchases of users received impressions and received impressions but not clicked
+
+--For users received impressions but not clicked
+DECLARE @received_not_clicked int 
+SET @received_not_clicked = 127
+
+SELECT
+	CAST(1.0*SUM(purchase) / @received_not_clicked AS decimal(10,1)) AS avg_purchase
+FROM #campaign_summary
+WHERE impression > 0
+AND click = 0
+AND campaign_name IS NOT NULL;
+
+/*Combine table                        | avg_purchase  |
+|--------------------------------------|---------------|
+| Received impressions                 | 1.5           |
+| Received impressions but not clicked | 0.8           |
+| Increase by clicking to the ads      | Yes           |
+*/
