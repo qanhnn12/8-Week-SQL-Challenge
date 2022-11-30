@@ -69,10 +69,11 @@ users who do not receive an impression? What if we compare them with users who h
 - What metrics can you use to quantify the success or failure of each campaign compared to each other?
 
 ### Solution
-Since the number of users received impressions was higher than those who not received impressions, 
-the total views, total cart adds and total purchases of the prior group are definitely higher than the latter. 
-Therefore, in this case, I compare *the average rate per user* between two groups (instead of the total) to see 
-if running ads could increase the number of `page_views`, `cart_adds`, and `purchase`.
+Since the number of users received impressions is higher than those not received impressions and those received impressions but not clicked to ads, 
+the total views, total cart adds and total purchases of the prior group are definitely higher than the latters. 
+Therefore, in this case, I compare *the rate per user* among these groups (instead of the total). The purpose is evaluate:
+* performance of ads through *impression rate* and *click rate*.
+* see if ads could increase the number of `page_views`, `cart_adds`, and `purchase` per user.
 
 #### 1. Calculate the number of users in each group
 
@@ -88,7 +89,7 @@ AND campaign_name IS NOT NULL;
 | 417                   |
 
 ```TSQL
---Number of users received impressions but didn't click on the ad during campaign periods
+--Number of users received impressions but not clicked on the ad during campaign periods
 SELECT COUNT(DISTINCT user_id) AS received_impressions_not_clicked
 FROM #campaign_summary
 WHERE impression > 0
@@ -149,7 +150,7 @@ DECLARE @received_not_clicked int
 SET @received_not_clicked = 127
 
 SELECT
-	CAST(1.0*SUM(click) / @received_not_clicked AS decimal(10,1)) AS avg_click,
+  CAST(1.0*SUM(click) / @received_not_clicked AS decimal(10,1)) AS avg_click,
   CAST(1.0*SUM(page_views) / @received_not_clicked AS decimal(10,1)) AS avg_view,
   CAST(1.0*SUM(cart_adds) / @received_not_clicked AS decimal(10,1)) AS avg_cart_adds,
   CAST(1.0*SUM(purchase) / @received_not_clicked AS decimal(10,1)) AS avg_purchase
@@ -194,9 +195,9 @@ Combine results in (2), we have the table below:
 | *Increase by campaigns*     | *n/a*     | *No*     | *Yes*         | *Yes*         |
 
 Insights:
-* The average view per user decreases, while the average of products added to cart and average of purchased products per user increase during the campaign period. 
-* Customers might not wander around many pages as before to select products, but go to the page having that products to purchase or add to cart. They could do that by either click to the ads or directly go to the relevant page.
-* For customers received impressions, they were more likely to add products to cart then purchase them (9-5.8 > 1.5-1.2).
+* The average view decreases, while the average of products added to cart and average of purchased products increase during the campaign period. 
+* During campaign periods, customers might not wander around many pages to select products, but click to the ad or directly go to the page having that products to purchase or add to cart. 
+* Customers received impressions were more likely to add products to cart then to purchase them: (9-5.8) > (1.5-1.2).
 
 #### 4. Compare the average purchases per user received impressions and received impressions but not clicked
 Combine results in (2), we have the table below:
@@ -208,5 +209,5 @@ Combine results in (2), we have the table below:
 | *Increase by clicking to the ads*    | *Yes*         |
 
 Insights:
-* The average purchases per user received impressions but not clicked to ads were lower than received impressions in overall. 
+* The average purchases for users received impressions but not clicked to ads were lower than those received impressions in overall. 
 * Clicking to ads might not lead to higher purchase rate.
