@@ -62,7 +62,7 @@ SELECT
   pi.*,
   pa.abandoned,
   pp.purchases
-INTO product_summary
+INTO #product_summary
 FROM product_info pi
 JOIN product_abandoned pa ON pi.product_id = pa.product_id
 JOIN product_purchased pp ON pi.product_id = pp.product_id;
@@ -119,7 +119,6 @@ SELECT
   ci.*,
   ca.abandoned,
   cp.purchases
-INTO category_summary
 FROM category_info ci
 JOIN category_abandoned ca ON ci.product_category = ca.product_category
 JOIN category_purchased cp ON ci.product_category = cp.product_category;
@@ -129,24 +128,24 @@ JOIN category_purchased cp ON ci.product_category = cp.product_category;
 --1. Which product had the most views, cart adds and purchases?
 
 SELECT TOP 1 *
-FROM product_summary
+FROM #product_summary
 ORDER BY views DESC;
 --> Oyster has the most views.
 
 SELECT TOP 1 *
-FROM product_summary
+FROM #product_summary
 ORDER BY cart_adds DESC;
 --> Lobster had the most cart adds.
 
 SELECT TOP 1 *
-FROM product_summary
+FROM #product_summary
 ORDER BY purchases DESC;
 --> Lobster had the most purchases.
 
 
 --2. Which product was most likely to be abandoned?
 SELECT TOP 1 *
-FROM product_summary
+FROM #product_summary
 ORDER BY abandoned DESC;
 --> Russian Caviar was most likely to be abandoned.
 
@@ -156,7 +155,7 @@ SELECT
   TOP 1 product_name,
   product_category,
   CAST(100.0 * purchases / views AS decimal(10, 2)) AS purchase_per_view_pct
-FROM product_summary
+FROM #product_summary
 ORDER BY purchase_per_view_pct DESC;
 --> Lobster had the highest view to purchase percentage?
 
@@ -164,10 +163,10 @@ ORDER BY purchase_per_view_pct DESC;
 --4. What is the average conversion rate from view to cart add?
 SELECT 
   CAST(AVG(1.0*cart_adds/views) AS decimal(10, 2)) AS avg_view_to_cart
-FROM product_summary;
+FROM #product_summary;
 
 
 --5. What is the average conversion rate from cart add to purchase?
 SELECT 
   CAST(AVG(1.0*purchases/cart_adds) AS decimal(10, 2)) AS avg_cart_to_purchase
-FROM product_summary;
+FROM #product_summary;
