@@ -45,7 +45,7 @@ GROUP BY u.user_id, e.visit_id, c.campaign_name;
 and comparing each metric with other users who did not have an impression event
 - Does clicking on an impression lead to higher purchase rates?
 - What is the uplift in purchase rate when comparing users who click on a campaign impression versus 
-users who do not receive an impression? What if we compare them with users who just an impression but do not click?
+users who do not receive an impression? What if we compare them with users who have just an impression but do not click?
 - What metrics can you use to quantify the success or failure of each campaign compared to each other?
 */
 
