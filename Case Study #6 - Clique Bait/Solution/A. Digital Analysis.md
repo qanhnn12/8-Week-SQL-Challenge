@@ -140,6 +140,7 @@ GROUP BY ph.product_category;
 
 ---
 ### 9. What are the top 3 products by purchases?
+* Products were purchased must be in the `Purchase` list and `Add to cart`
 ```TSQL
 SELECT 
   TOP 3 ph.product_id,
