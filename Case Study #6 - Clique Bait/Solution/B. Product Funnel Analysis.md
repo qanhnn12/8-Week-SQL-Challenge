@@ -165,7 +165,7 @@ JOIN category_purchased cp ON ci.product_category = cp.product_category;
 ---
 Use 2 new output tables - answer the following questions:
 
-### 1. Which product had the most views, cart adds and purchases?
+#### 1. Which product had the most views, cart adds and purchases?
 ```TSQL
 SELECT TOP 1 *
 FROM #product_summary
@@ -195,7 +195,7 @@ ORDER BY purchases DESC;
 | 7          | Lobster      | Shellfish        | 1547  | 968       | 214       | 754        |
 
 
-### 2. Which product was most likely to be abandoned?
+#### 2. Which product was most likely to be abandoned?
 ```TSQL
 SELECT TOP 1 *
 FROM #product_summary
@@ -205,7 +205,7 @@ ORDER BY abandoned DESC;
 |------------|----------------|------------------|-------|-----------|-----------|------------|
 | 4          | Russian Caviar | Luxury           | 1563  | 946       | 249       | 697        |
 
-### 3. Which product had the highest view to purchase percentage?
+#### 3. Which product had the highest view to purchase percentage?
 ```TSQL
 SELECT 
   TOP 1 product_name,
@@ -219,7 +219,7 @@ ORDER BY purchase_per_view_pct DESC;
 | Lobster      | Shellfish        | 48.74                  |
 
 
-### 4. What is the average conversion rate from view to cart add?
+#### 4. What is the average conversion rate from view to cart add?
 ```TSQL
 SELECT 
   CAST(AVG(1.0*cart_adds/views) AS decimal(10, 2)) AS avg_view_to_cart
@@ -229,7 +229,7 @@ FROM #product_summary;
 |-------------------|
 | 0.61              |
 
-### 5. What is the average conversion rate from cart add to purchase?
+#### 5. What is the average conversion rate from cart add to purchase?
 ```TSQL
 SELECT 
   CAST(AVG(1.0*purchases/cart_adds) AS decimal(10, 2)) AS avg_cart_to_purchase
