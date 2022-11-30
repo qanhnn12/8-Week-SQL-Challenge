@@ -165,3 +165,6 @@ ORDER BY purchase_count DESC;
 | 7          | Lobster   | Shellfish        | 754             |
 | 9          | Oyster    | Shellfish        | 726             |
 | 8          | Crab      | Shellfish        | 719             |
+
+---
+My solution for **[B. Product Funnel Analysis](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%236%20-%20Clique%20Bait/Solution/B.%20Product%20Funnel%20Analysis.md)**.
