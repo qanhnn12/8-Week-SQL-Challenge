@@ -123,7 +123,7 @@ Using those numbers, we can calculate:
 * Overall, impression rate = 100 * 417 / (417+56) = 88.16 %
 * Overall, click rate = 100 * 127 / 417 = 30.46 %
 
-#### 2. Calculate the average clicks, average views, average cart adds, and average purchases per user of each group
+#### 2. Calculate the average clicks, average views, average cart adds, and average purchases of each group
 
 ```TSQL
 --For users received impressions
@@ -194,7 +194,7 @@ Insights:
 * During campaign periods, the average view decreases while the average of products added to cart and average of purchased products increase. Customers might not wander around many pages to select products, but click to the ad or directly go to the relevant page having that products. 
 * Customers received impressions were more likely to add products to cart then to purchase them: (9-5.8) > (1.5-1.2).
 
-#### 4. Compare the average purchases per user received impressions and received impressions but not clicked
+#### 4. Compare the average purchases of users received impressions and received impressions but not clicked to ads
 Combine results in (2), we have the table below:
 
 |                                      | avg_purchase  |
