@@ -39,3 +39,31 @@ JOIN page_hierarchy ph
 LEFT JOIN campaign_identifier c 
   ON e.event_time BETWEEN c.start_date AND c.end_date
 GROUP BY u.user_id, e.visit_id, c.campaign_name;
+
+
+/*
+Identifying users who have received impressions during each campaign period 
+and comparing each metric with other users who did not have an impression event
+*/
+
+WITH metrics AS (
+SELECT 
+	SUM(CASE WHEN impression = 0 THEN page_views END) AS normal_views,
+	SUM(CASE WHEN impression > 0 THEN page_views END) AS campaign_views,
+	SUM(CASE WHEN impression = 0 THEN cart_adds END) AS normal_cart_adds,
+	SUM(CASE WHEN impression > 0 THEN cart_adds END) AS campaign_cart_adds,
+	SUM(CASE WHEN impression = 0 THEN click END) AS no_ad_click,
+	SUM(CASE WHEN impression > 0 THEN click END) AS campaign_ad_click,
+	SUM(CASE WHEN impression = 0 THEN purchase END) AS normal_purchase,
+	SUM(CASE WHEN impression > 0 THEN purchase END) AS campaign_purchase
+FROM #campaign_summary
+)
+
+SELECT 
+	CAST(100.0 * (campaign_views - normal_views)
+		/ normal_views AS decimal(10,2)) AS views_increase_pct,
+	CAST(100.0 * (campaign_cart_adds - normal_cart_adds)
+		/ normal_cart_adds AS decimal(10,2)) AS cart_adds_increase_pct,
+	CAST(100.0 * (campaign_purchase - normal_purchase)
+		/ normal_purchase AS decimal(10,2)) AS purchase_increase_pct
+FROM metrics;
