@@ -10,8 +10,8 @@ Thanks @DataWithDanny for interesting SQL case studies! :wave:🏻
 * [Case Study #2 - Pizza Runner](https://github.com/qanhnn12/8-Week-SQL-Challenge#-case-study-2---pizza-runner)
 * [Case Study #3 - Foodie-Fi](https://github.com/qanhnn12/8-Week-SQL-Challenge#-case-study-3---foodie-fi)
 * [Case Study #4 - Data Bank](https://github.com/qanhnn12/8-Week-SQL-Challenge#bar_chart-case-study-4---data-bank)
-* [Case Study #5 - Data Mart](https://github.com/qanhnn12/8-Week-SQL-Challenge#bar_chart-case-study-5---data-mart)
-* [Case Study #6 - Clique Bait](https://github.com/qanhnn12/8-Week-SQL-Challenge#briefcase-case-study-6---clique-bait)
+* [Case Study #5 - Data Mart](https://github.com/qanhnn12/8-Week-SQL-Challenge#-case-study-5---data-mart)
+* [Case Study #6 - Clique Bait](https://github.com/qanhnn12/8-Week-SQL-Challenge#-case-study-6---clique-bait)
 * [Case Study #7 - Balanced Tree Clothing Co.](https://github.com/qanhnn12/8-Week-SQL-Challenge#tshirt-case-study-7---balanced-tree-clothing-co)
 * [Case Study #8 - Fresh Segments](https://github.com/qanhnn12/8-Week-SQL-Challenge#-case-study-8---fresh-segments)
 
