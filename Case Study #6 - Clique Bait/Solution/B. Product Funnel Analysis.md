@@ -176,8 +176,6 @@ ORDER BY views DESC;
 |------------|--------------|------------------|-------|-----------|-----------|------------|
 | 9          | Oyster       | Shellfish        | 1568  | 943       | 217       | 726        |
 
-* Oyster has the most views.
-
 ```TSQL
 SELECT TOP 1 *
 FROM #product_summary
@@ -186,8 +184,6 @@ ORDER BY cart_adds DESC;
 | product_id | product_name | product_category | views | cart_adds | abandoned | purchases  |
 |------------|--------------|------------------|-------|-----------|-----------|------------|
 | 7          | Lobster      | Shellfish        | 1547  | 968       | 214       | 754        |
-
-* Lobster had the most cart adds.
 
 ```TSQL
 SELECT TOP 1 *
@@ -198,7 +194,6 @@ ORDER BY purchases DESC;
 |------------|--------------|------------------|-------|-----------|-----------|------------|
 | 7          | Lobster      | Shellfish        | 1547  | 968       | 214       | 754        |
 
-* Lobster had the most purchases.
 
 ### 2. Which product was most likely to be abandoned?
 ```TSQL
@@ -209,8 +204,6 @@ ORDER BY abandoned DESC;
 | product_id | product_name   | product_category | views | cart_adds | abandoned | purchases  |
 |------------|----------------|------------------|-------|-----------|-----------|------------|
 | 4          | Russian Caviar | Luxury           | 1563  | 946       | 249       | 697        |
-
-* Russian Caviar was most likely to be abandoned.
 
 ### 3. Which product had the highest view to purchase percentage?
 ```TSQL
@@ -225,7 +218,6 @@ ORDER BY purchase_per_view_pct DESC;
 |--------------|------------------|------------------------|
 | Lobster      | Shellfish        | 48.74                  |
 
-* Lobster had the highest view to purchase percentage.
 
 ### 4. What is the average conversion rate from view to cart add?
 ```TSQL
