@@ -209,4 +209,4 @@ Combine results in (2), we have the table below:
 
 Insights:
 * The average purchases per user received impressions but not clicked to ads were lower than received impressions in overall. 
-* Clicking to ads might not lead to higher purchase rate
+* Clicking to ads might not lead to higher purchase rate.
