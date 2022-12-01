@@ -19,11 +19,11 @@ Generate a table that has 1 single row for every unique visit_id record and has 
 * `INNER JOIN` from table `events` to `event_identifier`
 * `LEFT JOIN` from table `events` to `campaign_identifier` to display`campaign_name` in all rows regardless of `start_time` and `end_time`.
 * To generate earliest `visit_start_time` for each unique `visit_id`, use `MIN()` to find the 1st `visit_time`.
-* Use `SUM()` and `CASE` statement to calculate `page_views`, `cart_adds`, `purchase`, ad `impression` and ad `click` for each `visit_id`.
-* To get a list of products added to cart sorted by `sequence_number`:
-  * Firstly, use a `CASE` statement to only get cart add events.
-  * Then, use `STRING_AGG()` to separate products by comma and `ORDER BY()` the sequence using `sequence_number`.
-* Create a temporary table `campaign_summary` for further analysis.
+* Use `SUM()` and `CASE` to calculate `page_views`, `cart_adds`, `purchase`, ad `impression` and ad `click` for each `visit_id`.
+* To get a comma separated list of products added to cart sorted by `sequence_number`:
+  * Use a `CASE` to select `Add to cart` events.
+  * Use `STRING_AGG()` to separate products by comma and ` WITHIN GROUP` to order `sequence_number`.
+* Store the result in a temporary table `campaign_summary` for further analysis.
   
 ```TSQL
 SELECT
@@ -71,9 +71,9 @@ users who do not receive an impression? What if we compare them with users who h
 ### Solution
 Since the number of users *received impressions* is higher than those *not received impressions* and those *received impressions but not clicked to ads*, 
 the total views, total cart adds and total purchases of the prior group are definitely higher than the latter groups. 
-Therefore, in this case, I compare *the rate per user* among these groups (instead of the total). The purpose is to evaluate:
-* performance of ads through *impression rate* and *click rate*.
-* the increase percentage of `page_views`, `cart_adds`, and `purchase` per user.
+Therefore, in this case, I compare *the rate per user* among these groups (instead of the total). The purpose is to check:
+* performance of ads: *impression rate* and *click rate*.
+* whether the average `page_views`, `cart_adds`, and `purchase` per user increase after running ads.
 
 #### 1. Calculate the number of users in each group
 
@@ -120,8 +120,8 @@ Now we know:
 * The number of users didn't receive impressions during campaign periods is 56.
 
 Using those numbers, we can calculate:
-* Overall, impression rate = 100 * 417 / (417+56) = 88.16 %
-* Overall, click rate = 100 * 127 / 417 = 30.46 %
+* Overall, impression rate = 100 * 417 / (417+56) = 88.2 %
+* Overall, click rate = 100-(100 * 127 / 417) = 69.5 %
 
 #### 2. Calculate the average clicks, average views, average cart adds, and average purchases of each group
 
