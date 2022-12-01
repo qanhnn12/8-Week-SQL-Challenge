@@ -52,14 +52,14 @@ users who do not receive an impression? What if we compare them with users who h
 
 --1. Calculate the number of users in each group
 
---Number of users received impressions during campaign periods = 417
+--Number of users who received impressions during campaign periods = 417
 SELECT COUNT(DISTINCT user_id) AS received_impressions
 FROM #campaign_summary
 WHERE impression > 0
 AND campaign_name IS NOT NULL;
 
 
---Number of users received impressions but didn't click on the ad = 127
+--Number of users who received impressions but didn't click on ads = 127
 SELECT COUNT(DISTINCT user_id) AS received_impressions_not_clicked
 FROM #campaign_summary
 WHERE impression > 0
@@ -67,7 +67,7 @@ AND click = 0
 AND campaign_name IS NOT NULL;
 
 
---Number of users didn't receive impressions during campaign periods = 56
+--Number of users who didn't receive impressions during campaign periods = 56
 SELECT COUNT(DISTINCT user_id) AS received_impressions
 FROM #campaign_summary
 WHERE campaign_name IS NOT NULL
@@ -79,7 +79,7 @@ AND user_id NOT IN (
 
 --2. Calculate the average clicks, average views, average cart adds, and average purchases of each group
 
---For users received impressions
+--For users who received impressions
 DECLARE @received int 
 SET @received = 417
 
@@ -92,7 +92,7 @@ WHERE impression > 0
 AND campaign_name IS NOT NULL;
 
 
---For users received impressions but not clicked
+--For users who received impressions but didn't click on ads
 DECLARE @received_not_clicked int 
 SET @received_not_clicked = 127
 
@@ -106,7 +106,7 @@ AND click = 0
 AND campaign_name IS NOT NULL;
 
 
---For users not received impressions 
+--For users who didn't receive impressions 
 DECLARE @not_received int 
 SET @not_received = 56
 
@@ -129,7 +129,7 @@ AND user_id NOT IN (
 |-----------------------------|----------|---------------|---------------|
 | Received impressions        | 15.3     | 9             | 1.5           |
 | Not received impressions    | 19.4     | 5.8           | 1.2           |
-| % Increase by campaigns     |  No      | Yes           | Yes           |
+| Increase by campaigns       |  No      | Yes           | Yes           |
 */
 
 
@@ -139,5 +139,5 @@ AND user_id NOT IN (
 |--------------------------------------|---------------|
 | Received impressions                 | 1.5           |
 | Received impressions but not clicked | 0.8           |
-| *Increase by clicking to the ads*    | *Yes*         |
+| Increase by clicking to the ads      | Yes           |
 */
