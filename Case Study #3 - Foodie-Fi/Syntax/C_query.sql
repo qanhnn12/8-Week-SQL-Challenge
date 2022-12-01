@@ -12,20 +12,6 @@ by each customer in the subscriptions table with the following requirements:
 */
 
 
---Copy the column definition from [subscriptions], [plans] and paste them to the new table [payments]
-SELECT 
-  s.customer_id, 
-  s.plan_id, 
-  p.plan_name, 
-  s.start_date AS payment_date, 
-  p.price AS amount, 
-  ROW_NUMBER() OVER(PARTITION BY s.customer_id ORDER BY s.start_date) AS payment_order
-INTO payments
-FROM subscriptions s
-JOIN plans p ON s.plan_id = p.plan_id
-WHERE 1=0;
-
-
 --Use a recursive CTE to increment rows for all monthly paid plans in 2020 until customers changing their plans, except 'pro annual'
 WITH dateRecursion AS (
   SELECT 
@@ -65,9 +51,7 @@ WITH dateRecursion AS (
 )
 
 
---Insert data into table [payments]
-INSERT INTO payments 
-  (customer_id, plan_id, plan_name, payment_date, amount, payment_order)
+--Create a new table [payments]
 SELECT 
   customer_id,
   plan_id,
@@ -75,6 +59,7 @@ SELECT
   payment_date,
   amount,
   ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY payment_date) AS payment_order
+INTO payments
 FROM dateRecursion
 --exclude churns
 WHERE amount IS NOT NULL
