@@ -75,9 +75,7 @@ WITH dateRecursion AS (
   WHERE DATEADD(MONTH, 1, payment_date) <= last_date
     AND plan_name != 'pro annual'
 )
-
-
---Create the table [payments]
+--Create a new table [payments]
 SELECT 
   customer_id,
   plan_id,
