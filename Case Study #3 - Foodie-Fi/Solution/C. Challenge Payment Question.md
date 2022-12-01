@@ -31,30 +31,13 @@ Example outputs for this table might look like the following:
 | 18          | 2       | pro monthly   | 2020-10-13   | 19.90  | 4              |
 
 ---
-To create the table above:
-  * Create a new table named ```payments``` by copying the column definition from two tables ```subscriptions``` and ```plans```. 
-  This is just my personal approach, you can create ```payments``` manually with ```CREATE TABLE``` and specify the data type in each column.
   * Use a recursive CTE to increment rows for all monthly paid plans in 2020 until customers changing their plans, except 'pro annual'.
     * use ```CASE``` to create a new column ```last_date```: last day of the current plan
     * if a customer kept using the current plan, last_date = '2020-12-31'
     * if a customer changed the plan, last_date = (month difference between start_date and changing date) + start_date
-  * Insert data into ```payments``` by selecting the required columns
+  * Create a new table ```payments``` by selecting the required columns
 
 ```TSQL
---Copy the column definition from [subscriptions], [plans] and paste them to the new table [payments]
-SELECT 
-  s.customer_id, 
-  s.plan_id, 
-  p.plan_name, 
-  s.start_date AS payment_date, 
-  p.price AS amount, 
-  ROW_NUMBER() OVER(PARTITION BY s.customer_id ORDER BY s.start_date) AS payment_order
-INTO payments
-FROM subscriptions s
-JOIN plans p ON s.plan_id = p.plan_id
-WHERE 1=0;
-
-
 --Use a recursive CTE to increment rows for all monthly paid plans until customers changing the plan, except 'pro annual'
 WITH dateRecursion AS (
   SELECT 
@@ -94,9 +77,7 @@ WITH dateRecursion AS (
 )
 
 
---Insert data into table [payments]
-INSERT INTO payments 
-  (customer_id, plan_id, plan_name, payment_date, amount, payment_order)
+--Create the table [payments]
 SELECT 
   customer_id,
   plan_id,
@@ -104,6 +85,7 @@ SELECT
   payment_date,
   amount,
   ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY payment_date) AS payment_order
+INTO payments
 FROM dateRecursion
 --exclude churns
 WHERE amount IS NOT NULL
