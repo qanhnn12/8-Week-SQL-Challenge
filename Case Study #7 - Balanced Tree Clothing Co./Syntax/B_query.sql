@@ -53,9 +53,9 @@ FROM (
 
 SELECT 
   CAST(100.0*COUNT(DISTINCT CASE WHEN member = 1 THEN txn_id END) 
-		/ COUNT(DISTINCT txn_id) AS FLOAT) AS members,
+		/ COUNT(DISTINCT txn_id) AS FLOAT) AS members_pct,
   CAST(100.0*COUNT(DISTINCT CASE WHEN member = 0 THEN txn_id END)
-		/ COUNT(DISTINCT txn_id) AS FLOAT) AS non_members
+		/ COUNT(DISTINCT txn_id) AS FLOAT) AS non_members_pct
 FROM sales;
 
 
