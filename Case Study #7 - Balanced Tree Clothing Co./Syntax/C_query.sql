@@ -206,6 +206,5 @@ SELECT
   products_id,
   products_name
 FROM combination_count
-WHERE common_combinations = (
-	SELECT MAX(common_combinations) 
-	FROM combination_count);
+WHERE common_combinations = (SELECT MAX(common_combinations) 
+			     FROM combination_count);
