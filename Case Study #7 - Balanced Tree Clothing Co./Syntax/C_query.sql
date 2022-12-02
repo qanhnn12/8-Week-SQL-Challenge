@@ -144,3 +144,24 @@ SELECT
   category_name,
   CAST(100.0 * revenue / SUM(revenue) OVER () AS decimal (10, 2)) AS category_pct
 FROM category_revenue;
+
+
+--9. What is the total transaction “penetration” for each product? 
+--(hint: penetration = number of transactions where at least 1 quantity of a product was purchased divided by total number of transactions)
+
+WITH product_transations AS (
+  SELECT 
+    DISTINCT s.prod_id, pd.product_name,
+    COUNT(DISTINCT s.txn_id) AS product_txn,
+    (SELECT COUNT(DISTINCT txn_id) FROM sales) AS total_txn
+  FROM sales s
+  JOIN product_details pd 
+    ON s.prod_id = pd.product_id
+  GROUP BY prod_id, pd.product_name
+)
+
+SELECT 
+  *,
+  CAST(100.0 * product_txn / total_txn AS decimal(10,2)) AS penetration_pct
+FROM product_transations;
+
