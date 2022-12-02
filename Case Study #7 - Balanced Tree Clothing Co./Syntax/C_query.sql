@@ -165,3 +165,47 @@ SELECT
   CAST(100.0 * product_txn / total_txn AS decimal(10,2)) AS penetration_pct
 FROM product_transations;
 
+
+--10. What is the most common combination of at least 1 quantity of any 3 products in a 1 single transaction?
+
+--Count the number of products in each transaction
+WITH products_per_transaction AS (
+  SELECT 
+    s.txn_id,
+    pd.product_id,
+    pd.product_name,
+    s.qty,
+    COUNT(pd.product_id) OVER (PARTITION BY txn_id) AS cnt
+  FROM sales s
+  JOIN product_details pd 
+  ON s.prod_id = pd.product_id
+),
+
+--Filter transactions that have the 3 products and group them to a cell
+combinations AS (
+  SELECT 
+    STRING_AGG(product_id, ', ') AS products_id,
+    STRING_AGG(product_name, ', ') AS products_name
+  FROM products_per_transaction
+  WHERE cnt = 3
+  GROUP BY txn_id
+),
+
+--Count the number of times each combination appears
+combination_count AS (
+  SELECT 
+    products_id,
+    products_name,
+    COUNT (*) AS common_combinations
+  FROM combinations
+  GROUP BY products_id, products_name
+)
+
+--Filter the most common combinations
+SELECT 
+  products_id,
+  products_name
+FROM combination_count
+WHERE common_combinations = (
+	SELECT MAX(common_combinations) 
+	FROM combination_count);
