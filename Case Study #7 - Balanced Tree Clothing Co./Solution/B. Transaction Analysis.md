@@ -100,4 +100,4 @@ GROUP BY member;
 | 1      | 516.27       |
 
 ---
-My solution for **[C. Product Analysis]()**.
+My solution for **[C. Product Analysis](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co./Solution/C.%20Product%20Analysis.md)**.
