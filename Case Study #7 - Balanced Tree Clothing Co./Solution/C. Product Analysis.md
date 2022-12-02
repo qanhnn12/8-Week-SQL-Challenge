@@ -286,4 +286,4 @@ WHERE common_combinations = (SELECT MAX(common_combinations)
 | c4a632, 2a2353, 2feb6b | Navy Oversized Jeans - Womens, Blue Polo Shirt - Mens, Pink Fluro Polkadot Socks - Mens    |
 
 ---
-My solution for **[D. Bonus Question]()**.
+My solution for **[D. Bonus Question](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co./Solution/D.%20Bonus%20Question.md)**.
