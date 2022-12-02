@@ -25,7 +25,7 @@ FROM (
 WITH transaction_revenue AS (
   SELECT 
     txn_id,
-    SUM(qty*price*(100-discount)/100) AS revenue
+    SUM(qty*price) AS revenue
   FROM sales
   GROUP BY txn_id)
 
@@ -65,7 +65,7 @@ WITH member_revenue AS (
   SELECT 
     member,
     txn_id,
-    SUM(qty*price*(100-discount)/100) AS revenue
+    SUM(qty*price) AS revenue
   FROM sales
   GROUP BY member, txn_id
 ) 
