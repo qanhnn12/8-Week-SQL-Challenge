@@ -87,62 +87,60 @@ WHERE rnk = 1;
 --6. What is the percentage split of revenue by product for each segment?
 
 WITH segment_product_revenue AS (
-	SELECT 
-		pd.segment_name,
-		pd.product_name,
-		SUM(s.qty * s.price) AS product_revenue
-	FROM sales s
-	JOIN product_details pd 
-	ON s.prod_id = pd.product_id
-	GROUP BY pd.segment_name, pd.product_name
+  SELECT 
+    pd.segment_name,
+    pd.product_name,
+    SUM(s.qty * s.price) AS product_revenue
+  FROM sales s
+  JOIN product_details pd 
+    ON s.prod_id = pd.product_id
+  GROUP BY pd.segment_name, pd.product_name
 )
 
 SELECT 
-	segment_name,
-	product_name,
-	CAST(100.0 * product_revenue 
-		/ SUM(product_revenue) OVER (PARTITION BY segment_name) 
-		AS decimal (10, 2)) AS segment_product_pct
+  segment_name,
+  product_name,
+  CAST(100.0 * product_revenue 
+	/ SUM(product_revenue) OVER (PARTITION BY segment_name) 
+    AS decimal (10, 2)) AS segment_product_pct
 FROM segment_product_revenue;
 
 
 --7. What is the percentage split of revenue by segment for each category?
 
 WITH segment_category_revenue AS (
-	SELECT 
-		pd.segment_name,
-		pd.category_name,
-		SUM(s.qty * s.price) AS category_revenue
-	FROM sales s
-	JOIN product_details pd 
-	ON s.prod_id = pd.product_id
-	GROUP BY pd.segment_name, pd.category_name
+  SELECT 
+    pd.segment_name,
+    pd.category_name,
+    SUM(s.qty * s.price) AS category_revenue
+  FROM sales s
+  JOIN product_details pd 
+    ON s.prod_id = pd.product_id
+  GROUP BY pd.segment_name, pd.category_name
 )
 
 SELECT 
-	segment_name,
-	category_name,
-	CAST(100.0 * category_revenue 
-		/ SUM(category_revenue) OVER (PARTITION BY category_name) 
-		AS decimal (10, 2)) AS segment_category_pct
+  segment_name,
+  category_name,
+  CAST(100.0 * category_revenue 
+	/ SUM(category_revenue) OVER (PARTITION BY category_name) 
+    AS decimal (10, 2)) AS segment_category_pct
 FROM segment_category_revenue;
 
 
 --8. What is the percentage split of total revenue by category?
 
 WITH category_revenue AS (
-	SELECT 
-		pd.category_name,
-		SUM(s.qty * s.price) AS revenue
-	FROM sales s
-	JOIN product_details pd 
-	ON s.prod_id = pd.product_id
-	GROUP BY pd.category_name
+  SELECT 
+    pd.category_name,
+    SUM(s.qty * s.price) AS revenue
+  FROM sales s
+  JOIN product_details pd 
+    ON s.prod_id = pd.product_id
+  GROUP BY pd.category_name
 )
 
 SELECT 
-	category_name,
-	CAST(100.0 * revenue 
-		/ SUM(revenue) OVER () 
-		AS decimal (10, 2)) AS category_pct
+  category_name,
+  CAST(100.0 * revenue / SUM(revenue) OVER () AS decimal (10, 2)) AS category_pct
 FROM category_revenue;
