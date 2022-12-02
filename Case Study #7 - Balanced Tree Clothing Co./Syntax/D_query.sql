@@ -15,9 +15,9 @@ SELECT
   ph2.level_text AS segment_name,
   ph1.level_text AS style_name
 FROM product_hierarchy ph1
---self join style level with segment level
+--self join style level (ph1) with segment level (ph2)
 JOIN product_hierarchy ph2 ON ph1.parent_id = ph2.id
---self join segment level with category level 
+--self join segment level (ph2) with category level (ph3)
 JOIN product_hierarchy ph3 ON ph3.id = ph2.parent_id
---inner join style level with table [product_prices] 
+--inner join style level (ph1) with table [product_prices] 
 JOIN product_prices pp ON ph1.id = pp.id;
