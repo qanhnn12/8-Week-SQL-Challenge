@@ -16,5 +16,5 @@ FROM sales;
 
 --3. What was the total discount amount for all products?
 
-SELECT CAST(SUM(qty * price * discount/100.0) AS FLOAT) AS discount_amount
+SELECT CAST(SUM(qty * price * discount/100.0) AS FLOAT) AS total_discount
 FROM sales;
