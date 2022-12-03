@@ -35,7 +35,8 @@ ORDER BY month_year;
 --interest_id = 21246 have NULL _month, _year, and month_year
 SELECT *
 FROM interest_metrics
-ORDER BY _month;
+WHERE month_year IS NULL
+ORDER BY interest_id DESC;
 
 --Delete rows that are null in column interest_id (1193 rows)
 DELETE FROM interest_metrics
@@ -66,11 +67,11 @@ FROM interest_map;
 --include all columns from fresh_segments.interest_metrics and all columns from fresh_segments.interest_map except from the id column.
 
 SELECT 
-	metrics.*,
-	map.interest_name,
-	map.interest_summary,
-	map.created_at,
-	map.last_modified
+  metrics.*,
+  map.interest_name,
+  map.interest_summary,
+  map.created_at,
+  map.last_modified
 FROM interest_metrics metrics
 JOIN interest_map map
   ON metrics.interest_id = map.id
@@ -80,10 +81,16 @@ WHERE metrics.interest_id = 21246;
 --7. Are there any records in your joined table where the month_year value is before the created_at value from the fresh_segments.interest_map table? 
 --Do you think these values are valid and why?
 
+--Check if metrics.month_year < map.created_at
 SELECT COUNT(*) AS cnt
 FROM interest_metrics metrics
 JOIN interest_map map
   ON metrics.interest_id = map.id
 WHERE metrics.month_year < CAST(map.created_at AS DATE);
 
-
+--Check if metrics.month_year and map.created_at are in the same month
+SELECT COUNT(*) AS cnt
+FROM interest_metrics metrics
+JOIN interest_map map
+  ON map.id = metrics.interest_id
+WHERE metrics.month_year < CAST(DATEADD(DAY, -DAY(map.created_at)+1, map.created_at) AS DATE);
