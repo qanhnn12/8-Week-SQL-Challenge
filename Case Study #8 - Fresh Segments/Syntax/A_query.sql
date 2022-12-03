@@ -10,7 +10,7 @@ ALTER COLUMN month_year VARCHAR(10);
 
 --Update values in month_year column
 UPDATE fresh_segments.dbo.interest_metrics
-SET month_year = '01-' + month_year;
+SET month_year =  CONVERT(DATE, '01-' + month_year, 105)
 
 --Convert month_year to DATE
 ALTER TABLE fresh_segments.dbo.interest_metrics
