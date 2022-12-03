@@ -19,11 +19,12 @@ ALTER COLUMN month_year DATE;
 SELECT * FROM fresh_segments.dbo.interest_metrics;
 
 
---2. What is count of records in the fresh_segments.interest_metrics for each month_year value sorted in chronological order (earliest to latest) with the null values appearing first?
+--2. What is count of records in the fresh_segments.interest_metrics for each month_year value 
+--sorted in chronological order (earliest to latest) with the null values appearing first?
 
 SELECT 
-	month_year,
-	COUNT(*) AS cnt
+  month_year,
+  COUNT(*) AS cnt
 FROM interest_metrics
 GROUP BY month_year
 ORDER BY month_year;
