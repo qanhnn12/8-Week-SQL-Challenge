@@ -27,12 +27,16 @@ and generate a basic financial report to share with the wider business.
 
 ## ❓ Case Study Questions
 ### A. High Level Sales Analysis
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co./Solution/A.%20High%20Level%20Sales%20Analysis.md).
+
 1. What was the total quantity sold for all products?
 2. What is the total generated revenue for all products before discounts?
 3. What was the total discount amount for all products?
 
 ---
 ### B. Transaction Analysis
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co./Solution/B.%20Transaction%20Analysis.md).
+
 1. How many unique transactions were there?
 2. What is the average unique products purchased in each transaction?
 3. What are the 25th, 50th and 75th percentile values for the revenue per transaction?
@@ -42,6 +46,8 @@ and generate a basic financial report to share with the wider business.
 
 ---
 ### C. Product Analysis
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co./Solution/C.%20Product%20Analysis.md).
+
 1. What are the top 3 products by total revenue before discount?
 2. What is the total quantity, revenue and discount for each segment?
 3. What is the top selling product for each segment?
@@ -55,9 +61,11 @@ and generate a basic financial report to share with the wider business.
 
 ---
 ### D. Bonus Challenge
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co./Solution/D.%20Bonus%20Question.md).
+
 Use a single SQL query to transform the `product_hierarchy` and `product_prices` datasets to the `product_details` table.
 
 ---
 ## 🚀 My Solution
 * View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co./Syntax)
-* View the result and explanation [HERE]()
+* View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co./Solution)
