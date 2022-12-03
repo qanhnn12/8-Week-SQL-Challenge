@@ -254,8 +254,8 @@ WITH products_per_transaction AS (
 --Filter transactions that have the 3 products and group them to a cell
 combinations AS (
   SELECT 
-    STRING_AGG(product_id, ', ') AS products_id,
-    STRING_AGG(product_name, ', ') AS products_name
+    STRING_AGG(product_id, ', ') WITHIN GROUP (ORDER BY product_id)  AS product_ids,
+    STRING_AGG(product_name, ', ') WITHIN GROUP (ORDER BY product_id) AS product_names
   FROM products_per_transaction
   WHERE cnt = 3
   GROUP BY txn_id
@@ -264,26 +264,28 @@ combinations AS (
 --Count the number of times each combination appears
 combination_count AS (
   SELECT 
-    products_id,
-    products_name,
+    product_ids,
+    product_names,
     COUNT (*) AS common_combinations
   FROM combinations
-  GROUP BY products_id, products_name
+  GROUP BY product_ids, product_names
 )
 
 --Filter the most common combinations
 SELECT 
-  products_id,
-  products_name
+    product_ids,
+    product_names
 FROM combination_count
 WHERE common_combinations = (SELECT MAX(common_combinations) 
 			     FROM combination_count);
 ```
-| products_id            | products_name                                                                              |
+| product_ids            | product_names                                                                              |
 |------------------------|--------------------------------------------------------------------------------------------|
-| c4a632, e83aa3, c8d436 | Navy Oversized Jeans - Womens, Black Straight Jeans - Womens, Teal Button Up Shirt - Mens  |
-| c4a632, e83aa3, 5d267b | Navy Oversized Jeans - Womens, Black Straight Jeans - Womens, White Tee Shirt - Mens       |
-| c4a632, 2a2353, 2feb6b | Navy Oversized Jeans - Womens, Blue Polo Shirt - Mens, Pink Fluro Polkadot Socks - Mens    |
+| 2a2353, 2feb6b, c4a632 | Blue Polo Shirt - Mens, Pink Fluro Polkadot Socks - Mens, Navy Oversized Jeans - Womens    |
+| c4a632, c8d436, e83aa3 | Navy Oversized Jeans - Womens, Teal Button Up Shirt - Mens, Black Straight Jeans - Womens  |
+| b9a74d, c4a632, d5e9a6 | White Striped Socks - Mens, Navy Oversized Jeans - Womens, Khaki Suit Jacket - Womens      |
+| 5d267b, c4a632, e83aa3 | White Tee Shirt - Mens, Navy Oversized Jeans - Womens, Black Straight Jeans - Womens       |
+| 5d267b, c4a632, e31d39 | White Tee Shirt - Mens, Navy Oversized Jeans - Womens, Cream Relaxed Jeans - Womens        |
 
 ---
 My solution for **[D. Bonus Question](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%237%20-%20Balanced%20Tree%20Clothing%20Co./Solution/D.%20Bonus%20Question.md)**.
