@@ -51,8 +51,8 @@ SELECT
   COUNT(DISTINCT metrics.interest_id) AS metrics_id_count,
   SUM(CASE WHEN map.id IS NULL THEN 1 END) AS not_in_metric,
   SUM(CASE WHEN metrics.interest_id is NULL THEN 1 END) AS not_in_map
-FROM interest_map map
-FULL JOIN interest_metrics metrics
+FROM interest_metrics metrics
+FULL JOIN interest_map map
   ON metrics.interest_id = map.id;
   
 
