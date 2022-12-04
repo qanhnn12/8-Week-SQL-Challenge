@@ -67,7 +67,7 @@ FROM interest_count
 WHERE total_months < 6;
 
 
---4. 4. Does this decision make sense to remove these data points from a business perspective? 
+--4. Does this decision make sense to remove these data points from a business perspective? 
 --Use an example where there are all 14 months present to a removed interest example for your arguments 
 -- think about what it means to have less months present from a segment perspective.
 
@@ -135,3 +135,12 @@ WHERE interest_id IN (
   GROUP BY interest_id
   HAVING COUNT(DISTINCT month_year) < 6 --total_months in Q3
   ); 
+
+--Find the number of unique interests after removing step above
+SELECT 
+  month_year,
+  COUNT(DISTINCT interest_id) AS unique_interests
+FROM interest_metrics
+WHERE month_year IS NOT NULL
+GROUP BY month_year
+ORDER BY month_year;
