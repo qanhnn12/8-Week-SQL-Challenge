@@ -38,10 +38,21 @@ WHERE cr.bottom_rnk <= 10;
 --2. Which 5 interests had the lowest average ranking value?
 
 SELECT 
-	TOP 5 metrics.interest_id,
-	map.interest_name
+  TOP 5 metrics.interest_id,
+  map.interest_name
 FROM #interest_metrics_edited metrics
 JOIN interest_map map
 ON metrics.interest_id = map.id
 ORDER BY metrics.ranking DESC;
 
+
+--3. Which 5 interests had the largest standard deviation in their percentile_ranking value?
+
+SELECT 
+  DISTINCT TOP 5 metrics.interest_id,
+  map.interest_name,
+  STDEV(metrics.percentile_ranking) OVER(PARTITION BY metrics.interest_id) AS std_percentile_ranking
+FROM #interest_metrics_edited metrics
+JOIN interest_map map
+ON metrics.interest_id = map.id
+ORDER BY std_percentile_ranking DESC;
