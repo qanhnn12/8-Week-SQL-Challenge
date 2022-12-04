@@ -77,11 +77,9 @@ moving_avg_compositions AS (
 	  OVER(ORDER BY mac.month_year 
 	       ROWS BETWEEN 2 PRECEDING AND CURRENT ROW), 2) AS '3_month_moving_avg',
     LAG(im.interest_name) OVER (ORDER BY mac.month_year) + ': ' +
-	CAST(LAG(mac.max_avg_comp) OVER (ORDER BY mac.month_year) 
-	     AS VARCHAR(4)) AS '1_month_ago',
+	CAST(LAG(mac.max_avg_comp) OVER (ORDER BY mac.month_year) AS VARCHAR(4)) AS '1_month_ago',
     LAG(im.interest_name, 2) OVER (ORDER BY mac.month_year) + ': ' +
-	CAST(LAG(mac.max_avg_comp, 2) OVER (ORDER BY mac.month_year) 
-	     AS VARCHAR(4)) AS '2_month_ago'
+	CAST(LAG(mac.max_avg_comp, 2) OVER (ORDER BY mac.month_year) AS VARCHAR(4)) AS '2_month_ago'
   FROM max_avg_compositions mac 
   JOIN interest_map im 
     ON mac.interest_id = im.id
