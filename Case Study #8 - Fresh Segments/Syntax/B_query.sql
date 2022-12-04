@@ -71,10 +71,62 @@ WHERE total_months < 6;
 --Use an example where there are all 14 months present to a removed interest example for your arguments 
 -- think about what it means to have less months present from a segment perspective.
 
+--When total_months = 14
+SELECT 
+  month_year,
+  COUNT(interest_id) interest_count,
+  MIN(ranking) AS highest_rank,
+  MAX(composition) AS composition_max,
+  MAX(index_value) AS index_max
+FROM interest_metrics metrics
+WHERE interest_id IN (
+  SELECT interest_id
+  FROM interest_metrics
+  WHERE interest_id IS NOT NULL
+  GROUP BY interest_id
+  HAVING COUNT(DISTINCT month_year) = 14)
+GROUP BY month_year
+ORDER BY month_year, highest_rank;
+
+--When total_months = 6
+SELECT 
+  month_year,
+  COUNT(interest_id) interest_count,
+  MIN(ranking) AS highest_rank,
+  MAX(composition) AS composition_max,
+  MAX(index_value) AS index_max
+FROM interest_metrics metrics
+WHERE interest_id IN (
+  SELECT interest_id
+  FROM interest_metrics
+  WHERE interest_id IS NOT NULL
+  GROUP BY interest_id
+  HAVING COUNT(DISTINCT month_year) = 6)
+GROUP BY month_year
+ORDER BY month_year, highest_rank;
+
+
+--When total_months = 1
+SELECT 
+  month_year,
+  COUNT(interest_id) interest_count,
+  MIN(ranking) AS highest_rank,
+  MAX(composition) AS composition_max,
+  MAX(index_value) AS index_max
+FROM interest_metrics metrics
+WHERE interest_id IN (
+  SELECT interest_id
+  FROM interest_metrics
+  WHERE interest_id IS NOT NULL
+  GROUP BY interest_id
+  HAVING COUNT(DISTINCT month_year) = 1)
+GROUP BY month_year
+ORDER BY month_year, highest_rank;
+
 
 --5. After removing these interests - how many unique interests are there for each month?
 
---Delete all interest_id that have total_months lower than 6
+--Remove all interest_id that have total_months lower than 6
 DELETE FROM interest_metrics
 WHERE interest_id IN (
   SELECT interest_id
