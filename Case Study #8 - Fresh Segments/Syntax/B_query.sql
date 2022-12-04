@@ -74,7 +74,7 @@ WHERE total_months < 6;
 --When total_months = 14
 SELECT 
   month_year,
-  COUNT(interest_id) interest_count,
+  COUNT(DISTINCT interest_id) interest_count,
   MIN(ranking) AS highest_rank,
   MAX(composition) AS composition_max,
   MAX(index_value) AS index_max
@@ -91,7 +91,7 @@ ORDER BY month_year, highest_rank;
 --When total_months = 6
 SELECT 
   month_year,
-  COUNT(interest_id) interest_count,
+  COUNT(DISTINCT interest_id) interest_count,
   MIN(ranking) AS highest_rank,
   MAX(composition) AS composition_max,
   MAX(index_value) AS index_max
@@ -109,7 +109,7 @@ ORDER BY month_year, highest_rank;
 --When total_months = 1
 SELECT 
   month_year,
-  COUNT(interest_id) interest_count,
+  COUNT(DISTINCT interest_id) interest_count,
   MIN(ranking) AS highest_rank,
   MAX(composition) AS composition_max,
   MAX(index_value) AS index_max
