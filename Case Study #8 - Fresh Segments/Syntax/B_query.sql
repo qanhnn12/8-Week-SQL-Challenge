@@ -126,21 +126,22 @@ ORDER BY month_year, highest_rank;
 
 --5. After removing these interests - how many unique interests are there for each month?
 
---Remove all interest_id that have total_months lower than 6
-DELETE FROM interest_metrics
-WHERE interest_id IN (
+--Create a temporary table [interest_metrics_edited] that removes all interest_id that have total_months lower than 6
+SELECT *
+INTO #interest_metrics_edited
+FROM interest_metrics
+WHERE interest_id NOT IN (
   SELECT interest_id
   FROM interest_metrics
   WHERE interest_id IS NOT NULL
   GROUP BY interest_id
-  HAVING COUNT(DISTINCT month_year) < 6 --total_months in Q3
-  ); 
+  HAVING COUNT(DISTINCT month_year) < 6)
 
---Find the number of unique interests after removing step above
+--Find the number of unique interests for each month after removing step above
 SELECT 
   month_year,
   COUNT(DISTINCT interest_id) AS unique_interests
-FROM interest_metrics
+FROM #interest_metrics_edited
 WHERE month_year IS NOT NULL
 GROUP BY month_year
 ORDER BY month_year;
