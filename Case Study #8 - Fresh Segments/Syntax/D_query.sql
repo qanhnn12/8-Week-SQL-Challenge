@@ -5,77 +5,51 @@
 --1. What is the top 10 interests by the average composition for each month?
 
 SELECT 
-  temp.*, map.interest_name
-FROM (
-  SELECT
-    interest_id, month_year,
-    AVG(composition) AS avg_composition,
-    DENSE_RANK() OVER(PARTITION BY month_year ORDER BY AVG(composition) DESC) AS rnk_avg_composition
-  FROM interest_metrics
-  WHERE month_year IS NOT NULL
-  GROUP BY interest_id, month_year
-  ) temp
-JOIN interest_map map 
-  ON temp.interest_id = map.id
-WHERE temp.rnk_avg_composition <= 10;
+	TOP 10 metrics.interest_id,
+	map.interest_name,
+	ROUND(metrics.composition / metrics.index_value, 2) AS avg_composition
+FROM interest_metrics metrics
+JOIN interest_map map ON metrics.interest_id = map.id
+ORDER BY avg_composition DESC;
 
 
 --2. For all of these top 10 interests - which interest appears the most often?
 
---Query in Q1
-WITH top_interest_composition AS (
-  SELECT 
-    temp.*, map.interest_name
-  FROM (
-    SELECT
-      interest_id, month_year,
-      AVG(composition) AS avg_composition,
-      DENSE_RANK() OVER(PARTITION BY month_year ORDER BY AVG(composition) DESC) AS rnk_avg_composition
-    FROM interest_metrics
-    WHERE month_year IS NOT NULL
-    GROUP BY interest_id, month_year
-  ) temp
-  JOIN interest_map map ON temp.interest_id = map.id
-  WHERE temp.rnk_avg_composition <= 10
-),
-
---Count the number of times each interest_id appears
-interest_frequency AS (
-  SELECT
-    interest_id,
-    COUNT(interest_id) AS freq
-  FROM top_interest_composition
-  GROUP BY interest_id
+WITH top_10_interests AS (
+	SELECT 
+	TOP 10 metrics.interest_id,
+	map.interest_name,
+	ROUND(metrics.composition / metrics.index_value, 2) AS avg_composition
+FROM interest_metrics metrics
+JOIN interest_map map ON metrics.interest_id = map.id
+ORDER BY avg_composition DESC
 )
-
-SELECT 
-  interest_id,
-  freq AS most_freq
-FROM interest_frequency
-WHERE freq IN (SELECT MAX(freq) FROM interest_frequency);
+SELECT
+	TOP 1 interest_id,
+	interest_name,
+	COUNT(interest_id) AS freq
+FROM top_10_interests
+GROUP BY interest_id, interest_name
+ORDER BY freq;
 
 
 --3. What is the average of the average composition for the top 10 interests for each month?
 
---Query in Q1
-WITH top_interest_composition AS (
-  SELECT 
-    temp.*, map.interest_name
-  FROM (
-    SELECT
-      interest_id, month_year,
-      AVG(composition) AS avg_composition,
-      DENSE_RANK() OVER(PARTITION BY month_year ORDER BY AVG(composition) DESC) AS rnk_avg_composition
-    FROM interest_metrics
-    WHERE month_year IS NOT NULL
-    GROUP BY interest_id, month_year
-  ) temp
-  JOIN interest_map map ON temp.interest_id = map.id
-  WHERE temp.rnk_avg_composition <= 10
+WITH top_10_interests AS (
+	SELECT 
+	TOP 10 metrics.interest_id,
+	map.interest_name,
+	metrics.composition / metrics.index_value AS avg_composition
+FROM interest_metrics metrics
+JOIN interest_map map ON metrics.interest_id = map.id
+ORDER BY avg_composition DESC
 )
 
-SELECT 
-  DISTINCT month_year,
-  ROUND(AVG(avg_composition) OVER (PARTITION BY month_year),2) AS avg_of_avg_composition
-FROM top_interest_composition
-ORDER BY month_year;
+SELECT ROUND(AVG(avg_composition), 2) AS avg_of_avg_composition
+FROM top_10_interests
+
+
+--4. What is the 3 month rolling average of the max average composition value from September 2018 to August 2019 
+--and include the previous top ranking interests in the same output shown below.
+
+
