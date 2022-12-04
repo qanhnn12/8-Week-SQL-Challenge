@@ -62,36 +62,35 @@ ORDER BY std_percentile_ranking DESC;
 --4. For the 5 interests found in the previous question - what were minimum and maximum percentile_ranking values for each interest 
 --and its corresponding year_month value? Can you describe what is happening for these 5 interests?
 
+--Based on the query for the previous question
 WITH largest_std_interests AS (
-  SELECT 
-    DISTINCT TOP 5 metrics.interest_id,
-    map.interest_name,
-    STDEV(metrics.percentile_ranking) 
-      OVER(PARTITION BY metrics.interest_id) AS std_percentile_ranking
-  FROM #interest_metrics_edited metrics
-  JOIN interest_map map
-    ON metrics.interest_id = map.id
-  ORDER BY std_percentile_ranking DESC
+	SELECT 
+	  DISTINCT TOP 5 interest_id,
+	  STDEV(percentile_ranking) OVER(PARTITION BY interest_id) AS std_percentile_ranking
+	FROM #interest_metrics_edited
+	ORDER BY std_percentile_ranking DESC
 ),
 max_min_percentiles AS (
-  SELECT 
-    lsi.interest_id,
-    lsi.interest_name,
-    ime.month_year,
-    ime.percentile_ranking,
-    MAX(ime.percentile_ranking) OVER(PARTITION BY lsi.interest_id) AS max_pct_rnk,
-    MIN(ime.percentile_ranking) OVER(PARTITION BY lsi.interest_id) AS min_pct_rnk
-  FROM largest_std_interests lsi
-  JOIN #interest_metrics_edited ime
-    ON lsi.interest_id = ime.interest_id
+	SELECT 
+		lsi.interest_id,
+		ime.month_year,
+		ime.percentile_ranking,
+		MAX(ime.percentile_ranking) OVER(PARTITION BY lsi.interest_id) AS max_pct_rnk,
+		MIN(ime.percentile_ranking) OVER(PARTITION BY lsi.interest_id) AS min_pct_rnk
+	FROM largest_std_interests lsi
+	JOIN #interest_metrics_edited ime
+	ON lsi.interest_id = ime.interest_id
 )
 
 SELECT 
-  interest_id,
-  interest_name,
-  MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN month_year END) AS max_month_year,
-  MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN percentile_ranking END) AS max_pct_rnk,
-  MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN month_year END) AS min_month_year,
-  MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN percentile_ranking END) AS min_pct_rnk
+	interest_id,
+	MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN month_year END) AS max_pct_month_year,
+	MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN percentile_ranking END) AS max_pct_rnk,
+	MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN month_year END) AS min_pct_month_year,
+	MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN percentile_ranking END) AS min_pct_rnk
 FROM max_min_percentiles
-GROUP BY interest_id, interest_name;
+GROUP BY interest_id
+
+
+--5. How would you describe our customers in this segment based off their composition and ranking values? 
+--What sort of products or services should we show to these customers and what should we avoid?
