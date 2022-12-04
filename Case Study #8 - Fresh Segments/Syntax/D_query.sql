@@ -24,7 +24,7 @@ WHERE temp.rnk_avg_composition <= 10;
 --The query for the previous question
 WITH top_interest_composition AS (
   SELECT 
-    temp.*,	map.interest_name
+    temp.*, map.interest_name
   FROM (
     SELECT
       interest_id, month_year,
