@@ -89,9 +89,9 @@ max_min_percentiles AS (
 SELECT 
   interest_id,
   interest_name,
-  MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN month_year END) AS max_pct_month_year,
+  MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN month_year END) AS max_month_year,
   MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN percentile_ranking END) AS max_pct_rnk,
-  MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN month_year END) AS min_pct_month_year,
+  MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN month_year END) AS min_month_year,
   MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN percentile_ranking END) AS min_pct_rnk
 FROM max_min_percentiles
 GROUP BY interest_id, interest_name;
