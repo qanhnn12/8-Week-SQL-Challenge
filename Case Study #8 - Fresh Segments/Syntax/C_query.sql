@@ -67,6 +67,7 @@ WITH largest_std_interests AS (
   SELECT 
     DISTINCT TOP 5 metrics.interest_id,
     map.interest_name,
+    map.interest_summary,
     STDEV(metrics.percentile_ranking) 
       OVER(PARTITION BY metrics.interest_id) AS std_percentile_ranking
   FROM #interest_metrics_edited metrics
@@ -78,6 +79,7 @@ max_min_percentiles AS (
   SELECT 
     lsi.interest_id,
     lsi.interest_name,
+    lsi.interest_summary,
     ime.month_year,
     ime.percentile_ranking,
     MAX(ime.percentile_ranking) OVER(PARTITION BY lsi.interest_id) AS max_pct_rnk,
@@ -88,14 +90,15 @@ max_min_percentiles AS (
 )
 
 SELECT 
-	interest_id,
-	interest_name,
-	MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN month_year END) AS max_pct_month_year,
-	MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN percentile_ranking END) AS max_pct_rnk,
-	MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN month_year END) AS min_pct_month_year,
-	MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN percentile_ranking END) AS min_pct_rnk
+  interest_id,
+  interest_name,
+  interest_summary,
+  MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN month_year END) AS max_pct_month_year,
+  MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN percentile_ranking END) AS max_pct_rnk,
+  MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN month_year END) AS min_pct_month_year,
+  MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN percentile_ranking END) AS min_pct_rnk
 FROM max_min_percentiles
-GROUP BY interest_id, interest_name
+GROUP BY interest_id, interest_name, interest_summary;
 
 
 --5. How would you describe our customers in this segment based off their composition and ranking values? 
