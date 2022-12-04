@@ -77,8 +77,7 @@ WHERE total_months < 6;
 --Delete all interest_id that have total_months lower than 6
 DELETE FROM interest_metrics
 WHERE interest_id IN (
-  SELECT
-    interest_id
+  SELECT interest_id
   FROM interest_metrics
   WHERE interest_id IS NOT NULL
   GROUP BY interest_id
