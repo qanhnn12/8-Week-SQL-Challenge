@@ -14,7 +14,7 @@ WITH composition_ranks AS (
     MAX(composition) OVER (PARTITION BY month_year) AS largest_composition,
     DENSE_RANK() OVER(PARTITION BY month_year ORDER BY composition DESC) AS top_rnk,
     DENSE_RANK() OVER(PARTITION BY month_year ORDER BY composition) AS bottom_rnk
-  FROM interest_metrics
+  FROM #interest_metrics_edited -- filtered dataset in which interests with less than 6 months are removed
   WHERE month_year IS NOT NULL
 )
 
@@ -33,4 +33,15 @@ SELECT
 FROM composition_ranks cr
 JOIN interest_map im ON cr.interest_id = im.id
 WHERE cr.bottom_rnk <= 10;
+
+
+--2. Which 5 interests had the lowest average ranking value?
+
+SELECT 
+	TOP 5 metrics.interest_id,
+	map.interest_name
+FROM #interest_metrics_edited metrics
+JOIN interest_map map
+ON metrics.interest_id = map.id
+ORDER BY metrics.ranking DESC;
 
