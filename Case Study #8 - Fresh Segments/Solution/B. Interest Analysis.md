@@ -101,13 +101,13 @@ WHERE interest_id IN (
 |-----------|-------------------|
 | 400       | 110               |
 
-If we remove all 110 `interest_id` values that are below 6 months in the table `interest_metrics`, 400 data points would be removing.
+If we removed all 110 `interest_id` values that are below 6 months in the table `interest_metrics`, 400 data points would be removing.
 
 ---
 ### 4. Does this decision make sense to remove these data points from a business perspective? Use an example where there are all 14 months present to a removed interest example for your arguments - think about what it means to have less months present from a segment perspective.
 From the business perspective, we shouldn't remove these data points even if those customers didn't contribute much to the business outcome.
-When checking the timeline of our data set, I realized that this business has just started 1 year and 1 month. 
-The time was too short to decide whether those customers will go back or not.
+When checking the timeline of our data set, I realized that this business had just started 1 year and 1 month. 
+The timeline was too short to decide whether those customers will go back or not.
 ```TSQL
 SELECT 
   MIN(month_year) AS first_date,
@@ -180,11 +180,11 @@ ORDER BY month_year, highest_rank;
 | 2019-03-01 | 1              | 1135         | 1.57            | 0.51       |
 | 2019-08-01 | 2              | 437          | 2.6             | 1.83       |
 
-Let's say we want to take the average, maximum or minimum of `ranking`, `composition` or `index_values` for each interest in every month, interests that don't have 14 months would create uneven distribution of observations since there are months we don't have data. Therefore, we should archive these data points in the segment analysis to have an accurate view on overall interests of customers.
+Let's say we want to take the average, maximum or minimum of `ranking`, `composition` or `index_values` for each interest in every month, interests that don't have 14 months would create uneven distribution of observations since there are months we don't have data. Therefore, we should archive these data points in the segment analysis to have an accurate view on the overall interest of customers.
 
 ---
 ### 5. After removing these interests - how many unique interests are there for each month?
-As mentioned before, instead of deleting those data points that have `total_months` below 6, I create a temporary table `interest_metrics_edited` for the segment analysis.
+As mentioned before, instead of deleting interests below 6 months, I create a temporary table `interest_metrics_edited` excluded them for the segment analysis.
 
 ```TSQL
 --Create a temporary table [interest_metrics_edited]
