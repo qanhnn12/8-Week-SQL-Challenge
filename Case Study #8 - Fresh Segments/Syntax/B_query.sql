@@ -12,7 +12,7 @@ DECLARE @unique_month_year_cnt INT = (
 --Filter all interest_id that have the count = @unique_month_year_cnt
 SELECT 
   interest_id,
-  COUNT(month_year) AS cnt
+  COUNT(month_year) AS interests
 FROM interest_metrics
 GROUP BY interest_id
 HAVING COUNT(month_year) = @unique_month_year_cnt;
