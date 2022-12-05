@@ -7,7 +7,8 @@
 * [Entity Relationship Diagram](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%236%20-%20Clique%20Bait#-entity-relationship-diagram)
 * [Case Study Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%236%20-%20Clique%20Bait#-case-study-questions)
 * [My Solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%236%20-%20Clique%20Bait#-my-solution)
-  
+
+---
 ## 🛠️ Bussiness Task
 Clique Bait is not like your regular online seafood store - the founder and CEO Danny, was also a part of a digital data analytics team and wanted 
   to expand his knowledge into the seafood industry!
@@ -15,10 +16,12 @@ Clique Bait is not like your regular online seafood store - the founder and CEO 
 In this case study - you are required to support Danny’s vision and analyse his dataset and come up with 
   creative solutions to calculate funnel fallout rates for the Clique Bait online store.
 
+---
 ## 🔐 Entity Relationship Diagram
 <p align="center">
 <img src="https://raw.githubusercontent.com/qanhnn12/8-Week-SQL-Challenge/main/IMG/e6.png" align="center width="600" height="300"">
-  
+
+---
 ## ❓ Case Study Questions
 ### A. Digital Analysis
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%236%20-%20Clique%20Bait/Solution/A.%20Digital%20Analysis.md).
