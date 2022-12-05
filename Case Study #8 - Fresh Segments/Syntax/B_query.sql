@@ -38,8 +38,8 @@ interest_count AS (
 )
 
 SELECT *,
-  CAST(100.0 * SUM(cnt) OVER(ORDER BY total_months DESC)
-	/ SUM(cnt) OVER() AS decimal(10, 2)) AS cumulative_pct
+  CAST(100.0 * SUM(interests) OVER(ORDER BY total_months DESC)
+	/ SUM(interests) OVER() AS decimal(10, 2)) AS cumulative_pct
 FROM interest_count;
 
 
@@ -53,18 +53,16 @@ WITH interest_months AS (
   FROM interest_metrics
   WHERE interest_id IS NOT NULL
   GROUP BY interest_id
-),
-interest_count AS (
-  SELECT
-    total_months,
-    COUNT(interest_id) AS interests
-  FROM interest_months
-  GROUP BY total_months
 )
 
-SELECT SUM(cnt) AS interest_id_count
-FROM interest_count
-WHERE total_months < 6;
+SELECT 
+  COUNT(interest_id) AS interests,
+  COUNT(DISTINCT interest_id) AS unique_interests
+FROM interest_metrics
+WHERE interest_id IN (
+  SELECT interest_id 
+  FROM interest_months
+  WHERE total_months < 6);
 
 
 --4. Does this decision make sense to remove these data points from a business perspective? 
