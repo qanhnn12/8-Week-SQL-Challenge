@@ -174,6 +174,6 @@ This might be because the trip on July was cheaper or the weather on those place
 ---
 ### 5. How would you describe our customers in this segment based off their composition and ranking values? What sort of products or services should we show to these customers and what should we avoid?
 
-Customers in this segment love travelling and personalized gifts but they just want to spend once. That's why we can see that in one month of 2018 the `percentile_ranking` was very high but in another month of 2019 that value was quite low. They are also interested in new trends in tech and entertainment industries. 
+Customers in this segment love travelling and personalized gifts but they just want to spend once. That's why we can see that in one month of 2018, the `percentile_ranking` was very high; but in another month of 2019, that value was quite low. These customers are also interested in new trends in tech and entertainment industries. 
 
 Therefore, we should only recommend only one-time accomodation services and personalized gift to them. We can ask them to sign-up to newsletters for tech products or new trends in entertainment industry as well.
