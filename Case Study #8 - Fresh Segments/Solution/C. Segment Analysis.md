@@ -177,3 +177,6 @@ This might be because the trip on July was cheaper or the weather on those place
 Customers in this segment love travelling and personalized gifts but they just want to spend once. That's why we can see that in one month of 2018, the `percentile_ranking` was very high; but in another month of 2019, that value was quite low. These customers are also interested in new trends in tech and entertainment industries. 
 
 Therefore, we should only recommend only one-time accomodation services and personalized gift to them. We can ask them to sign-up to newsletters for tech products or new trends in entertainment industry as well.
+
+---
+My solution for **[D. Index Analysis](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/Solution/D.%20Index%20Analysis.md)**.
