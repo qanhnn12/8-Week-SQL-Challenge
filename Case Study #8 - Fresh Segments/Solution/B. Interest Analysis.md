@@ -105,9 +105,9 @@ If we remove all 110 `interest_id` values that are below 6 months in the table `
 
 ---
 ### 4. Does this decision make sense to remove these data points from a business perspective? Use an example where there are all 14 months present to a removed interest example for your arguments - think about what it means to have less months present from a segment perspective.
-From the business perspective, we shouldn't remove these data points even if those customers don't contribute that much to the business outcome.
-When checking the timeline of our data set, I realize that this business has just started 1 year and 1 month. 
-The time was too short to decide whether those customers would go back or not.
+From the business perspective, we shouldn't remove these data points even if those customers didn't contribute much to the business outcome.
+When checking the timeline of our data set, I realized that this business has just started 1 year and 1 month. 
+The time was too short to decide whether those customers will go back or not.
 ```TSQL
 SELECT 
   MIN(month_year) AS first_date,
