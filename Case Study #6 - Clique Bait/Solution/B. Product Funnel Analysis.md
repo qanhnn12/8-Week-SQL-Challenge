@@ -91,7 +91,6 @@ JOIN product_purchased pp ON pi.product_id = pp.product_id;
 SELECT *
 FROM #product_summary;
 ```
-Result:
 | product_id | product_name   | product_category | views | cart_adds | abandoned | purchases  |
 |------------|----------------|------------------|-------|-----------|-----------|------------|
 | 1          | Salmon         | Fish             | 1559  | 938       | 227       | 711        |
