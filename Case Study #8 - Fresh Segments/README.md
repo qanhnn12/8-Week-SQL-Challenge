@@ -26,6 +26,8 @@ Danny has asked for your assistance to analyse aggregated metrics for an example
 ---
 ## ❓ Case Study Questions
 ### A. Data Exploration and Cleansing
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/Solution/A.%20Data%20Exploration%20and%20Cleansing.md).
+
 1. Update the `fresh_segments.interest_metrics` table by modifying the `month_year` column to be a date data type with the start of the month
 2. What is count of records in the `fresh_segments.interest_metrics` for each `month_year` value sorted in chronological order (earliest to latest) 
 with the null values appearing first?
@@ -41,6 +43,8 @@ Do you think these values are valid and why?
 
 ---
 ### B. Interest Analysis
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/Solution/B.%20Interest%20Analysis.md).
+
 1. Which interests have been present in all `month_year` dates in our dataset?
 2. Using this same `total_months` measure - calculate the cumulative percentage of all records starting at 14 months - which `total_months` value 
 passes the 90% cumulative percentage value?
@@ -53,6 +57,8 @@ what it means to have less months present from a segment perspective.
 
 ---
 ### C. Segment Analysis
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/Solution/C.%20Segment%20Analysis.md).
+
 1. Using our filtered dataset by removing the interests with less than 6 months worth of data, 
 which are the top 10 and bottom 10 interests which have the largest composition values in any `month_year`? 
 2. Only use the maximum `composition` value for each interest but you must keep the corresponding `month_year`.
@@ -65,6 +71,8 @@ What sort of products or services should we show to these customers and what sho
 
 ---
 ### D. Index Analysis
+View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/Solution/D.%20Index%20Analysis.md).
+
 The `index_value` is a measure which can be used to reverse calculate the average composition for Fresh Segments’ clients.
 
 Average composition can be calculated by dividing the `composition` column by the `index_value` column rounded to 2 decimal places.
