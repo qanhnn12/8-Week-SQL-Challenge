@@ -192,4 +192,4 @@ WHERE metrics.month_year < CAST(DATEADD(DAY, -DAY(map.created_at)+1, map.created
 Yes, all `month_year` and `created_at` were at the same month. Therefore, these values are valid.
 
 ---
-My solution for **[B. Interest Analysis]()**.
+My solution for **[B. Interest Analysis](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/Solution/B.%20Interest%20Analysis.md)**.
