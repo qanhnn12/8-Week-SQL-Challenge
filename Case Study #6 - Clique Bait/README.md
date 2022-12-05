@@ -83,5 +83,5 @@ users who do not receive an impression? What if we compare them with users who h
   
 ---
 ## 🚀 My Solution
-* View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%236%20-%20Clique%20Bait/Syntax)
-* View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%236%20-%20Clique%20Bait/Solution)
+* View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%236%20-%20Clique%20Bait/Syntax).
+* View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%236%20-%20Clique%20Bait/Solution).
