@@ -46,7 +46,7 @@ Top 10 interests which have the largest composition values in any `month_year`:
 | 6286        | Luxury Hotel Guests               | 9        |
 | 4           | Luxury Retail Researchers         | 10       |
 
-Using the CTE above, replace the filter for top 10 interests by the below syntax:
+Using the CTE above, replace the filter for top 10 interests by this:
 ```TSQL
 --Bottom 10 interests that have the largest composition values
 SELECT 
