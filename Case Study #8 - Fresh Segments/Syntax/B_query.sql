@@ -86,24 +86,6 @@ WHERE interest_id IN (
 GROUP BY month_year
 ORDER BY month_year, highest_rank;
 
---When total_months = 6
-SELECT 
-  month_year,
-  COUNT(DISTINCT interest_id) interest_count,
-  MIN(ranking) AS highest_rank,
-  MAX(composition) AS composition_max,
-  MAX(index_value) AS index_max
-FROM interest_metrics metrics
-WHERE interest_id IN (
-  SELECT interest_id
-  FROM interest_metrics
-  WHERE interest_id IS NOT NULL
-  GROUP BY interest_id
-  HAVING COUNT(DISTINCT month_year) = 6)
-GROUP BY month_year
-ORDER BY month_year, highest_rank;
-
-
 --When total_months = 1
 SELECT 
   month_year,
