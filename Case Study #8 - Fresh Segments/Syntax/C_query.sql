@@ -106,7 +106,3 @@ SELECT
   MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN percentile_ranking END) AS min_pct_rnk
 FROM max_min_percentiles
 GROUP BY interest_id, interest_name, interest_summary;
-
-
---5. How would you describe our customers in this segment based off their composition and ranking values? 
---What sort of products or services should we show to these customers and what should we avoid?
