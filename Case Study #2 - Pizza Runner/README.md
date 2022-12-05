@@ -7,17 +7,19 @@
 * [Entity Relationship Diagram](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/README.md#-entity-relationship-diagram)
 * [Case Study Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/README.md#-case-study-questions)
 * [My Solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/README.md#-my-solution)
-  
+
+---
 ## 🛠️ Bussiness Task
 Danny wanted to expand his new Pizza Empire and intended to Uberize it with Pizza Runner. 
 Danny started by recruiting “runners” to deliver fresh pizza from Pizza Runner Headquarters (otherwise known as Danny’s house) 
   and also maxed out his credit card to pay freelance developers to build a mobile app to accept orders from customers.
-  
+
+---
 ## 🔐 Entity Relationship Diagram
 <p align="center">
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/e2.PNG" align="center" width="550" height="300" >
 
-
+---
 ## ❓ Case Study Questions
 ### A. Pizza Metrics
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/Solution/A.%20Pizza%20Metrics.md).
