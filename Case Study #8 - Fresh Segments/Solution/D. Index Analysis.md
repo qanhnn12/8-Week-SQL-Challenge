@@ -6,72 +6,112 @@ Average composition can be calculated by dividing the `composition` column by th
 
 ### 1. What is the top 10 interests by the average composition for each month?
 ```TSQL
-SELECT 
-  TOP 10 metrics.interest_id,
-  map.interest_name,
-  ROUND(metrics.composition / metrics.index_value, 2) AS avg_composition
-FROM interest_metrics metrics
-JOIN interest_map map ON metrics.interest_id = map.id
-ORDER BY avg_composition DESC;
+WITH avg_composition_rank AS (
+  SELECT 
+    metrics.interest_id,
+    map.interest_name,
+    metrics.month_year,
+    ROUND(metrics.composition / metrics.index_value, 2) AS avg_composition,
+    DENSE_RANK() OVER(PARTITION BY metrics.month_year ORDER BY metrics.composition / metrics.index_value DESC) AS rnk
+  FROM interest_metrics metrics
+  JOIN interest_map map 
+    ON metrics.interest_id = map.id
+  WHERE metrics.month_year IS NOT NULL
+) 
+SELECT *
+FROM avg_composition_rank
+--filter top 10 interests for each month
+WHERE rnk <= 10; 
 ```
-| interest_id | interest_name               | avg_composition  |
-|-------------|-----------------------------|------------------|
-| 21057       | Work Comes First Travelers  | 9.14             |
-| 21057       | Work Comes First Travelers  | 8.31             |
-| 21057       | Work Comes First Travelers  | 8.28             |
-| 21057       | Work Comes First Travelers  | 8.26             |
-| 21057       | Work Comes First Travelers  | 7.66             |
-| 21057       | Work Comes First Travelers  | 7.66             |
-| 21245       | Readers of Honduran Content | 7.6              |
-| 6324        | Las Vegas Trip Planners     | 7.36             |
-| 7541        | Alabama Trip Planners       | 7.27             |
-| 6324        | Las Vegas Trip Planners     | 7.21             |
+140 rows for 14 months in total. The first 10 rows:
+
+| interest_id | interest_name                 | month_year | avg_composition | rnk  |
+|-------------|-------------------------------|------------|-----------------|------|
+| 6324        | Las Vegas Trip Planners       | 2018-07-01 | 7.36            | 1    |
+| 6284        | Gym Equipment Owners          | 2018-07-01 | 6.94            | 2    |
+| 4898        | Cosmetics and Beauty Shoppers | 2018-07-01 | 6.78            | 3    |
+| 77          | Luxury Retail Shoppers        | 2018-07-01 | 6.61            | 4    |
+| 39          | Furniture Shoppers            | 2018-07-01 | 6.51            | 5    |
+| 18619       | Asian Food Enthusiasts        | 2018-07-01 | 6.1             | 6    |
+| 6208        | Recently Retired Individuals  | 2018-07-01 | 5.72            | 7    |
+| 21060       | Family Adventures Travelers   | 2018-07-01 | 4.85            | 8    |
+| 21057       | Work Comes First Travelers    | 2018-07-01 | 4.8             | 9    |
+| 82          | HDTV Researchers              | 2018-07-01 | 4.71            | 10   |
 
 ---
 ### 2. For all of these top 10 interests - which interest appears the most often?
 ```TSQL
-WITH top_10_interests AS (
+WITH avg_composition_rank AS (
   SELECT 
-    TOP 10 metrics.interest_id,
+    metrics.interest_id,
     map.interest_name,
-    ROUND(metrics.composition / metrics.index_value, 2) AS avg_composition
-FROM interest_metrics metrics
-JOIN interest_map map 
-  ON metrics.interest_id = map.id
-ORDER BY avg_composition DESC
+    metrics.month_year,
+    ROUND(metrics.composition / metrics.index_value, 2) AS avg_composition,
+    DENSE_RANK() OVER(PARTITION BY metrics.month_year ORDER BY metrics.composition / metrics.index_value DESC) AS rnk
+  FROM interest_metrics metrics
+  JOIN interest_map map 
+    ON metrics.interest_id = map.id
+  WHERE metrics.month_year IS NOT NULL
+),
+frequent_interests AS (
+  SELECT 
+    interest_id,
+    interest_name,
+    COUNT(*) AS freq
+  FROM avg_composition_rank
+  WHERE rnk <= 10	--filter top 10 interests for each month
+  GROUP BY interest_id, interest_name
 )
 
-SELECT
-  TOP 1 interest_id,
-  interest_name,
-  COUNT(interest_id) AS freq
-FROM top_10_interests
-GROUP BY interest_id, interest_name
-ORDER BY freq DESC;
+SELECT * 
+FROM frequent_interests
+WHERE freq IN (SELECT MAX(freq) FROM frequent_interests);
 ```
-| interest_id | interest_name         | freq  |
-|-------------|-----------------------|-------|
-| 7541        | Work Comes First Travelers | 6     |
+| interest_id | interest_name            | freq  |
+|-------------|--------------------------|-------|
+| 7541        | Alabama Trip Planners    | 10    |
+| 5969        | Luxury Bedding Shoppers  | 10    |
+| 6065        | Solar Energy Researchers | 10    |
 
 ---
 ### 3. What is the average of the average composition for the top 10 interests for each month?
 ```TSQL
-WITH top_10_interests AS (
+WITH avg_composition_rank AS (
   SELECT 
-    TOP 10 metrics.interest_id,
+    metrics.interest_id,
     map.interest_name,
-    metrics.composition / metrics.index_value AS avg_composition
-FROM interest_metrics metrics
-JOIN interest_map map ON metrics.interest_id = map.id
-ORDER BY avg_composition DESC
+    metrics.month_year,
+    ROUND(metrics.composition / metrics.index_value, 2) AS avg_composition,
+    DENSE_RANK() OVER(PARTITION BY metrics.month_year ORDER BY metrics.composition / metrics.index_value DESC) AS rnk
+  FROM interest_metrics metrics
+  JOIN interest_map map 
+    ON metrics.interest_id = map.id
+  WHERE metrics.month_year IS NOT NULL
 )
 
-SELECT ROUND(AVG(avg_composition), 2) AS avg_of_avg_composition
-FROM top_10_interests;
+SELECT 
+  month_year,
+  AVG(avg_composition) AS avg_of_avg_composition
+FROM avg_composition_rank
+WHERE rnk <= 10 --filter top 10 interests for each month
+GROUP BY month_year;
 ```
-| avg_of_avg_composition  |
-|-------------------------|
-| 7.87                    |
+| month_year | avg_of_avg_composition  |
+|------------|-------------------------|
+| 2018-07-01 | 6.038                   |
+| 2018-08-01 | 5.945                   |
+| 2018-09-01 | 6.895                   |
+| 2018-10-01 | 7.066                   |
+| 2018-11-01 | 6.623                   |
+| 2018-12-01 | 6.652                   |
+| 2019-01-01 | 6.399                   |
+| 2019-02-01 | 6.579                   |
+| 2019-03-01 | 6.168                   |
+| 2019-04-01 | 5.75                    |
+| 2019-05-01 | 3.537                   |
+| 2019-06-01 | 2.427                   |
+| 2019-07-01 | 2.765                   |
+| 2019-08-01 | 2.631                   |
 
 ---
 ### 4. What is the 3 month rolling average of the max average composition value from September 2018 to August 2019 and include the previous top ranking interests in the same output shown below.
