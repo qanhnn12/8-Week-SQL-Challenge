@@ -44,5 +44,5 @@ View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/ma
 
 ---
 ## 🚀 My Solution
-  * View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Syntax)
-  * View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Solution)
+  * View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Syntax).
+  * View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%234%20-%20Data%20Bank/Solution).
