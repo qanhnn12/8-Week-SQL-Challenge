@@ -28,7 +28,7 @@ ORDER BY avg_composition DESC;
 | 6324        | Las Vegas Trip Planners     | 7.21             |
 
 ---
-2. For all of these top 10 interests - which interest appears the most often?
+### 2. For all of these top 10 interests - which interest appears the most often?
 ```TSQL
 WITH top_10_interests AS (
   SELECT 
@@ -54,7 +54,7 @@ ORDER BY freq DESC;
 | 7541        | Work Comes First Travelers | 6     |
 
 ---
-3. What is the average of the average composition for the top 10 interests for each month?
+### 3. What is the average of the average composition for the top 10 interests for each month?
 ```TSQL
 WITH top_10_interests AS (
   SELECT 
