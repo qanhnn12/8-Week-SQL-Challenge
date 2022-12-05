@@ -3,12 +3,13 @@
 <p align="center">
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/8.png" align="center" width="400" height="400" >
 
- 📕 Table of Contents
+## 📕 Table of Contents
 * [Bussiness Task]()
 * [Entity Relationship Diagram]()
 * [Case Study Questions]()
 * [My Solution]()
 
+---
 ## 🛠️ Bussiness Task
 Fresh Segments is a digital marketing agency that helps other businesses analyse trends in online ad click behaviour for their unique customer base.
 
@@ -17,10 +18,12 @@ In particular - the composition and rankings for different interests are provide
 
 Danny has asked for your assistance to analyse aggregated metrics for an example client and provide some high level insights about the customer list and their interests.
 
+---
 ## 🔐 Entity Relationship Diagram
 <p align="center">
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/e8.PNG" align="center width="600" height="300"">
 
+---
 ## ❓ Case Study Questions
 ### A. Data Exploration and Cleansing
 1. Update the `fresh_segments.interest_metrics` table by modifying the `month_year` column to be a date data type with the start of the month
