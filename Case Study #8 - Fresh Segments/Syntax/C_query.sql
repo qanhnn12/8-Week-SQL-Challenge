@@ -6,7 +6,6 @@
 --which are the top 10 and bottom 10 interests which have the largest composition values in any month_year? 
 --Only use the maximum composition value for each interest but you must keep the corresponding month_year.
 
-```TSQL
 WITH max_composition AS (
   SELECT 
     month_year,
