@@ -8,6 +8,7 @@
 * [Case Study Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart#-case-study-questions)
 * [My Solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart#-my-solution)
 
+---
 ## 🛠️ Bussiness Task
 Data Mart is an online supermarket that specialises in fresh produce.
   In June 2020 - large scale supply changes were made at Data Mart. 
@@ -18,11 +19,13 @@ The key business question to answer are the following:
 * What was the quantifiable impact of the changes introduced in June 2020?
 * Which platform, region, segment and customer types were the most impacted by this change?
 * What can we do about future introduction of similar sustainability updates to the business to minimise impact on sales?
-  
+
+---
 ## 🔐 Entity Relationship Diagram
 <p align="center">
 <img src="https://raw.githubusercontent.com/qanhnn12/8-Week-SQL-Challenge/main/IMG/e5.png" align="center">
 
+---
 ## ❓ Case Study Questions
 ### A. Data Cleansing Steps
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%235%20-%20Data%20Mart/Solution/A.%20Data%20Cleansing%20Steps.md).
