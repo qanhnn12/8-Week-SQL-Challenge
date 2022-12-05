@@ -123,6 +123,7 @@ WITH largest_std_interests AS (
   SELECT 
     DISTINCT TOP 5 metrics.interest_id,
     map.interest_name,
+    map.interest_summary,
     ROUND(STDEV(metrics.percentile_ranking) 
       OVER(PARTITION BY metrics.interest_id), 2) AS std_percentile_ranking
   FROM #interest_metrics_edited metrics
@@ -134,6 +135,7 @@ max_min_percentiles AS (
   SELECT 
     lsi.interest_id,
     lsi.interest_name,
+    lsi. interest_summary,
     ime.month_year,
     ime.percentile_ranking,
     MAX(ime.percentile_ranking) OVER(PARTITION BY lsi.interest_id) AS max_pct_rnk,
@@ -146,19 +148,32 @@ max_min_percentiles AS (
 SELECT 
   interest_id,
   interest_name,
+  interest_summary,
   MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN month_year END) AS max_pct_month_year,
   MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN percentile_ranking END) AS max_pct_rnk,
   MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN month_year END) AS min_pct_month_year,
   MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN percentile_ranking END) AS min_pct_rnk
 FROM max_min_percentiles
-GROUP BY interest_id, interest_name;
+GROUP BY interest_id, interest_name, interest_summary;
 ```
-| interest_id | interest_name                          | max_pct_month_year | max_pct_rnk | min_pct_month_year | min_pct_rnk  |
-|-------------|----------------------------------------|--------------------|-------------|--------------------|--------------|
-| 10839       | Tampa and St Petersburg Trip Planners  | 2018-07-01         | 75.03       | 2019-03-01         | 4.84         |
-| 20764       | Entertainment Industry Decision Makers | 2018-07-01         | 86.15       | 2019-08-01         | 11.23        |
-| 23          | Techies                                | 2018-07-01         | 86.69       | 2019-08-01         | 7.92         |
-| 38992       | Oregon Trip Planners                   | 2018-11-01         | 82.44       | 2019-07-01         | 2.2          |
-| 43546       | Personalized Gift Shoppers             | 2019-03-01         | 73.15       | 2019-06-01         | 5.7          |
+| interest_id | interest_name                          | interest_summary                                                                                                                                                        | max_pct_month_year | max_pct_rnk | min_pct_month_year | min_pct_rnk  |
+|-------------|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|-------------|--------------------|--------------|
+| 10839       | Tampa and St Petersburg Trip Planners  | People researching attractions and accommodations in Tampa and St Petersburg. These consumers are more likely to spend money on flights, hotels, and local attractions. | 2018-07-01         | 75.03       | 2019-03-01         | 4.84         |
+| 20764       | Entertainment Industry Decision Makers | Professionals reading industry news and researching trends in the entertainment industry.                                                                               | 2018-07-01         | 86.15       | 2019-08-01         | 11.23        |
+| 23          | Techies                                | Readers of tech news and gadget reviews.                                                                                                                                | 2018-07-01         | 86.69       | 2019-08-01         | 7.92         |
+| 38992       | Oregon Trip Planners                   | People researching attractions and accommodations in Oregon. These consumers are more likely to spend money on travel and local attractions.                            | 2018-11-01         | 82.44       | 2019-07-01         | 2.2          |
+| 43546       | Personalized Gift Shoppers             | Consumers shopping for gifts that can be personalized.                                                                                                                  | 2019-03-01         | 73.15       | 2019-06-01         | 5.7          |
 
-### 5. How would you describe our customers in this segment based off their `composition` and ranking values? What sort of products or services should we show to these customers and what should we avoid?
+
+We can see that the the range between the maximum and minimum `percentile_ranking` of 5 interests in the table above is very large. 
+Noticed that the month of the maximum and minumum values are different. This implies that these interests may have the seasonal demand or there are other underlying reasons related to products, services or prices that we should investigate further.
+
+For example, customers prefer interest `10839`, which is `Tampa and St Petersburg Trip Planners` on July 2018, but not prefer that on March 2019. 
+This might be because the trip on July was cheaper or the weather on those places was more suitable for travelling.
+
+---
+### 5. How would you describe our customers in this segment based off their composition and ranking values? What sort of products or services should we show to these customers and what should we avoid?
+
+Customers in this segment love travelling and personalized gifts but they just want to spend once. That's why we can see that in one month of 2018 the `percentile_ranking` was very high but in another month of 2019 that value was quite low. They are also interested in new trends in tech and entertainment industries. 
+
+Therefore, we should only recommend only one-time accomodation services and personalized gift to them. We can ask them to sign-up to newsletters for tech products or new trends in entertainment industry as well.
