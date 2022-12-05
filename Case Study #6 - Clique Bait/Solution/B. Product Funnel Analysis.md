@@ -161,6 +161,11 @@ FROM category_info ci
 JOIN category_abandoned ca ON ci.product_category = ca.product_category
 JOIN category_purchased cp ON ci.product_category = cp.product_category;
 ```
+| product_category | views | cart_adds | abandoned | purchases  |
+|------------------|-------|-----------|-----------|------------|
+| Fish             | 4633  | 2789      | 674       | 2115       |
+| Luxury           | 3032  | 1870      | 466       | 1404       |
+| Shellfish        | 6204  | 3792      | 894       | 2898       |
 
 ---
 Use 2 new output tables - answer the following questions:
