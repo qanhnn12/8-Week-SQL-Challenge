@@ -8,14 +8,17 @@
 * [Case Study Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%231%20-%20Danny's%20Diner#-case-study-questions)
 * [Bonus Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%231%20-%20Danny's%20Diner#%EF%B8%8F-bonus-questions)  
 * [My Solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%231%20-%20Danny's%20Diner#-my-solution)
-  
+
+---
 ## 🛠️ Bussiness Task
 Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite. Having this deeper connection with his customers will help him deliver a better and more personalised experience for his loyal customers.
 
+---
 ## 🔐 Entity Relationship Diagram
 <p align="center">
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/e1.PNG" align="center" width="500" height="250" >
 
+---
 ## ❓ Case Study Questions
 1. What is the total amount each customer spent at the restaurant?
 2. How many days has each customer visited the restaurant?
@@ -29,14 +32,15 @@ Danny wants to use the data to answer a few simple questions about his customers
 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, 
   not just sushi - how many points do customer A and B have at the end of January?
 
+---
 ## 🗒️ Bonus Questions
 * Join All The Things - Create a table that has these columns: customer_id, order_date, product_name, price, member (Y/N).
 * Rank All The Things - Based on the table above, add one column: ranking.  
-  
+
+---
 ## 🚀 My Solution
 *View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/query.sql).*
   
----
 ### Q1. What is the total amount each customer spent at the restaurant?
 ```TSQL
 SELECT 
