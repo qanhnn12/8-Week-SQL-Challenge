@@ -110,7 +110,7 @@ FULL JOIN interest_map map
 
 * There are 1209 `id` in table `interest_map`.
 * There are 1202 `interest_id` in table `interest_metrics`.
-* No `id` appear in table `interest_map` but don't appear in `interest_id` of table `interest_metrics`.
+* No `id` values appear in table `interest_map` but don't appear in `interest_id` of table `interest_metrics`.
 * There are 7 `interest_id` appearing in table `interest_metrics` but not appearing in `id` of table `interest_map`.
 
 ---
@@ -192,4 +192,4 @@ WHERE metrics.month_year < CAST(DATEADD(DAY, -DAY(map.created_at)+1, map.created
 Yes, all `month_year` and `created_at` were at the same month. Therefore, these values are valid.
 
 ---
-My solution for **[Interest Analysis]()**.
+My solution for **[B. Interest Analysis]()**.
