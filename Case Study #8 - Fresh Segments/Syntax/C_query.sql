@@ -15,16 +15,16 @@ WITH max_composition AS (
   WHERE month_year IS NOT NULL
 ),
 composition_rank AS (
-	SELECT *,
-		DENSE_RANK() OVER(ORDER BY largest_composition DESC) AS rnk
-	FROM max_composition
+  SELECT *,
+    DENSE_RANK() OVER(ORDER BY largest_composition DESC) AS rnk
+  FROM max_composition
 )
 
 --Top 10 interests that have the largest composition values
 SELECT 
-	cr.interest_id,
-	im.interest_name,
-	cr.rnk
+  cr.interest_id,
+  im.interest_name,
+  cr.rnk
 FROM composition_rank cr
 JOIN interest_map im ON cr.interest_id = im.id
 WHERE cr.rnk <= 10
@@ -32,9 +32,9 @@ ORDER BY cr.rnk;
 
 --Bottom 10 interests that have the largest composition values in each month_year
 SELECT 
-	DISTINCT TOP 10 cr.interest_id,
-	im.interest_name,
-	cr.rnk
+  DISTINCT TOP 10 cr.interest_id,
+  im.interest_name,
+  cr.rnk
 FROM composition_rank cr
 JOIN interest_map im ON cr.interest_id = im.id
 ORDER BY cr.rnk DESC;
