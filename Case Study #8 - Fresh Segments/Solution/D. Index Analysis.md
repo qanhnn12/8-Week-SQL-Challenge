@@ -179,6 +179,6 @@ WHERE month_year BETWEEN '2018-09-01' AND '2019-08-01';
 ---
 ### 5. Provide a possible reason why the max average composition might change from month to month? Could it signal something is not quite right with the overall business model for Fresh Segments?
 
-The max average composition decreased overtime because top interests were mostly travel-related services, which were in high seasonal demands for some months throughout a year. Customers mainly travelled for vacation or business purposes in the last 3 months and the first 3 months of a year. You can see `max_index_composition` were high from September 2018 to March 2019. 
+The max average composition decreased overtime because top interests were mostly travel-related services, which were in high seasonal demands for some months throughout a year. Customers wanted to go on a trip during the last and first 3 months of a year. You can see `max_index_composition` were high from September 2018 to March 2019. 
 
 This also means that Fresh Segments's business heavily relied on travel-related services. Other products and services didn't receive much interest from customers.
