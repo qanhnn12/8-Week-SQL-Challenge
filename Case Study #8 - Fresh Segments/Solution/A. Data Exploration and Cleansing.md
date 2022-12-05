@@ -174,7 +174,7 @@ WHERE metrics.month_year < CAST(map.created_at AS DATE);
 
 There are 188 `month_year` values that are before `created_at` values.
 However, it may be the case that those 188 `created_at` values were created at the same month as `month_year` values. 
-The reason is because `month_year` values were set on the first date of the month by default (Q1).
+The reason is because `month_year` values were set on the first date of the month by default in Question 1.
 
 
 To check that, we turn the `create_at` to the first date of the month:
