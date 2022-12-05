@@ -115,7 +115,7 @@ WHERE interest_id NOT IN (
   FROM interest_metrics
   WHERE interest_id IS NOT NULL
   GROUP BY interest_id
-  HAVING COUNT(DISTINCT month_year) < 6)
+  HAVING COUNT(DISTINCT month_year) < 6);
 
 --Find the number of unique interests for each month after removing step above
 SELECT 
