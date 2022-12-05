@@ -6,33 +6,39 @@
 --which are the top 10 and bottom 10 interests which have the largest composition values in any month_year? 
 --Only use the maximum composition value for each interest but you must keep the corresponding month_year.
 
-WITH composition_ranks AS (
+```TSQL
+WITH max_composition AS (
   SELECT 
     month_year,
     interest_id,
-    composition,
-    MAX(composition) OVER (PARTITION BY month_year) AS largest_composition,
-    DENSE_RANK() OVER(PARTITION BY month_year ORDER BY composition DESC) AS top_rnk,
-    DENSE_RANK() OVER(PARTITION BY month_year ORDER BY composition) AS bottom_rnk
+    MAX(composition) OVER(PARTITION BY interest_id) AS largest_composition
   FROM #interest_metrics_edited -- filtered dataset in which interests with less than 6 months are removed
   WHERE month_year IS NOT NULL
+),
+composition_rank AS (
+	SELECT *,
+		DENSE_RANK() OVER(ORDER BY largest_composition DESC) AS rnk
+	FROM max_composition
 )
 
---Top 10 interests that have the largest composition values in each month_year
+--Top 10 interests that have the largest composition values
 SELECT 
-  DISTINCT cr.interest_id,
-  im.interest_name
-FROM composition_ranks cr
+	cr.interest_id,
+	im.interest_name,
+	cr.rnk
+FROM composition_rank cr
 JOIN interest_map im ON cr.interest_id = im.id
-WHERE cr.top_rnk <= 10;
+WHERE cr.rnk <= 10
+ORDER BY cr.rnk;
 
 --Bottom 10 interests that have the largest composition values in each month_year
 SELECT 
-  DISTINCT cr.interest_id,
-  im.interest_name
-FROM composition_ranks cr
+	DISTINCT TOP 10 cr.interest_id,
+	im.interest_name,
+	cr.rnk
+FROM composition_rank cr
 JOIN interest_map im ON cr.interest_id = im.id
-WHERE cr.bottom_rnk <= 10;
+ORDER BY cr.rnk DESC;
 
 
 --2. Which 5 interests had the lowest average ranking value?
