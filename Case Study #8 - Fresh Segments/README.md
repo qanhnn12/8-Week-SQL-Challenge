@@ -4,10 +4,10 @@
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/8.png" align="center" width="400" height="400" >
 
 ## 📕 Table of Contents
-* [Bussiness Task]()
-* [Entity Relationship Diagram]()
-* [Case Study Questions]()
-* [My Solution]()
+* [Bussiness Task](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%238%20-%20Fresh%20Segments#%EF%B8%8F-bussiness-task)
+* [Entity Relationship Diagram](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%238%20-%20Fresh%20Segments#-entity-relationship-diagram)
+* [Case Study Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%238%20-%20Fresh%20Segments#-case-study-questions)
+* [My Solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%238%20-%20Fresh%20Segments#-my-solution)
 
 ---
 ## 🛠️ Bussiness Task
@@ -96,5 +96,5 @@ Required output for question 4:
 
 ---
 ## 🚀 My Solution
-* View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%238%20-%20Fresh%20Segments/Syntax)
-* View the result and explanation [HERE]()
+* View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%238%20-%20Fresh%20Segments/Syntax).
+* View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%238%20-%20Fresh%20Segments/Solution).
