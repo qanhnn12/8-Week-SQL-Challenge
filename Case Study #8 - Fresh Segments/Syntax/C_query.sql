@@ -30,7 +30,7 @@ JOIN interest_map im ON cr.interest_id = im.id
 WHERE cr.rnk <= 10
 ORDER BY cr.rnk;
 
---Bottom 10 interests that have the largest composition values in each month_year
+--Bottom 10 interests that have the largest composition values
 SELECT 
   DISTINCT TOP 10 cr.interest_id,
   im.interest_name,
@@ -44,11 +44,13 @@ ORDER BY cr.rnk DESC;
 
 SELECT 
   TOP 5 metrics.interest_id,
-  map.interest_name
+  map.interest_name,
+  CAST(AVG(1.0*metrics.ranking) AS decimal(10,2)) AS avg_ranking
 FROM #interest_metrics_edited metrics
 JOIN interest_map map
-ON metrics.interest_id = map.id
-ORDER BY metrics.ranking DESC;
+  ON metrics.interest_id = map.id
+GROUP BY metrics.interest_id, map.interest_name
+ORDER BY avg_ranking;
 
 
 --3. Which 5 interests had the largest standard deviation in their percentile_ranking value?
@@ -56,8 +58,8 @@ ORDER BY metrics.ranking DESC;
 SELECT 
   DISTINCT TOP 5 metrics.interest_id,
   map.interest_name,
-  STDEV(metrics.percentile_ranking) 
-    OVER(PARTITION BY metrics.interest_id) AS std_percentile_ranking
+  ROUND(STDEV(metrics.percentile_ranking) 
+    OVER(PARTITION BY metrics.interest_id), 2) AS std_percentile_ranking
 FROM #interest_metrics_edited metrics
 JOIN interest_map map
 ON metrics.interest_id = map.id
@@ -72,9 +74,8 @@ WITH largest_std_interests AS (
   SELECT 
     DISTINCT TOP 5 metrics.interest_id,
     map.interest_name,
-    map.interest_summary,
-    STDEV(metrics.percentile_ranking) 
-      OVER(PARTITION BY metrics.interest_id) AS std_percentile_ranking
+    ROUND(STDEV(metrics.percentile_ranking) 
+      OVER(PARTITION BY metrics.interest_id), 2) AS std_percentile_ranking
   FROM #interest_metrics_edited metrics
   JOIN interest_map map
   ON metrics.interest_id = map.id
@@ -84,7 +85,6 @@ max_min_percentiles AS (
   SELECT 
     lsi.interest_id,
     lsi.interest_name,
-    lsi.interest_summary,
     ime.month_year,
     ime.percentile_ranking,
     MAX(ime.percentile_ranking) OVER(PARTITION BY lsi.interest_id) AS max_pct_rnk,
@@ -97,13 +97,12 @@ max_min_percentiles AS (
 SELECT 
   interest_id,
   interest_name,
-  interest_summary,
   MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN month_year END) AS max_pct_month_year,
   MAX(CASE WHEN percentile_ranking = max_pct_rnk THEN percentile_ranking END) AS max_pct_rnk,
   MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN month_year END) AS min_pct_month_year,
   MIN(CASE WHEN percentile_ranking = min_pct_rnk THEN percentile_ranking END) AS min_pct_rnk
 FROM max_min_percentiles
-GROUP BY interest_id, interest_name, interest_summary;
+GROUP BY interest_id, interest_name;
 
 
 --5. How would you describe our customers in this segment based off their composition and ranking values? 
