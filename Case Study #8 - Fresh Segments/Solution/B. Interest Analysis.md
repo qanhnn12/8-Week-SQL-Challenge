@@ -238,4 +238,4 @@ ORDER BY month_year;
 | 2019-08-01 | 1062              |
 
 ---
-My solution for **[C. Segment Analysis]()**.
+My solution for **[C. Segment Analysis](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%238%20-%20Fresh%20Segments/Solution/C.%20Segment%20Analysis.md)**.
