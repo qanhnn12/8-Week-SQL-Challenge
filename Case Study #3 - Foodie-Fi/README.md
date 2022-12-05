@@ -7,24 +7,27 @@
 * [Entity Relationship Diagram](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi#-entity-relationship-diagram)
 * [Case Study Questions](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi#-case-study-questions)
 * [My Solution](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%233%20-%20Foodie-Fi#-my-solution)
-  
+
+---
 ## 🛠️ Bussiness Task
 Danny and his friends launched a new startup called "Food-Fi" in 2020 and started selling monthly and annual subscriptions, 
   giving their customers unlimited on-demand access to exclusive food videos from around the world. 
   
   This case study focuses 
   on using subscription style digital data to answer some important questions such as business performance, payments, and customer journey.
-  
+
+---
 ## 🔐 Entity Relationship Diagram
 <p align="center">
 <img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/e3.PNG" align="center" width="550" height="220" >
-  
+
+---
 ## ❓ Case Study Questions
 ### A. Customer Journey
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution/A.%20Customer%20Journey.md).
 * Based off the 8 sample customers provided in the sample from the subscriptions table, write a brief description about each customer’s onboarding journey.
----
 
+---
 ### B. Data Analysis Questions
 View my solution [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%233%20-%20Foodie-Fi/Solution/B.%20Data%20Analysis%20Questions.md).
 
