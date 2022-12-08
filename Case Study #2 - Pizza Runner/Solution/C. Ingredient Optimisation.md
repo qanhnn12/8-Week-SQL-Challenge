@@ -382,7 +382,7 @@ To solve this question:
 * Create a CTE to record the number of times each ingredient was used
   * if extra ingredient, add 2 
   * if excluded ingredient, add 0
-  * no extras, no exclusions, add 1, add 1
+  * no extras or no exclusions, add 1
 ```TSQL
 WITH frequentIngredients AS (
   SELECT 
