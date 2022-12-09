@@ -162,11 +162,11 @@ ORDER BY purchase_per_view_pct DESC;
 
 --4. What is the average conversion rate from view to cart add?
 SELECT 
-  CAST(AVG(1.0*cart_adds/views) AS decimal(10, 2)) AS avg_view_to_cart
+  CAST(AVG(100.0*cart_adds/views) AS decimal(10, 2)) AS avg_view_to_cart
 FROM #product_summary;
 
 
 --5. What is the average conversion rate from cart add to purchase?
 SELECT 
-  CAST(AVG(1.0*purchases/cart_adds) AS decimal(10, 2)) AS avg_cart_to_purchase
+  CAST(AVG(100.0*purchases/cart_adds) AS decimal(10, 2)) AS avg_cart_to_purchase
 FROM #product_summary;
