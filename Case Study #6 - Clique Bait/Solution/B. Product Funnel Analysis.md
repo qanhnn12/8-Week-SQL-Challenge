@@ -24,7 +24,7 @@ The output table will look like:
 * Create a CTE `product_abandoned`: calculate the number of abandoned products (replace `IN` by `NOT IN` in the solution for Question 9 in part A). 
 * Create a CTE `product_purchased`: calculate the number of purchased products (solution for Question 9 in part A)
 * `JOIN` 3 CTEs using `product_id`, `product_name` and `product_category` of each product
-* Put the result into a temporary table `product_summary` for further analysis
+* Store the result in a temporary table `product_summary` for further analysis
 
 ```TSQL
 WITH product_info AS (
@@ -226,22 +226,22 @@ ORDER BY purchase_per_view_pct DESC;
 #### 4. What is the average conversion rate from view to cart add?
 ```TSQL
 SELECT 
-  CAST(AVG(1.0*cart_adds/views) AS decimal(10, 2)) AS avg_view_to_cart
+  CAST(AVG(100.0*cart_adds/views) AS decimal(10, 2)) AS avg_view_to_cart
 FROM #product_summary;
 ```
 | avg_view_to_cart  |
 |-------------------|
-| 0.61              |
+| 60.95              |
 
 #### 5. What is the average conversion rate from cart add to purchase?
 ```TSQL
 SELECT 
-  CAST(AVG(1.0*purchases/cart_adds) AS decimal(10, 2)) AS avg_cart_to_purchase
+  CAST(AVG(100.0*purchases/cart_adds) AS decimal(10, 2)) AS avg_cart_to_purchase
 FROM #product_summary;
 ```
 | avg_cart_to_purchase  |
 |-----------------------|
-| 0.76                  |
+| 75.93                  |
 
 ---
 My solution for **[C. Campaigns Analysis](https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/Case%20Study%20%236%20-%20Clique%20Bait/Solution/C.%20Campaigns%20Analysis.md)**.
