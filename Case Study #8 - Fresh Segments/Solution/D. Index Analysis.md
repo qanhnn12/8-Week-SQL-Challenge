@@ -132,12 +132,12 @@ GROUP BY month_year;
 | 2019-08-01 | Cosmetics and Beauty Shoppers | 2.73                  | 2.77               | Las Vegas Trip Planners: 2.82     | Las Vegas Trip Planners: 2.77      |
 
 This is my approach:
-* Create a CTE `avg_compositions` to calculate the average composition value and the maximum of the average composition value for each `month_year`. In this case, I use the window function `MAX() OVER` to keep the corresponding `interest_id`.
-* From the CTE `avg_compositions` above, create a new CTE `max_avg_compositions` to filter out `interest_id` that has the average composition value equal to the maximum of the average composition value for each `month_year`.
+* Create a CTE `avg_compositions` to calculate the average composition value and the maximum of the average composition value for each `month_year`. In this case, I use the window function `MAX() OVER` to keep the corresponding `interest_id` and `month_year`.
+* From the CTE `avg_compositions` above, create a new CTE `max_avg_compositions` to filter `interest_id` that has the average composition value equal to the maximum of the average composition value for each `month_year`.
 * Next, from the CTE `max_avg_compositions`, JOIN with the table `interest_map` to take out relevant `interest_name` and create 2 last columns.
 * To create the 3-month moving averages column, use the window function `AVG() OVER` with  `ROWS BETWEEN 2 PRECEDING AND CURRENT ROW`
-* To create the last 2 column, use `LAG() OVER`. Remember to specify the second argument in `LAG()` when it comes to `2_month_ago` column. Then, cast those moving values to string to concatenate with the corresponding `interest_name`. 
-* Finally, filter out rows that have `month_year` from September 2018 to August 2019.
+* To create the last 2 column, use `LAG() OVER`. Remember to specify the second argument in `LAG()` for `2_month_ago` column. Then, cast those moving values to string to concatenate with the corresponding `interest_name`. 
+* Finally, filter rows that have `month_year` from September 2018 to August 2019.
 
 ```TSQL
 WITH avg_compositions AS (
