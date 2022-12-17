@@ -19,7 +19,7 @@ In this case study - you are required to support Danny’s vision and analyse hi
 ---
 ## 🔐 Entity Relationship Diagram
 <p align="center">
-<img src="https://raw.githubusercontent.com/qanhnn12/8-Week-SQL-Challenge/main/IMG/e6.png" align="center width="600" height="300"">
+<img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/e6.PNG" align="center ="800" height="400"">
 
 ---
 ## ❓ Case Study Questions
