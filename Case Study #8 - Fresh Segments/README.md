@@ -21,7 +21,7 @@ Danny has asked for your assistance to analyse aggregated metrics for an example
 ---
 ## 🔐 Entity Relationship Diagram
 <p align="center">
-<img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/e8.PNG" align="center width="600" height="300"">
+<img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/e8-updated.PNG" align="center width="600" height="300"">
 
 ---
 ## ❓ Case Study Questions
