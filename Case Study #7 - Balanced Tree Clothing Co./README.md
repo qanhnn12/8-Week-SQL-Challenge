@@ -25,7 +25,7 @@ and generate a basic financial report to share with the wider business.
 
 ### Bonus question
 <p align="center">
-<img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/e7.2.PNG" align="center width="320" height="160"">
+<img src="https://github.com/qanhnn12/8-Week-SQL-Challenge/blob/main/IMG/e7.2.PNG" align="center width="400" height="200"">
 
 ---
 ## ❓ Case Study Questions
