@@ -96,4 +96,4 @@ Do you have any further recommendations for Danny’s team at Data Mart or any i
 ---
 ## 🚀 My Solution
 * View the complete syntax [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart/Syntax).
-* View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/main/Case%20Study%20%235%20-%20Data%20Mart/Solution).
+* View the result and explanation [HERE](https://github.com/qanhnn12/8-Week-SQL-Challenge/tree/d7bbc5cd9ab25fe7429644a36bb0f62a8b292792/Case%20Study%20%235%20-%20Data%20Mart/Solution).
